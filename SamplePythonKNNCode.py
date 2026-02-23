@@ -27,3 +27,10 @@ y_pred = knn.predict(X_test)
 
 # 6. Evaluate accuracy
 print(f"Accuracy: {accuracy_score(y_test, y_pred) * 100:.2f}%")
+
+
+#train_test_split: Ensures the model is tested on unseen data to evaluate its actual performance.
+# StandardScaler: Scales features to have a mean of 0 and variance of 1. Since KNN relies on distance, features with larger scales would otherwise dominate the calculation.
+# KNeighborsClassifier: The core estimator. Parameters like n_neighbors (K) and metric (e.g., 'euclidean' or 'manhattan') can be tuned for better performance.
+# fit() vs predict(): In KNN, fit() simply stores the data points, while predict() performs the actual heavy lifting by calculating distances and finding neighbors. 
+
