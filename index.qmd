@@ -24,6 +24,8 @@ indent: true
  
 # Introduction
 
+REDO INTRO. MOVE TO METHODS SECTION. 
+
 The K-Nearest Neighbors (KNN) algorithm is one of the simplest and most intuitive supervised machine learning methods used for both classification (assigning a category) and regression (predicting a value). It requires two instances for it to achieve its goal: a distance metric and defining K.
 
 When it comes to a distance metric, a distance metric measures the distance between the query points and other data points. It is calculated using either Euclidean distance, Manhattan distance, or Minkowski distance. We can visualize this using Voronezh diagrams. (Insert diagram). In KNN the k defines how many neighbors will be checked to determine the classification of a query point. For example, K=1, means it will be assigned to the same class as its single nearest neighbor. Choosing K depends on the input data. For example, data with more outliers performs much better with higher k values. We also want to choose an odd number for k to minimize the chances of ties in classification. 
@@ -33,8 +35,146 @@ The KNN algorithm has multiple strengths. First of all, it's easy to implement/l
 When it comes to uses, we can use the KNN algorithm for simple recommendation systems. Data free processing is most commonly used because it's helpful for data sets with missing values because it estimates values using process called missing data imputation. KNN is actually most often used in finance like stock market forecasting, currency exchange rate, money laundering analysis. But it is also used in health care. For example, risk of heart attacks and prostate cancer by calculating most likely gene expression. In this paper we will apply the KNN algorithm to a data set of potential diabetic patients.  
 
 # Method
+As stated, the K-Nearest Neighbors (KNN) algorithm is a non-parametric, supervised machine learning method used for both classification and regression. Its methodology relies on the proximity principle, assuming that similar data points exist in close proximity within a feature space. Core Steps of the KNN Methodology include: 
+
+1. Define the Parameter 'K': Select the number of nearest neighbors to consider. A small 
+ can be sensitive to noise, while a large 
+ might smooth over important local patterns.
+2. Calculate Distance: When a new, unlabeled data point is introduced, the algorithm calculates its distance to every other point in the training dataset. Common metrics include:
+- Euclidean Distance: Measures the "straight-line" path between points; best for continuous data.
+- Manhattan Distance: Calculates the sum of absolute differences, similar to navigating a grid (taxicab geometry).
+- Minkowski Distance: A generalized formula that can represent both Euclidean (p=1) and Manhattan (p=2) distances.
+- Hamming Distance: Used for categorical or string variables to identify where vectors do not match.
+3. Identify Neighbors: Sort the calculated distances and select the 
+ points with the smallest distance values to the new query point.
+4. Aggregate Results:
+Classification: The new point is assigned the class that appears most frequently among its k 
+ neighbors (majority or plurality voting).
+Regression: The algorithm predicts a continuous value by taking the average (mean) or median of the k
+ neighbors' target values. 
+
+Key Characteristics
+Lazy Learning: KNN is considered a "lazy learner" because it does not have a distinct training phase. It simply stores the training data and defers all computation until a prediction is requested.
+Non-Parametric: It makes no prior assumptions about the underlying distribution of the data, making it flexible for complex datasets.
+Sensitivity to Scale: Because it relies on distance, features with larger magnitudes can disproportionately influence results. Therefore, feature scaling (standardization or normalization) is a critical preprocessing step. 
+
+Finding the Optimal 'K'
+The value of 
+ is often determined using the Elbow Method or Cross-Validation, where multiple 
+ values are tested to find the one that minimizes the error rate without overfitting or underfitting. Analysts typically choose an odd number for 
+ to prevent ties in classification.
+
+<center>
+![K-Means Convergence Algorithm (Image Source: ©Anand. Inspired from [@yul2020astudy])](KnnClassification.svg){#fig-2}
+</center>
 
 # Analysis and Results
+##Data Description
+These data are courtesy of Dr John Schorling, Department of Medicine, University of Virginia School of Medicine.
+The data consist of 19 variables on 403 subjects from 1046 subjects who were interviewed in a study to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors in central Virginia for African Americans. According to Dr John Hong, Diabetes Mellitus Type II (adult onset diabetes) is associated most strongly with obesity. The waist/hip ratio may be a predictor in diabetes and heart disease. DM II is also associated with hypertension - they may both be part of "Syndrome X". The 403 subjects were the ones who were actually screened for diabetes. Glycosolated hemoglobin > 7.0 is usually taken as a positive diagnosis of diabetes. 
+```{r, echo=TRUE}
+library(mt)
+library(caret)
+library(httr)
+library(readxl)
+library(dplyr)
+
+GET("https://query.data.world/s/qmc5py3qjodoyglqcny7ihdowxwepf?dws=00000", write_disk(tf <- tempfile(fileext = ".xlsx")))
+df <- data.frame(read_excel(tf))
+
+head(df)
+
+#We'll select the non-demographic columns to begin and create a reduced data set:
+df_reduced <- df[c("Diabetes", "Cholesterol", "Glucose", "BMI", "Waist.hip.ratio", "HDL.Chol", "Chol.HDL.ratio", "Systolic.BP", "Diastolic.BP", "Weight")]
+
+head(df_reduced)
+
+#kNN is sensitive to scaling (of the variables). 
+#it's helpful to first standardize the variables. Do this using the preProcess function of the caret package:
+preproc_reduced <- preProcess(df_reduced[,2:10], method = c("scale", "center"))
+df_standardized <- predict(preproc_reduced, df_reduced[, 2:10])
+
+#Now we have scaled and centered values for our data.frame:
+summary(df_standardized)
+
+#Apply those scaled and centered values to our data using the bind_cols method from dpylr to normalize all of our data.
+df_stdize <- bind_cols(Diabetes = df_reduced$Diabetes, df_standardized)
+#Now we have a data set which will work well for KNN! 
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#First create a test/train split so that we can train a KNN model. 
+#use the createDataPartition from caret to randomly select 80% of the data to use for the training set and 20% of the data to use for the test set. 
+#Then, create two different data.frames using partition point returned by createDataPartition.
+set.seed(42)
+# p indicates how much of the data should go into the first created partition
+param_split<- createDataPartition(df_stdize$Diabetes, times = 1, p = 0.8, list = FALSE)
+train_df <- df_stdize[param_split, ]
+test_df <- df_stdize[-param_split, ]
+
+#Train the KNN. 
+
+#The trainControl method is a helper function for all the nuances of the KNN train method. It allows you to easily set up the KNN training parameters. 
+trnctrl_df <- trainControl(method = "cv", number = 10)
+#method: This is the resampling method used. Using "cv" or cross validation. 
+#number: The number of folds because we're using cv. 
+
+#use all variables to predict Diabetes. 
+#then specify the training data, that we're training a KNN, and pass the training hyperparameters that we built with trainControl.
+model_knn_df <- train(Diabetes ~ ., data = train_df, method = "knn", 
+                      trControl = trnctrl_df, 
+                      tuneLength = 10)
+
+model_knn_df
+#This returns a series of KNN models and their associated metrics and tells us that the optimal number of nearest neighbors to be considered is 11 and the model accuracy for that K is 0.9198387. 
+#That's good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy. 
+#Remember that most of the records in our data set are not patients with diabetes. 
+#Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#we can find that simpler models have better accuracy. 
+#To see which variables are having the most impact on our outcome variable, we can use fs.anova to check the analysis of variance for each variable and use that in a second KNN.
+df_stdize$Diabetes = ifelse(df_stdize$Diabetes == "Diabetes", 1, 0)
+fs <- fs.anova(df_stdize, df_stdize$Diabetes)
+print(fs$fs.order)
+#We can see that "Glucose" is the most important feature in our data set for predicting diabetes.
+
+#two things here to improve our performance. 
+#First, we'll balance our data set so that we have equal numbers of records with and without diabetes. 
+#Second, we'll use just the Glucose readings to calculate the distance to our 'neighbors' in KNN:
+positive_cases <- nrow(train_df[train_df$Diabetes == 'Diabetes',])
+
+balanced = rbind(train_df[sample(which(train_df$Diabetes == 'No diabetes'), positive_cases),], train_df[train_df$Diabetes == 'Diabetes',])
+
+trnctrl_df <- trainControl(method = "cv", number = 10)
+model_knn_df_simple <- train(Diabetes ~ Glucose, data = balanced, method = "knn", 
+                             trControl = trnctrl_df, 
+                             tuneLength = 10)
+
+model_knn_df_simple
+#simpler model seems to have better performance. 
+#With a K value of 15, we see an accuracy of 0.93 and a Kappa of 0.86. 
+#Both of these scores are higher than we had seen with the larger model and the Kappa of 0.86 indicates that we are predicting both classes better although still not perfectly.
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Since we held out a testing set of 20% of our training data, we have an easy way to evaluate both of our models. 
+
+#pass the model to predict and check the results against the actual test labels. 
+#use a confusion matrix to assess how well our model predicts the test data:
+predict_knn <- predict(model_knn_df, test_df)
+confusionMatrix(as.factor(predict_knn), as.factor(test_df$Diabetes), positive = "Diabetes")
+
+#Our everything model does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. 
+#As seen in the confusion matrix, the model only accurately identifies 25% of the records labeled 'Diabetes'.
+
+predict_knn_simple <- predict(model_knn_df_simple, test_df)
+confusionMatrix(as.factor(predict_knn_simple), as.factor(test_df$Diabetes), positive = "Diabetes")
+#As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. 
+#This model correctly predicts 10 of the 12 true 'diabetes' records. 
+#On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. 
+#This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, 
+#our model is a little too over-eager to label them 'diabetes' when they aren't.
+```
+
 
 # Conclusion
 
