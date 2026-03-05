@@ -197,7 +197,7 @@ D_{Minkowski}(X,Y) = \sum_{i = 1}^{n}|x_i - y_i|^p
 <div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="KnnClassification.svg" class="img-fluid figure-img">
+<img src="Hamming%20Distance.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: K-Means Convergence Algorithm (Image Source: ©Anand. Inspired from <span class="citation" data-cites="yul2020astudy">(<a href="#ref-yul2020astudy" role="doc-biblioref"><strong>yul2020astudy?</strong></a>)</span>)
@@ -296,11 +296,11 @@ Attaching package: 'dplyr'</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Response [https://download.data.world/file_download/informatics-edu/diabetes-prediction/Diabetes_Classification.xlsx?auth=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcm9kLXVzZXItY2xpZW50Ompvc2h1YWpub2JsZWlibSIsImlzcyI6ImFnZW50Ompvc2h1YWpub2JsZWlibTo6NzhmMmQyYjQtNjNlMC00YjczLWJiZGQtNjYxYzYzNDJjNmMxIiwiaWF0IjoxNzEwNzc4NTY1LCJyb2xlIjpbInVzZXIiLCJ1c2VyX2FwaV9hZG1pbiIsInVzZXJfYXBpX2VudGVycHJpc2VfYWRtaW4iLCJ1c2VyX2FwaV9yZWFkIiwidXNlcl9hcGlfd3JpdGUiXSwiZ2VuZXJhbC1wdXJwb3NlIjpmYWxzZSwidXJsIjoiNDZhYTM1MTY4MWFlYmFmYzQ2YWQ5ZWQ2NDcwYzRkOTBmNmMyNGM5MCJ9.DSVbg-gytrs0PT0Rs6Co_H33na7kJYMUBe37UG1aRR6dNQhf9gSYamqzg4nLe85eW6nvURejy2x_zNjIExWo4g]
-  Date: 2026-03-05 21:59
+  Date: 2026-03-05 22:05
   Status: 200
   Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
   Size: 78.6 kB
-&lt;ON DISK&gt;  C:\Users\chana\AppData\Local\Temp\RtmpmKYlwe\file545473a042e5.xlsx</code></pre>
+&lt;ON DISK&gt;  C:\Users\chana\AppData\Local\Temp\RtmpmE1yU1\file7be466905af7.xlsx</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -1152,7 +1152,7 @@ Prediction    Diabetes No diabetes
 <span id="cb35-70"><a href="#cb35-70" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb35-71"><a href="#cb35-71" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hamming Distance: Used for categorical or string variables to identify where vectors do not match.</span>
 <span id="cb35-72"><a href="#cb35-72" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">center</span><span class="dt">&gt;</span></span>
-<span id="cb35-73"><a href="#cb35-73" aria-hidden="true" tabindex="-1"></a>!<span class="co">[</span><span class="ot">K-Means Convergence Algorithm (Image Source: ©Anand. Inspired from [@yul2020astudy])</span><span class="co">](KnnClassification.svg)</span>{#fig-2}</span>
+<span id="cb35-73"><a href="#cb35-73" aria-hidden="true" tabindex="-1"></a>!<span class="co">[</span><span class="ot">K-Means Convergence Algorithm (Image Source: ©Anand. Inspired from [@yul2020astudy])</span><span class="co">](Hamming Distance.png)</span>{#fig-2}</span>
 <span id="cb35-74"><a href="#cb35-74" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">center</span><span class="dt">&gt;</span></span>
 <span id="cb35-75"><a href="#cb35-75" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-76"><a href="#cb35-76" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Identify Neighbors: Combining steps 1 and 2. We sort the calculated distances based on our metric distance formula and select the points with the smallest distance values to the new query point. </span>
