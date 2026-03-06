@@ -70,7 +70,7 @@ D_{Minkowski}(X,Y) = \sum_{i = 1}^{n}|x_i - y_i|^p
 $$
 - Hamming Distance: Used for categorical or string variables to identify where vectors do not match.
 <center>
-![K-Means Convergence Algorithm (Image Source: ©Anand. Inspired from [@yul2020astudy])](Hamming Distance.png){#fig-2}
+![Hamming Distance XOR (Image Source: ©Anand. Inspired from [@yul2020astudy])](Hamming Distance.png){#fig-2}
 </center>
 
 3. Identify Neighbors: Combining steps 1 and 2. We sort the calculated distances based on our metric distance formula and select the points with the smallest distance values to the new query point. 
