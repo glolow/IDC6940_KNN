@@ -115,25 +115,41 @@ When it comes to uses, we can use the KNN algorithm for simple recommendation sy
 ## Data Description
 These data sets are courtesy of Dr John Schorling, Department of Medicine, University of Virginia School of Medicine.
 The data consist of 19 variables on 403 subjects from 1046 subjects who were interviewed in a study to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors in central Virginia for African Americans. According to Dr John Hong, Diabetes Mellitus Type II (adult onset diabetes) is associated most strongly with obesity. The waist/hip ratio may be a predictor in diabetes and heart disease. DM II is also associated with hypertension - they may both be part of "Syndrome X". The 403 subjects were the ones who were actually screened for diabetes. Glycosolated hemoglobin > 7.0 is usually taken as a positive diagnosis of diabetes. 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
+
+```
+
+```{r, include=FALSE}
 library(mt)
 library(caret)
 library(httr)
 library(readxl)
 library(dplyr)
-
+library(gtsummary)
 GET("https://query.data.world/s/qmc5py3qjodoyglqcny7ihdowxwepf?dws=00000", write_disk(tf <- tempfile(fileext = ".xlsx")))
 df <- data.frame(read_excel(tf))
-
 head(df)
-
-#We'll select the non-demographic columns to begin and create a reduced data set:
+```
+We'll select the non-demographic columns to begin and create a reduced data set:
+```{r, echo=TRUE}
 df_reduced <- df[c("Diabetes", "Cholesterol", "Glucose", "BMI", "Waist.hip.ratio", "HDL.Chol", "Chol.HDL.ratio", "Systolic.BP", "Diastolic.BP", "Weight")]
-
 head(df_reduced)
+```
 
-#kNN is sensitive to scaling (of the variables). 
-#it's helpful to first standardize the variables. Do this using the preProcess function of the caret package:
+The table below now shows a description of each of our variables to be used. 
+```{r, include=FALSE}
+vars <- data.frame(
+  Variables = c("Diabetes", "Cholesterol", "Glucose", "BMI", "Waist.hip.ratio", "HDL.Chol", "Chol.HDL.ratio", "Systolic.BP", "Diastolic.BP", "Weight"),
+  Description = c("Yes/No", "Numeric", "Numeric", "Numeric", "Waist to Hip Ratio","Numeric","Cholesterol to HDL ratio","Systolic Blood Pressure","Diastolic Blood Pressure","Numeric")
+  
+)
+```
+```{r, echo=TRUE}
+print(vars)
+```
+Like mentioned, kNN is sensitive to scaling (of the variables). So it is helpful to first standardize the variables. We do this using the preProcess function of the caret package:
+
+```{r, echo=TRUE}
 preproc_reduced <- preProcess(df_reduced[,2:10], method = c("scale", "center"))
 df_standardized <- predict(preproc_reduced, df_reduced[, 2:10])
 
@@ -142,13 +158,13 @@ summary(df_standardized)
 
 #Apply those scaled and centered values to our data using the bind_cols method from dpylr to normalize all of our data.
 df_stdize <- bind_cols(Diabetes = df_reduced$Diabetes, df_standardized)
-#Now we have a data set which will work well for KNN! 
+```
+Now we have a data set which will work well for KNN! 
 
-#---------------------------------------------------------------------------------------------------------------------------------------------------------------
+First, we create a test/train split so that we can train a KNN model. 
+We will use the createDataPartition from caret to randomly select 80% of the data to use for the training set and 20% of the data to use for the test set. Then, create two different data.frames using partition point returned by createDataPartition.
 
-#First create a test/train split so that we can train a KNN model. 
-#use the createDataPartition from caret to randomly select 80% of the data to use for the training set and 20% of the data to use for the test set. 
-#Then, create two different data.frames using partition point returned by createDataPartition.
+```{r, echo=TRUE}
 set.seed(42)
 # p indicates how much of the data should go into the first created partition
 param_split<- createDataPartition(df_stdize$Diabetes, times = 1, p = 0.8, list = FALSE)
@@ -173,10 +189,9 @@ model_knn_df
 #That's good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy. 
 #Remember that most of the records in our data set are not patients with diabetes. 
 #Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.
-
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#we can find that simpler models have better accuracy. 
-#To see which variables are having the most impact on our outcome variable, we can use fs.anova to check the analysis of variance for each variable and use that in a second KNN.
+```
+We can find that simpler models have better accuracy. To see which variables are having the most impact on our outcome variable, we can use fs.anova to check the analysis of variance for each variable and use that in a second KNN.
+```{r,echo=TRUE}
 df_stdize$Diabetes = ifelse(df_stdize$Diabetes == "Diabetes", 1, 0)
 fs <- fs.anova(df_stdize, df_stdize$Diabetes)
 print(fs$fs.order)
@@ -195,14 +210,13 @@ model_knn_df_simple <- train(Diabetes ~ Glucose, data = balanced, method = "knn"
                              tuneLength = 10)
 
 model_knn_df_simple
-#simpler model seems to have better performance. 
-#With a K value of 15, we see an accuracy of 0.93 and a Kappa of 0.86. 
-#Both of these scores are higher than we had seen with the larger model and the Kappa of 0.86 indicates that we are predicting both classes better although still not perfectly.
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#Since we held out a testing set of 20% of our training data, we have an easy way to evaluate both of our models. 
+```
+The simpler model seems to have better performance. With a K value of 15, we see an accuracy of 0.93 and a Kappa of 0.86. 
+Both of these scores are higher than we had seen with the larger model and the Kappa of 0.86 indicates that we are predicting both classes better although still not perfectly.
 
-#pass the model to predict and check the results against the actual test labels. 
-#use a confusion matrix to assess how well our model predicts the test data:
+
+Since we held out a testing set of 20% of our training data, we have an easy way to evaluate both of our models. Pass the model to predict and check the results against the actual test labels. Use a confusion matrix to assess how well our model predicts the test data:
+```{r,echo=TRUE}
 predict_knn <- predict(model_knn_df, test_df)
 confusionMatrix(as.factor(predict_knn), as.factor(test_df$Diabetes), positive = "Diabetes")
 
@@ -211,14 +225,8 @@ confusionMatrix(as.factor(predict_knn), as.factor(test_df$Diabetes), positive = 
 
 predict_knn_simple <- predict(model_knn_df_simple, test_df)
 confusionMatrix(as.factor(predict_knn_simple), as.factor(test_df$Diabetes), positive = "Diabetes")
-#As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. 
-#This model correctly predicts 10 of the 12 true 'diabetes' records. 
-#On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. 
-#This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, 
-#our model is a little too over-eager to label them 'diabetes' when they aren't.
 ```
-
-
+As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true 'diabetes' records. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set,our model is a little too over-eager to label them 'diabetes' when they aren't.
 # Conclusion
 
 # References
