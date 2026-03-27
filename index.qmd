@@ -39,7 +39,7 @@ The K-Nearest Neighbors (KNN) algorithm is one of the simplest and most intuitiv
 Take a look at the following photo. 
 
 <center>
-![K-Means Convergence Algorithm (Image Source: ©Anand. Inspired from [@yul2020astudy])](KnnClassification.svg){#fig-2}
+![K-Nearest Neighbor Visual Representation (Image Source: ©Wikipedia)](KnnClassification.svg.png){#fig-1}
 </center>
 
 
@@ -132,6 +132,7 @@ df <- data.frame(read_excel(tf))
 ```{r, echo=TRUE}
 kable(head(df))
 ```
+
 As shown, we have variables we do not need/want including empty columns. We'll select the non-demographic columns to begin and create a reduced data set. The new table below shows the first 6 rows of our reduced data set. 
 ```{r, echo=TRUE}
 df_reduced <- df[c("Diabetes", "Cholesterol", "Glucose", "BMI", "Waist.hip.ratio", "HDL.Chol", "Chol.HDL.ratio", "Systolic.BP", "Diastolic.BP", "Weight")]
@@ -149,6 +150,7 @@ vars <- data.frame(
 ```{r, echo=TRUE}
 kable(vars)
 ```
+## Cleaning the data
 Like mentioned, kNN is sensitive to scaling (of the variables). So it is helpful to first standardize the variables. We do this using the preProcess function of the caret package:
 
 ```{r, echo=TRUE}
@@ -163,6 +165,7 @@ df_stdize <- bind_cols(Diabetes = df_reduced$Diabetes, df_standardized)
 ```
 Now we have a data set which will work well for KNN! 
 
+## Using the KNN Model 
 First, we create a test/train split so that we can train a KNN model. 
 We will use the createDataPartition from caret to randomly select 80% of the data to use for the training set and 20% of the data to use for the test set. Then, create two different data.frames using partition point returned by createDataPartition.
 
@@ -217,18 +220,25 @@ The simpler model seems to have better performance. With a K value of 15, we see
 Both of these scores are higher than we had seen with the larger model and the Kappa of 0.86 indicates that we are predicting both classes better although still not perfectly.
 
 
-Since we held out a testing set of 20% of our training data, we have an easy way to evaluate both of our models. Pass the model to predict and check the results against the actual test labels. Use a confusion matrix to assess how well our model predicts the test data:
+Since we held out a testing set of 20% of our training data, we have an easy way to evaluate both of our models. Pass the model to predict and check the results against the actual test labels. Use a confusion matrix to assess how well our model predicts the test data. To recap, a confusion matrix looks like this: 
+<center>
+![Confusion Matrix (Image Source: ©glassboxmedicine)](confusion-matrix.png){#fig-3}
+</center>
+
 ```{r,echo=TRUE}
 predict_knn <- predict(model_knn_df, test_df)
 confusionMatrix(as.factor(predict_knn), as.factor(test_df$Diabetes), positive = "Diabetes")
+```
+Our everything model does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. 
 
-#Our everything model does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. 
-#As seen in the confusion matrix, the model only accurately identifies 25% of the records labeled 'Diabetes'.
+As seen in the confusion matrix, the model only accurately identifies 25% of the records labeled 'Diabetes'.
+```{r, echo=TRUE}
 
 predict_knn_simple <- predict(model_knn_df_simple, test_df)
 confusionMatrix(as.factor(predict_knn_simple), as.factor(test_df$Diabetes), positive = "Diabetes")
 ```
 As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true 'diabetes' records. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set,our model is a little too over-eager to label them 'diabetes' when they aren't.
+
 # Conclusion
 
 # References
