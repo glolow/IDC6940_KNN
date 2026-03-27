@@ -125,15 +125,17 @@ library(caret)
 library(httr)
 library(readxl)
 library(dplyr)
-library(gtsummary)
+library(knitr)
 GET("https://query.data.world/s/qmc5py3qjodoyglqcny7ihdowxwepf?dws=00000", write_disk(tf <- tempfile(fileext = ".xlsx")))
 df <- data.frame(read_excel(tf))
-head(df)
 ```
-We'll select the non-demographic columns to begin and create a reduced data set:
+```{r, echo=TRUE}
+kable(head(df))
+```
+As shown, we have variables we do not need/want including empty columns. We'll select the non-demographic columns to begin and create a reduced data set. The new table below shows the first 6 rows of our reduced data set. 
 ```{r, echo=TRUE}
 df_reduced <- df[c("Diabetes", "Cholesterol", "Glucose", "BMI", "Waist.hip.ratio", "HDL.Chol", "Chol.HDL.ratio", "Systolic.BP", "Diastolic.BP", "Weight")]
-head(df_reduced)
+kable(head(df_reduced))
 ```
 
 The table below now shows a description of each of our variables to be used. 
@@ -145,7 +147,7 @@ vars <- data.frame(
 )
 ```
 ```{r, echo=TRUE}
-print(vars)
+kable(vars)
 ```
 Like mentioned, kNN is sensitive to scaling (of the variables). So it is helpful to first standardize the variables. We do this using the preProcess function of the caret package:
 
