@@ -147,7 +147,7 @@ vars <- data.frame(
 ```{r, echo=TRUE}
 kable(vars)
 ```
-## Cleaning the data
+## Preparing the Data
 Like mentioned, kNN is sensitive to scaling (of the variables). So it is helpful to first standardize the variables. We do this using the preProcess function of the caret package:
 
 ```{r, echo=TRUE}
@@ -213,14 +213,14 @@ print(fs$fs.order)
 ```
 As we already guessed, we can now confirm that "Glucose" is the most important feature in our data set for predicting diabetes.
 
-We can now do two things here to improve our performance. First, we'll balance our data set so that we have equal numbers of records with and without diabetes. 
+We can now do two things here to improve our performance. First, we'll balance our data set so that we have equal numbers of records with and without diabetes: 
 ```{r, echo=TRUE}
 positive_cases <- nrow(train_df[train_df$Diabetes == 'Diabetes',])
 
 balanced = rbind(train_df[sample(which(train_df$Diabetes == 'No diabetes'), positive_cases),], train_df[train_df$Diabetes == 'Diabetes',])
 ```
 
-Second, we'll use just the Glucose readings to calculate the distance to our 'neighbors' in KNN. 
+Second, we'll use just the Glucose readings to calculate the distance to our 'neighbors' in KNN: 
 ```{r, echo=TRUE}
 trnctrl_df <- trainControl(method = "cv", number = 10)
 model_knn_df_simple <- train(Diabetes ~ Glucose, data = balanced, method = "knn", 
@@ -239,13 +239,25 @@ Since we held out a testing set of 20% of our training data, we have an easy way
 ![Confusion Matrix (Image Source: ©glassboxmedicine)](confusion-matrix.png){#fig-3}
 </center>
 
+### Unbalanced Model Analysis and Results
+
 ```{r,echo=TRUE}
 predict_knn <- predict(model_knn_df, test_df)
 confusionMatrix(as.factor(predict_knn), as.factor(test_df$Diabetes), positive = "Diabetes")
 ```
-Our "everything model" or unbalanced model does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled 'Diabetes'.
+Sensitivity (0.25000): The model correctly identifies only 25% of the actual positive cases (high false-negative rate).
+Specificity (1.00000): The model correctly identifies 100% of the negative cases, meaning there are no false positives.
+Positive Predictive Value (1.00000): When the model predicts a positive case, it is 100% correct.
+Negative Predictive Value (0.88000): When the model predicts a negative case, it is correct 88% of the time.
+Balanced Accuracy (0.62500): The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in.
+Prevalence (0.15385): The actual positive cases represent about 15.4% of the total dataset. 
+
+In summary, our unbalanced model does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled 'Diabetes'.
 
 Now we will look at the confusion matrix for our balanced model. 
+
+### Balanced Model Analysis and Results 
+
 ```{r, echo=TRUE}
 predict_knn_simple <- predict(model_knn_df_simple, test_df)
 confusionMatrix(as.factor(predict_knn_simple), as.factor(test_df$Diabetes), positive = "Diabetes")
