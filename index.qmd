@@ -143,7 +143,10 @@ vars <- data.frame(
   Description = c("Yes/No", "Numeric", "Numeric", "Numeric", "Waist to Hip Ratio","Numeric","Cholesterol to HDL ratio","Systolic Blood Pressure","Diastolic Blood Pressure","Numeric")
   
 )
+#vars <- bind_rows(vars, df_reduced)
+
 ```
+
 ```{r, echo=TRUE}
 kable(vars)
 ```
