@@ -42,11 +42,15 @@ Take a look at the following photo.
 ![K-Nearest Neighbor Visual Representation (Image Source: ©Wikipedia)](KnnClassification.svg.png){#fig-1}
 </center>
 
-But KNN is a bit more complex than simply pictured. Core Steps of the KNN Methodology include: 
+When determining how to classify the green dot as either a blue square or red triangle, we will look at its neighbors - specifically the ones closest to it. Here, if we chose to look at three of its closest neighbors (k=3) we are looking at the area within the inner solid circle. We see that the majority of its neighbors are red triangles so we would classify the green dot as a red triangle. However, if we're looking within the area of dashed circle, we see three blue squares vs two red triangles so the green dot would then be classified as a blue square.   
 
-1. Defining the Parameter 'K': When defining or selecting k, we are selecting the number of nearest neighbors to consider. In other words, the k defines how many neighbors will be checked to determine the classification of a query point. For example, K=1, means it will be assigned to the same class as its single nearest neighbor. Choosing K depends on the input data. For example, data with more outliers performs much better with higher k values. We also want to choose an odd number for k to minimize the chances of ties in classification. 
+But KNN is a bit more complex than this. 
 
-2. Calculating Distance: When a new, unlabeled data point is introduced, the algorithm calculates its distance to every other point in the training dataset. The distance metric measures the distance between the query point(s) and other data points. It can be calculated using either Euclidean distance, Manhattan distance, Minkowski, or Hamming distance, and we can visualize this using Voronezh diagrams like above.
+## Core Steps of the KNN Methodology  
+
+1. Defining the Parameter 'K': Like mentioned, when defining or selecting k, we are selecting the number of nearest neighbors to consider to determine the classification of a query point. For example, K=1, means it will be assigned to the same class as its single nearest neighbor. Choosing K depends on the input data. For example, data with more outliers performs much better with higher k values. We also want to choose an odd number for k to minimize the chances of ties in classification. 
+
+2. Calculating Distance: When a new, unlabeled data point is introduced, the algorithm calculates its distance to every other point in the training dataset. The distance metric measures the distance between the query point(s) and other data points. It can be calculated using a variety of formulas. For example, either Euclidean distance, Manhattan distance, Minkowski, or Hamming distance, and we can visualize this using Voronezh diagrams like above.
 
 - Euclidean Distance: Most commonly used. Measures the "straight-line" path between points; best for continuous data.
 _Euclidean distance_:
@@ -70,33 +74,34 @@ $$
 ![Hamming Distance XOR (Image Source: ©Anand. Inspired from [@yul2020astudy])](Hamming Distance.png){#fig-2}
 </center>
 
-3. Identify Neighbors: Combining steps 1 and 2. We sort the calculated distances based on our metric distance formula and select the points with the smallest distance values to the new query point. 
+3. Identify Neighbors: Combining steps 1 and 2. We defined k, we determined distance based on our metric distance formula. Now we sort and select the points with the smallest distance values to the new query point. 
 
 4. Aggregate results based on the goal. 
 
  - Classification: The new point is assigned the class that appears most frequently among its k 
- neighbors (majority or plurality voting).
+ neighbors (majority or plurality voting). Like the example above, we had mostly blue squares within the vicinity to the query point aka the green dot so it is most likely also a blue square. 
  
  - Regression: The algorithm predicts a continuous value by taking the average (mean) or median of the k
  neighbors' target values. 
 
-Key Characteristics of KNN
+## Key Characteristics of KNN
 
-Lazy Learning: KNN is considered a "lazy learner" because it does not have a distinct training phase. It simply stores the training data and defers all computation until a prediction is requested.
+Lazy Learner: KNN is considered a "lazy learner" because it does not have a distinct training phase. It simply stores the training data and defers all computation until a prediction is requested.
 
 Non-Parametric: It makes no prior assumptions about the underlying distribution of the data, making it flexible for complex datasets.
 
 Sensitivity to Scale: Because it relies on distance, features with larger magnitudes can disproportionately influence results. Therefore, feature scaling (standardization or normalization) is a critical preprocessing step. 
 
-Finding the Optimal 'K': The value of k is often determined using the Elbow Method or Cross-Validation, where multiple k values are tested to find the one that minimizes the error rate without overfitting or underfitting. Analysts typically choose an odd number for k to prevent ties in classification. In our example, we will be using cross-validation to determine the value of 'k'. In cross validation, the dataset is divided by kfolds. Where at each iteration each fold is used once as test data and the remaining fold is used as training data, the process is repeated until all data is evaluated.[https://www.ijadis.net/index.php/ijadis/article/view/k-nearest-neighbor-with-k-fold-cross-validation-and-analytic-hie/18]
+Finding the Optimal 'K': The value of k is often determined using the Elbow Method or Cross-Validation, where multiple k values are tested to find the one that minimizes the error rate without overfitting or underfitting. Analysts typically choose an odd number for k to prevent ties in classification (like if we had equal red triangles and blue squares what then?). In our example, we will be using cross-validation to determine the value of 'k'. In cross validation, the dataset is divided by kfolds. Where at each iteration each fold is used once as test data and the remaining fold is used as training data, the process is repeated until all data is evaluated.
+[https://www.ijadis.net/index.php/ijadis/article/view/k-nearest-neighbor-with-k-fold-cross-validation-and-analytic-hie/18]
 
-Strengths of KNN 
+## Strengths of KNN 
 
 1.Easy to implement/learn. There are also few hyper parameters - just the distance and k value. 
 
 2. It's also adaptable. It adjusts easily to new training data since all training data is stored into memory. But similarly, because of that, it doesn't scale well. As the data set grows, the algorithm becomes less efficient due to increasing computational complexity, which compromises overall model performance.
 
-Weaknesses of KNN 
+## Weaknesses of KNN 
 
 1. As mentioned, it can be considered a "lazy algorithm" meaning it stores all training data and defers the computation to the time of classification, increasing memory usage and leads to slower processing compared to other methods of classifying. In other words, it does not build the model beforehand. It instead stores the data and makes predictions on demand. 
 
@@ -104,7 +109,7 @@ Weaknesses of KNN
 
 3. Another weakness is overfitting. Low k values can overfit  the data. High values tend to smooth out prediction values since average values over a greater are or neighborhood. 
 
-Uses of the KNN Algorithm
+## Uses of the KNN Algorithm
 
 When it comes to uses, we can use the KNN algorithm for simple recommendation systems. Data free processing is most commonly used because it's helpful for data sets with missing values because it estimates values using process called missing data imputation. KNN is actually most often used in finance like stock market forecasting, currency exchange rate, money laundering analysis. But it is also used in health care. For example, risk of heart attacks and prostate cancer by calculating most likely gene expression. In this paper we will apply the KNN algorithm to a data set of potential diabetic patients.  
 
@@ -112,9 +117,6 @@ When it comes to uses, we can use the KNN algorithm for simple recommendation sy
 ## Data Description
 These data sets are courtesy of Dr John Schorling, Department of Medicine, University of Virginia School of Medicine.
 The data consist of 19 variables on 403 subjects from 1046 subjects who were interviewed in a study to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors in central Virginia for African Americans. According to Dr John Hong, Diabetes Mellitus Type II (adult onset diabetes) is associated most strongly with obesity. The waist/hip ratio may be a predictor in diabetes and heart disease. DM II is also associated with hypertension - they may both be part of "Syndrome X". The 403 subjects were the ones who were actually screened for diabetes. Glycosolated hemoglobin > 7.0 is usually taken as a positive diagnosis of diabetes. 
-```{r, echo=FALSE}
-
-```
 
 ```{r, include=FALSE}
 library(mt)
@@ -158,7 +160,7 @@ preproc_reduced <- preProcess(df_reduced[,2:10], method = c("scale", "center"))
 df_standardized <- predict(preproc_reduced, df_reduced[, 2:10])
 ```
 
-Now we have scaled and centered values for our data.frame:
+Now we have scaled and centered values for our data.frame. 
 ```{r, echo=TRUE}
 summary(df_standardized)
 ```
@@ -179,7 +181,7 @@ param_split<- createDataPartition(df_stdize$Diabetes, times = 1, p = 0.8, list =
 train_df <- df_stdize[param_split, ]
 test_df <- df_stdize[-param_split, ]
 ```
-Now we train the KNN. 
+Now we "train" the KNN. 
 
 The trainControl method is a helper function for all the nuances of the KNN train method. It allows you to easily set up the KNN training parameters.
 
@@ -189,8 +191,7 @@ trnctrl_df <- trainControl(method = "cv", number = 10)
 method: This is the resampling method used. Using "cv" or cross validation. 
 number: The number of folds because we're using cv. 
 
-Now we will use all variables to predict Diabetes. 
-Then specify the training data, that we're training a KNN, and pass the training hyperparameters that we built with trainControl.
+Now we will use all our variables to predict Diabetes. Then specify the training data, that we're training a KNN, and pass the training hyperparameters that we built with trainControl.
 
 ```{r, echo=TRUE}
 model_knn_df <- train(Diabetes ~ ., data = train_df, method = "knn", 
@@ -201,12 +202,13 @@ model_knn_df
 ```
 This returns a series of KNN models and their associated metrics and tells us that the optimal number of nearest neighbors to be considered is 11 and the model accuracy for that K is 0.9198387. 
 That's good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy.
-Because our data is imbalanced, which is common in the real-world, one class is much more frequent than the others.In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class.
+Because our data is imbalanced (which is common in the real-world) one class is much more frequent than the others.In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class.
 How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.
 
-Remember that most of the records in our data set are not patients with diabetes.Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.[https://www.knime.com/blog/cohens-kappa-an-overview#:~:text=%231.-,When%20your%20data%20is%20imbalanced,estimate%20of%20the%20model's%20performance.]
+Remember that most of the records in our data set are not patients with diabetes. Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.
+[https://www.knime.com/blog/cohens-kappa-an-overview#:~:text=%231.-,When%20your%20data%20is%20imbalanced,estimate%20of%20the%20model's%20performance.]
 
-## Second KNN Model to predict Diabetes based on "Glucose" 
+## Second KNN Model  
 
 We can find that simpler models have better accuracy. To see which variables are having the most impact on our outcome variable, we can use fs.anova to check the analysis of variance for each variable and use that in a second KNN.
 ```{r,echo=TRUE}
@@ -214,7 +216,7 @@ df_stdize$Diabetes = ifelse(df_stdize$Diabetes == "Diabetes", 1, 0)
 fs <- fs.anova(df_stdize, df_stdize$Diabetes)
 print(fs$fs.order)
 ```
-As we already guessed, we can now confirm that "Glucose" is the most important feature in our data set for predicting diabetes.
+We can see that "Glucose" is the most important feature in our data set for predicting diabetes.
 
 We can now do two things here to improve our performance. First, we'll balance our data set so that we have equal numbers of records with and without diabetes: 
 ```{r, echo=TRUE}
@@ -255,9 +257,9 @@ Negative Predictive Value (0.88000): When the model predicts a negative case, it
 Balanced Accuracy (0.62500): The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in.
 Prevalence (0.15385): The actual positive cases represent about 15.4% of the total dataset. 
 
-In summary, our unbalanced model does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled 'Diabetes'.
+In summary, our unbalanced model (first model) does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled 'Diabetes'.
 
-Now we will look at the confusion matrix for our balanced model. 
+Now we will look at the confusion matrix for our balanced model (second model). 
 
 ### Balanced Model Analysis and Results 
 
