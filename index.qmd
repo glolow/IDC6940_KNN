@@ -48,7 +48,7 @@ But KNN is a bit more complex than this.
 
 ## Core Steps of the KNN Methodology  
 
-1. Defining the Parameter 'K': Like mentioned, when defining or selecting k, we are selecting the number of nearest neighbors to consider to determine the classification of a query point. For example, K=1, means it will be assigned to the same class as its single nearest neighbor. Choosing K depends on the input data. For example, data with more outliers performs much better with higher k values. We also want to choose an odd number for k to minimize the chances of ties in classification. 
+1. Defining the Parameter 'K': Like mentioned, when defining or selecting k, we are selecting the number of nearest neighbors to consider to determine the classification of a query point. For example, K=1, means it will be assigned to the same class as its single nearest neighbor. Choosing K depends on the input data. For example, data with more outliers performs much better with higher k values. We also want to choose an odd number for k to minimize the chances of ties in classification. [@zhang2018]
 
 2. Calculating Distance: When a new, unlabeled data point is introduced, the algorithm calculates its distance to every other point in the training dataset. The distance metric measures the distance between the query point(s) and other data points. It can be calculated using a variety of formulas. For example, either Euclidean distance, Manhattan distance, Minkowski, or Hamming distance, and we can visualize this using Voronezh diagrams like above.
 
