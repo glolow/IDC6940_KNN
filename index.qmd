@@ -1,5 +1,5 @@
 ---
-title: "<span style='color: #0366D6;'>K-Nearest Neighbors</span>"
+title: "<span style='color: #0366D6;'>Using the Machine Learning Algorithm K-Nearest Neighbors to Detect Patients with Diabetes</span>"
 description: |
   A non-parametric supervised learning algorithm<br/><hr/>
 author:
