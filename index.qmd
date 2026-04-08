@@ -34,7 +34,7 @@ You can think of KNN as "birds of a feather flock together."
 
 
 # Method
-The K-Nearest Neighbors (KNN) algorithm is one of the simplest and most intuitive supervised machine learning methods used for both classification (assigning a category) and regression (predicting a value). It is a non-parametric, supervised machine learning method used for both classification and regression. It requires two instances for it to achieve its goal 1) a distance metric and 2) defining K. Its methodology relies on the proximity principle, assuming that similar data points exist in close proximity within a feature space. 
+The K-Nearest Neighbors (KNN) algorithm is one of the simplest and most intuitive supervised machine learning methods used for both classification (assigning a category) and regression (predicting a value). It is a non-parametric, supervised machine learning method used for both classification and regression. It requires two instances for it to achieve its goal 1) a distance metric and 2) defining K[@IBM2024]. Its methodology relies on the proximity principle, assuming that similar data points exist in close proximity within a feature space. 
 
 Take a look at the following photo. 
 
@@ -206,7 +206,7 @@ Because our data is imbalanced (which is common in the real-world) one class is 
 How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.
 
 Remember that most of the records in our data set are not patients with diabetes. Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.
-[https://www.knime.com/blog/cohens-kappa-an-overview#:~:text=%231.-,When%20your%20data%20is%20imbalanced,estimate%20of%20the%20model's%20performance.]
+[@Cadili2025]
 
 ## Second KNN Model  
 
@@ -274,6 +274,10 @@ As we can see, our overall accuracy rate has fallen slightly, but our ability to
 # References
 
 Alkhatib, K., Najadat, H., Hmeidi, I., & Shatnawi, M. K. A. (2013). Stock price prediction using k-nearest neighbor (kNN) algorithm. International Journal of Business, Humanities and Technology, 3(3), 32-44
+
+Cadili, R. (2025, December 16). What is Cohen’s Kappa? How and when to use it. KNIME. https://www.knime.com/blog/cohens-kappa-an-overview
+
+Draelos, R. (2019, February 17). [The Confusion Matrix] [Image]. Glass Box Medicine.
 
 IBM Technology. (2024, September 2). What is the K-Nearest Neighbor (KNN) Algorithm? YouTube. https://www.youtube.com/watch?v=b6uHw7QW_n4
 
