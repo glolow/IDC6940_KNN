@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Gloria Lowery">
-<meta name="dcterms.date" content="2026-04-06">
+<meta name="dcterms.date" content="2026-04-08">
 <meta name="description" content="A non-parametric supervised learning algorithm ">
 
-<title>K-Nearest Neighbors</title>
+<title>Using the Machine Learning Algorithm K-Nearest Neighbors to Detect Patients with Diabetes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,7 +58,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="index_files/libs/clipboard/clipboard.min.js"></script>
@@ -114,7 +134,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span style="color: #0366D6;">K-Nearest Neighbors</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span style="color: #0366D6;">Using the Machine Learning Algorithm K-Nearest Neighbors to Detect Patients with Diabetes</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 <div>
@@ -137,7 +157,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 6, 2026</p>
+      <p class="date">April 8, 2026</p>
     </div>
   </div>
   
@@ -179,7 +199,7 @@ Figure&nbsp;1: K-Nearest Neighbor Visual Representation (Image Source: ©Wikiped
 <section id="core-steps-of-the-knn-methodology" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="core-steps-of-the-knn-methodology"><span class="header-section-number">2.1</span> Core Steps of the KNN Methodology</h2>
 <ol type="1">
-<li><p>Defining the Parameter ‘K’: Like mentioned, when defining or selecting k, we are selecting the number of nearest neighbors to consider to determine the classification of a query point. For example, K=1, means it will be assigned to the same class as its single nearest neighbor. Choosing K depends on the input data. For example, data with more outliers performs much better with higher k values. We also want to choose an odd number for k to minimize the chances of ties in classification. <span class="citation" data-cites="zhang2018">(<a href="#ref-zhang2018" role="doc-biblioref"><strong>zhang2018?</strong></a>)</span></p></li>
+<li><p>Defining the Parameter ‘K’: Like mentioned, when defining or selecting k, we are selecting the number of nearest neighbors to consider to determine the classification of a query point. For example, K=1, means it will be assigned to the same class as its single nearest neighbor. Choosing K depends on the input data. For example, data with more outliers performs much better with higher k values. We also want to choose an odd number for k to minimize the chances of ties in classification. <span class="citation" data-cites="zhang2018">(<a href="#ref-zhang2018" role="doc-biblioref">S. Zhang and Wang 2018</a>)</span></p></li>
 <li><p>Calculating Distance: When a new, unlabeled data point is introduced, the algorithm calculates its distance to every other point in the training dataset. The distance metric measures the distance between the query point(s) and other data points. It can be calculated using a variety of formulas. For example, either Euclidean distance, Manhattan distance, Minkowski, or Hamming distance, and we can visualize this using Voronezh diagrams like above.</p></li>
 </ol>
 <ul>
@@ -248,7 +268,7 @@ Figure&nbsp;2: Hamming Distance XOR (Image Source: ©Anand. Inspired from <span 
 <h1 data-number="3"><span class="header-section-number">3</span> Analysis and Results</h1>
 <section id="data-description" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="data-description"><span class="header-section-number">3.1</span> Data Description</h2>
-<p>These data sets are courtesy of Dr John Schorling, Department of Medicine, University of Virginia School of Medicine. The data consist of 19 variables on 403 subjects from 1046 subjects who were interviewed in a study to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors in central Virginia for African Americans. According to Dr John Hong, Diabetes Mellitus Type II (adult onset diabetes) is associated most strongly with obesity. The waist/hip ratio may be a predictor in diabetes and heart disease. DM II is also associated with hypertension - they may both be part of “Syndrome X”. The 403 subjects were the ones who were actually screened for diabetes. Glycosolated hemoglobin &gt; 7.0 is usually taken as a positive diagnosis of diabetes.</p>
+<p>These data sets are courtesy of Dr John Schorling, Department of Medicine, University of Virginia School of Medicine.<span class="citation" data-cites="Schorling1997">(<a href="#ref-Schorling1997" role="doc-biblioref">Schorling JB 1997</a>)</span> The data consist of 19 variables on 403 subjects from 1046 subjects who were interviewed in a study to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors in central Virginia for African Americans. According to Dr John Hong, Diabetes Mellitus Type II (adult onset diabetes) is associated most strongly with obesity. The waist/hip ratio may be a predictor in diabetes and heart disease. DM II is also associated with hypertension - they may both be part of “Syndrome X”. The 403 subjects were the ones who were actually screened for diabetes. Glycosolated hemoglobin &gt; 7.0 is usually taken as a positive diagnosis of diabetes.</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -889,9 +909,17 @@ Prediction    Diabetes No diabetes
 <p>Willems JP, Saunders JT, DE Hunt, JB Schorling: Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. Southern Medical Journal 90:814-820; 1997</p>
 <!-- -->
 
+
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-zhang2018" class="csl-entry" role="listitem">
+S. Zhang, M. Zong, X. Li, and R. Wang. 2018. <span>“Efficient kNN Classification with Different Numbers of Nearest Neighbors.”</span> <em>IEEE Transactions on Neural Networks and Learning Systems</em> 29 (5): 1774–85.
+</div>
+<div id="ref-Schorling1997" class="csl-entry" role="listitem">
+Schorling JB, Siegel M, Roach J. 1997. <span>“A Trial of Church-Based Smoking Cessation Interventions for Rural African Americans.”</span> <em>Preventive Medicine</em> 26: 92–101.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1347,7 +1375,7 @@ Prediction    Diabetes No diabetes
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "&lt;span style='color: #0366D6;'&gt;K-Nearest Neighbors&lt;/span&gt;"</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "&lt;span style='color: #0366D6;'&gt;Using the Machine Learning Algorithm K-Nearest Neighbors to Detect Patients with Diabetes&lt;/span&gt;"</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> |</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">  A non-parametric supervised learning algorithm&lt;br/&gt;&lt;hr/&gt;</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
@@ -1463,7 +1491,7 @@ Prediction    Diabetes No diabetes
 <span id="cb21-115"><a href="#cb21-115" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-116"><a href="#cb21-116" aria-hidden="true" tabindex="-1"></a><span class="fu"># Analysis and Results</span></span>
 <span id="cb21-117"><a href="#cb21-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Description</span></span>
-<span id="cb21-118"><a href="#cb21-118" aria-hidden="true" tabindex="-1"></a>These data sets are courtesy of Dr John Schorling, Department of Medicine, University of Virginia School of Medicine.</span>
+<span id="cb21-118"><a href="#cb21-118" aria-hidden="true" tabindex="-1"></a>These data sets are courtesy of Dr John Schorling, Department of Medicine, University of Virginia School of Medicine.<span class="co">[</span><span class="ot">@Schorling1997</span><span class="co">]</span></span>
 <span id="cb21-119"><a href="#cb21-119" aria-hidden="true" tabindex="-1"></a>The data consist of 19 variables on 403 subjects from 1046 subjects who were interviewed in a study to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors in central Virginia for African Americans. According to Dr John Hong, Diabetes Mellitus Type II (adult onset diabetes) is associated most strongly with obesity. The waist/hip ratio may be a predictor in diabetes and heart disease. DM II is also associated with hypertension - they may both be part of "Syndrome X". The 403 subjects were the ones who were actually screened for diabetes. Glycosolated hemoglobin &gt; 7.0 is usually taken as a positive diagnosis of diabetes. </span>
 <span id="cb21-120"><a href="#cb21-120" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-121"><a href="#cb21-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
