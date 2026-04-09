@@ -30,7 +30,7 @@ One such learning algorithm that we will look at is K-Nearest Neighbor. It is co
 
 The main goal of the K-Nearest Neighbors(KNN) algorithm is to predict the classification or numerical value of a new data point based on how similar it is to its closest neighbors. In this paper we will discuss the concept and underlying methodology of KNN, it's strengths and limitations, as well as its real-world applications such as in business and medicine. Specifically, applying the KNN algorithm to identify diabetes within a group of subjects who were studied in order to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors. 
 
-You can think of KNN as "birds of a feather flock together." 
+You can think of KNN as ***"birds of a feather flock together."*** 
 
 
 # Method
@@ -39,7 +39,7 @@ The K-Nearest Neighbors (KNN) algorithm is one of the simplest and most intuitiv
 Take a look at the following photo. 
 
 <center>
-![K-Nearest Neighbor Visual Representation (Image Source: ©Wikipedia)](KnnClassification.svg.png){#fig-1}
+![K-Nearest Neighbor Visual Representation (Image Source: ©Wikipedia2019)](KnnClassification.svg.png){#fig-1}
 </center>
 
 When determining how to classify the green dot as either a blue square or red triangle, we will look at its neighbors - specifically the ones closest to it. Here, if we chose to look at three of its closest neighbors (k=3) we are looking at the area within the inner solid circle. We see that the majority of its neighbors are red triangles so we would classify the green dot as a red triangle. However, if we're looking within the area of dashed circle, we see three blue squares vs two red triangles so the green dot would then be classified as a blue square.   
@@ -50,7 +50,7 @@ But KNN is a bit more complex than this.
 
 1. Defining the Parameter 'K': Like mentioned, when defining or selecting k, we are selecting the number of nearest neighbors to consider to determine the classification of a query point. For example, K=1, means it will be assigned to the same class as its single nearest neighbor. Choosing K depends on the input data. For example, data with more outliers performs much better with higher k values. We also want to choose an odd number for k to minimize the chances of ties in classification. [@zhang2018]
 
-2. Calculating Distance: When a new, unlabeled data point is introduced, the algorithm calculates its distance to every other point in the training dataset. The distance metric measures the distance between the query point(s) and other data points. It can be calculated using a variety of formulas. For example, either Euclidean distance, Manhattan distance, Minkowski, or Hamming distance, and we can visualize this using Voronezh diagrams like above.
+2. Calculating Distance: When a new, unlabeled data point is introduced, the algorithm calculates its distance to every other point in the training dataset. The distance metric measures the distance between the query point(s) and other data points. It can be calculated using a variety of formulas. For example, either Euclidean distance, Manhattan distance, Minkowski, or Hamming distance, and we can visualize this using Voronezh diagrams like above. [@VisuallyExplained2025]
 
 - Euclidean Distance: Most commonly used. Measures the "straight-line" path between points; best for continuous data.
 _Euclidean distance_:
@@ -90,7 +90,7 @@ Lazy Learner: KNN is considered a "lazy learner" because it does not have a dist
 
 Non-Parametric: It makes no prior assumptions about the underlying distribution of the data, making it flexible for complex datasets.
 
-Sensitivity to Scale: Because it relies on distance, features with larger magnitudes can disproportionately influence results. Therefore, feature scaling (standardization or normalization) is a critical preprocessing step. 
+Sensitivity to Scale: Because it relies on distance, features with larger magnitudes can disproportionately influence results. Therefore, feature scaling (standardization or normalization) is a critical preprocessing step.[@xing2020] 
 
 Finding the Optimal 'K': The value of k is often determined using the Elbow Method or Cross-Validation, where multiple k values are tested to find the one that minimizes the error rate without overfitting or underfitting. Analysts typically choose an odd number for k to prevent ties in classification (like if we had equal red triangles and blue squares what then?). In our example, we will be using cross-validation to determine the value of 'k'. In cross validation, the dataset is divided by kfolds. Where at each iteration each fold is used once as test data and the remaining fold is used as training data, the process is repeated until all data is evaluated.
 [@Tembusai2021]
@@ -107,11 +107,11 @@ Finding the Optimal 'K': The value of k is often determined using the Elbow Meth
 
 2. KNN also has what's called the "Curse of Dimensionality." It does not perform well with high dimensional data inputs. On a 2D xy graph it works fine but if we wanted to classify according to color, size, weight, etc. then the data points become sparse in higher dimensions and the distance between points become too similar for KNN to find meaningful neighbors. This leads to what's called the "peaking phenomenon." The peaking phenomenon occurs after reaching the optimal number of features - any more just increases noise and increases classification errors especially when the sample size is small. Feature selection and dimensionality reduction techniques can help minimize "curse of dimensionality" but we need to be careful. 
 
-3. Another weakness is overfitting. Low k values can overfit  the data. High values tend to smooth out prediction values since average values over a greater are or neighborhood. 
+3. Another weakness is overfitting. Low k values can overfit  the data. High values tend to smooth out prediction values since average values over a greater are or neighborhood. [@zhang2022]
 
 ## Uses of the KNN Algorithm
 
-When it comes to uses, we can use the KNN algorithm for simple recommendation systems. Data free processing is most commonly used because it's helpful for data sets with missing values because it estimates values using process called missing data imputation. KNN is actually most often used in finance like stock market forecasting, currency exchange rate, money laundering analysis. But it is also used in health care. For example, risk of heart attacks and prostate cancer by calculating most likely gene expression. In this paper we will apply the KNN algorithm to a data set of potential diabetic patients.  
+When it comes to uses, we can use the KNN algorithm for simple recommendation systems. Data free processing is most commonly used because it's helpful for data sets with missing values because it estimates values using process called missing data imputation. KNN is actually most often used in finance like stock market forecasting, currency exchange rate, money laundering analysis. But it is also used in health care. For example, risk of heart attacks and prostate cancer by calculating most likely gene expression. In this paper we will apply the KNN algorithm to a data set of potential diabetic patients.[@Nain2023] 
 
 # Analysis and Results
 ## Data Description
@@ -241,7 +241,7 @@ Both of these scores are higher than we had seen with the larger model and the K
 
 Since we held out a testing set of 20% of our training data, we have an easy way to evaluate both of our models. We will pass the model to predict and check the results against the actual test labels. Use a confusion matrix to assess how well our model predicts the test data. To recap, a confusion matrix looks like this: 
 <center>
-![Confusion Matrix (Image Source: ©glassboxmedicine)](confusion-matrix.png){#fig-3}
+![Confusion Matrix (Image Source: ©Draelos2019)](confusion-matrix.png){#fig-3}
 </center>
 
 ### Unbalanced Model Analysis and Results
@@ -273,26 +273,26 @@ As we can see, our overall accuracy rate has fallen slightly, but our ability to
 
 # References
 
-Alkhatib, K., Najadat, H., Hmeidi, I., & Shatnawi, M. K. A. (2013). Stock price prediction using k-nearest neighbor (kNN) algorithm. International Journal of Business, Humanities and Technology, 3(3), 32-44
+# References
 
-Cadili, R. (2025, December 16). What is Cohen’s Kappa? How and when to use it. KNIME. https://www.knime.com/blog/cohens-kappa-an-overview
+***Cadili, R. (2025, December 16). What is Cohen’s Kappa? How and when to use it. KNIME. https://www.knime.com/blog/cohens-kappa-an-overview***
 
-Draelos, R. (2019, February 17). [The Confusion Matrix] [Image]. Glass Box Medicine.
+***Draelos, R. (2019, February 17). [The Confusion Matrix] [Image]. Glass Box Medicine.***
 
-IBM Technology. (2024, September 2). What is the K-Nearest Neighbor (KNN) Algorithm? YouTube. https://www.youtube.com/watch?v=b6uHw7QW_n4
+***IBM Technology. (2024, September 2). What is the K-Nearest Neighbor (KNN) Algorithm? YouTube. https://www.youtube.com/watch?v=b6uHw7QW_n4***
 
-Nain, S., & Tomar, S. (2023). Medical image prediction for diagnosis of breast cancer using machine learning. AIP Conference Proceedings, 2853(1), Article 020140. doi.org
+***Nain, S., & Tomar, S. (2023). Medical image prediction for diagnosis of breast cancer using machine learning. AIP Conference Proceedings, 2853(1), Article 020140. doi.org***
 
-S. Zhang, "Challenges in KNN Classification," in IEEE Transactions on Knowledge and Data Engineering, vol. 34, no. 10, pp. 4663-4675, 1 Oct. 2022, doi: 10.1109/TKDE.2021.3049250
+***S. Zhang, "Challenges in KNN Classification," in IEEE Transactions on Knowledge and Data Engineering, vol. 34, no. 10, pp. 4663-4675, 1 Oct. 2022, doi: 10.1109/TKDE.2021.3049250***
 
-S. Zhang, X. Li, M. Zong, X. Zhu and R. Wang, "Efficient kNN Classification With Different Numbers of Nearest Neighbors," in IEEE Transactions on Neural Networks and Learning Systems, vol. 29, no. 5, pp. 1774-1785, May 2018, doi: 10.1109/TNNLS.2017.2673241
+***S. Zhang, X. Li, M. Zong, X. Zhu and R. Wang, "Efficient kNN Classification With Different Numbers of Nearest Neighbors," in IEEE Transactions on Neural Networks and Learning Systems, vol. 29, no. 5, pp. 1774-1785, May 2018, doi: 10.1109/TNNLS.2017.2673241***
 
-Schorling JB, Roach J, Siegel M, Baturka N, Hunt DE, Guterbock TM, Stewart HL: A trial of church-based smoking cessation interventions for rural African Americans. Preventive Medicine 26:92-101; 1997
+***Schorling JB, Roach J, Siegel M, Baturka N, Hunt DE, Guterbock TM, Stewart HL: A trial of church-based smoking cessation interventions for rural African Americans. Preventive Medicine 26:92-101; 1997***
 
-Tembusai, Z. R., Mawengkang, H., & Zarlis, M. (2021). K-Nearest Neighbor with K-Fold Cross Validation and Analytic Hierarchy Process on Data Classification. International Journal of Advances in Data and Information Systems, 2(1), 1–8. https://doi.org/10.25008/ijadis.v2i1.1204 
+***Tembusai, Z. R., Mawengkang, H., & Zarlis, M. (2021). K-Nearest Neighbor with K-Fold Cross Validation and Analytic Hierarchy Process on Data Classification. International Journal of Advances in Data and Information Systems, 2(1), 1–8. https://doi.org/10.25008/ijadis.v2i1.1204 ***
 
-Visually Explained. “K-Nearest Neighbors (KNN) in 3 Min.” YouTube, 17 Apr. 2025, www.youtube.com/watch?v=gs9E7E0qOIc.
+***Visually Explained. “K-Nearest Neighbors (KNN) in 3 Min.” YouTube, 17 Apr. 2025, www.youtube.com/watch?v=gs9E7E0qOIc.***
 
-W. Xing and Y. Bei, "Medical Health Big Data Classification Based on KNN Classification Algorithm," in IEEE Access, vol. 8, pp. 28808-28819, 2020, doi: 10.1109/ACCESS.2019.2955754
+***W. Xing and Y. Bei, "Medical Health Big Data Classification Based on KNN Classification Algorithm," in IEEE Access, vol. 8, pp. 28808-28819, 2020, doi: 10.1109/ACCESS.2019.2955754***
 
-Willems JP, Saunders JT, DE Hunt, JB Schorling: Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. Southern Medical Journal 90:814-820; 1997
+***Willems JP, Saunders JT, DE Hunt, JB Schorling: Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. Southern Medical Journal 90:814-820; 1997***
