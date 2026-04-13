@@ -283,3 +283,4 @@ As we can see, our overall accuracy rate has fallen slightly, but our ability to
 # Conclusion
 
 KNN is a powerful tool to predict the classification or numerical value of new data. It's simple, intuitive, and easy to learn which makes it easy to implement. In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.
+
