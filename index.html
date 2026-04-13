@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Gloria Lowery">
-<meta name="dcterms.date" content="2026-04-12">
+<meta name="dcterms.date" content="2026-04-13">
 <meta name="description" content="A non-parametric supervised learning algorithm ">
 
 <title>Using the Machine Learning Algorithm K-Nearest Neighbors to Detect Patients with Diabetes</title>
@@ -157,7 +157,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 12, 2026</p>
+      <p class="date">April 13, 2026</p>
     </div>
   </div>
   
@@ -202,20 +202,16 @@ Figure&nbsp;1: K-Nearest Neighbor Visual Representation (Image Source: ©Wikiped
 <li><p>Defining the Parameter ‘K’: Like mentioned, when defining or selecting k, we are selecting the number of nearest neighbors to consider to determine the classification of a query point. For example, K=1, means it will be assigned to the same class as its single nearest neighbor. Choosing K depends on the input data. For example, data with more outliers performs much better with higher k values. We also want to choose an odd number for k to minimize the chances of ties in classification. <span class="citation" data-cites="zhang2018">(<a href="#ref-zhang2018" role="doc-biblioref">S. Zhang and Wang 2018</a>)</span></p></li>
 <li><p>Calculating Distance: When a new, unlabeled data point is introduced, the algorithm calculates its distance to every other point in the training dataset. The distance metric measures the distance between the query point(s) and other data points. It can be calculated using a variety of formulas. For example, either Euclidean distance, Manhattan distance, Minkowski, or Hamming distance, and we can visualize this using Voronezh diagrams like above. <span class="citation" data-cites="VisuallyExplained2025">(<a href="#ref-VisuallyExplained2025" role="doc-biblioref"><span>“K-Nearest Neighbors (KNN) in 3 Min”</span> 2025</a>)</span></p></li>
 </ol>
-<ul>
-<li>Euclidean Distance: Most commonly used. Measures the “straight-line” path between points; best for continuous data. <em>Euclidean distance</em>:</li>
-</ul>
+<p><em>Euclidean Distance</em>: Most commonly used. Measures the “straight-line” path between points; best for continuous data.</p>
 <p><span class="math display">\[
 D_{euclidean}(x_1, x_2) = \sqrt{\sum_{i = 1}^{n}{((x_1)_i - (x_2)_i)^2}}
 \]</span></p>
-<ul>
-<li>Manhattan Distance: Calculates the sum of absolute differences, similar to navigating a grid (taxicab geometry). <em>Manhattan distance</em>:</li>
-</ul>
+<p><em>Manhattan Distance</em>: Calculates the sum of absolute differences, similar to navigating a grid (taxicab geometry).</p>
 <span class="math display">\[
 D_{manhattan}(x_1, x_2) = \sum_{i = 1}^{n}|((x_1)_i - (x_2)_i)|
-\]</span> - Minkowski Distance: A generalized formula that can represent both Euclidean (p=1) and Manhattan (p=2) distances. <span class="math display">\[
+\]</span> <em>Minkowski Distance</em>: A generalized formula that can represent both Euclidean (p=1) and Manhattan (p=2) distances. <span class="math display">\[
 D_{Minkowski}(X,Y) = \sum_{i = 1}^{n}|x_i - y_i|^p
-\]</span> - Hamming Distance: Used for categorical or string variables to identify where vectors do not match.
+\]</span> <em>Hamming Distance</em>: Used for categorical or string variables to identify where vectors do not match.
 <center>
 <div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -223,7 +219,7 @@ D_{Minkowski}(X,Y) = \sum_{i = 1}^{n}|x_i - y_i|^p
 <img src="Hamming%20Distance.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Hamming Distance XOR (Image Source: ©Anand. Inspired from <span class="citation" data-cites="yul2020astudy">(<a href="#ref-yul2020astudy" role="doc-biblioref"><strong>yul2020astudy?</strong></a>)</span>)
+Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span class="citation" data-cites="An2021">(<a href="#ref-An2021" role="doc-biblioref">An 2021</a>)</span>)
 </figcaption>
 </figure>
 </div>
@@ -724,7 +720,7 @@ Accuracy was used to select the optimal model using the largest value.
 The final value used for the model was k = 9.</code></pre>
 </div>
 </div>
-<p>This returns a series of KNN models and their associated metrics and tells us that the optimal number of nearest neighbors to be considered is 11 and the model accuracy for that K is 0.9198387. That’s good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy. Because our data is imbalanced (which is common in the real-world) one class is much more frequent than the others.In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class. How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.<span class="citation" data-cites="Cadili2025">(<a href="#ref-Cadili2025" role="doc-biblioref"><span>“What Is Cohen’s Kappa? How and When to Use It”</span> 2025</a>)</span></p>
+<p>This returns a series of KNN models and their associated metrics and tells us that the optimal number of nearest neighbors to be considered is 11 and the model accuracy for that K is 0.9198387. That’s good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy. Because our data is imbalanced (which is common in the real-world) one class is much more frequent than the others. Variables (like cholesterol) drown out other (like BMI). In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class. How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.<span class="citation" data-cites="Cadili2025">(<a href="#ref-Cadili2025" role="doc-biblioref"><span>“What Is Cohen’s Kappa? How and When to Use It”</span> 2025</a>)</span></p>
 <p>Remember that most of the records in our data set are not patients with diabetes. Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.</p>
 </section>
 <section id="second-knn-model" class="level2" data-number="3.4">
@@ -847,8 +843,10 @@ Prediction    Diabetes No diabetes
                                           </code></pre>
 </div>
 </div>
-<p>Sensitivity (0.25000): The model correctly identifies only 25% of the actual positive cases (high false-negative rate). Specificity (1.00000): The model correctly identifies 100% of the negative cases, meaning there are no false positives. Positive Predictive Value (1.00000): When the model predicts a positive case, it is 100% correct. Negative Predictive Value (0.88000): When the model predicts a negative case, it is correct 88% of the time. Balanced Accuracy (0.62500): The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in. Prevalence (0.15385): The actual positive cases represent about 15.4% of the total dataset.</p>
-<p>In summary, our unbalanced model (first model) does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled ‘Diabetes’.</p>
+<p>Our confusion matrix shows 3 true positives, 66 true negatives, 9 false negatives, and 0 false positives.</p>
+<p><strong><em>Sensitivity (0.25000)</em></strong>: The model correctly identifies only 25% of the actual positive cases (high false-negative rate). It only caught 3 out of 12 people who have diabetes and missed 75% of the sick patients. <strong><em>Specificity (1.00000)</em></strong>: The model correctly identifies 100% of the negative cases, meaning there are no false positives. <strong><em>Positive Predictive Value (1.00000)</em></strong>: When the model predicts a positive case, it is 100% correct. <strong><em>Negative Predictive Value (0.88000)</em></strong>: When the model predicts a negative case, it is correct 88% of the time. <strong><em>Balanced Accuracy (0.62500)</em></strong>: The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in. <strong><em>Prevalence (0.15385)</em></strong>: The actual positive cases represent about 15.4% of the total dataset.</p>
+<p>At first glance, having a 88.46% accuracy looks great! If you guessed “no diabetes” for each patient, you’d be right 84.62% of the time because the dataset is unbalanced. Our p value is 0.22 which is greater than 0.05, which means our model isn’t statistically better than just guessing “no diabetes” for everyone.Our kappa of 0.36 which isn’t great. It means most of the accuracy is coming from the lopsided nature of the data rather than the model’s predictive power.</p>
+<p>In summary, our unbalanced model (first model) does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled ‘Diabetes’ so it’s missing the vast majority of actual diabetes cases.</p>
 <p>Now we will look at the confusion matrix for our balanced model (second model).</p>
 </section>
 <section id="balanced-model-analysis-and-results" class="level3" data-number="3.5.2">
@@ -889,33 +887,24 @@ Prediction    Diabetes No diabetes
                                           </code></pre>
 </div>
 </div>
-<p>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true ‘diabetes’ records. On the negative side though, the model mis-classifies 9 of the 66 ‘no diabetes’ records as ‘diabetes’. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them ‘diabetes’ when they aren’t.</p>
+<p>Our confusion matrix shows 10 true positives, 56 true negatives, 2 false negatives, and 10 false positives.</p>
+<p><strong><em>Sensitivity (83.3%)</em></strong>: Out of 12 people who actually have diabetes, the model caught 10 of them. It only missed 2. <strong><em>Specificity (84.8%)</em></strong>: Out of 66 healthy people, the model correctly identified 56 as healthy. <strong><em>Pos Pred Value</em></strong>: Is 50% — when the model says “Diabetes,” it’s a coin flip whether the person actually has it. <strong><em>Balanced Accuracy (84.1%)</em></strong>: Since it’s high, it shows the model is actually learning to tell the difference between the two classes. <strong><em>Negative Predictive Value (96.5%)</em></strong>: This is excellent for a medical screen. If the model tells a patient they don’t have diabetes, it is almost certainly correct. <strong><em>Kappa (0.5357)</em></strong>: This is much better. It proves the model is doing much better than just randomly guessing based on the majority group.</p>
+<p>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better.This model correctly predicts 10 of the 12 true ‘diabetes’ records. Simple guessing would have missed all 12 sick people, the model found 10 of them. On the negative side though, the model mis-classifies 9 of the 66 ‘no diabetes’ records as ‘diabetes’. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them ‘diabetes’ when they aren’t.</p>
 </section>
 </section>
 </section>
 <section id="conclusion" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Conclusion</h1>
 <p>KNN is a powerful tool to predict the classification or numerical value of new data. It’s simple, intuitive, and easy to learn which makes it easy to implement. In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.</p>
-</section>
-<section id="references" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> References</h1>
-<p><strong><em>Cadili, R. (2025, December 16). What is Cohen’s Kappa? How and when to use it. KNIME. https://www.knime.com/blog/cohens-kappa-an-overview</em></strong></p>
-<p><strong><em>Draelos, R. (2019, February 17). [The Confusion Matrix] [Image]. Glass Box Medicine.</em></strong></p>
-<p><strong><em>IBM Technology. (2024, September 2). What is the K-Nearest Neighbor (KNN) Algorithm? YouTube. https://www.youtube.com/watch?v=b6uHw7QW_n4</em></strong></p>
-<p><strong><em>Nain, S., &amp; Tomar, S. (2023). Medical image prediction for diagnosis of breast cancer using machine learning. AIP Conference Proceedings, 2853(1), Article 020140. doi.org</em></strong></p>
-<p><strong><em>S. Zhang, “Challenges in KNN Classification,” in IEEE Transactions on Knowledge and Data Engineering, vol.&nbsp;34, no. 10, pp.&nbsp;4663-4675, 1 Oct.&nbsp;2022, doi: 10.1109/TKDE.2021.3049250</em></strong></p>
-<p><strong><em>S. Zhang, X. Li, M. Zong, X. Zhu and R. Wang, “Efficient kNN Classification With Different Numbers of Nearest Neighbors,” in IEEE Transactions on Neural Networks and Learning Systems, vol.&nbsp;29, no. 5, pp.&nbsp;1774-1785, May 2018, doi: 10.1109/TNNLS.2017.2673241</em></strong></p>
-<p><strong><em>Schorling JB, Roach J, Siegel M, Baturka N, Hunt DE, Guterbock TM, Stewart HL: A trial of church-based smoking cessation interventions for rural African Americans. Preventive Medicine 26:92-101; 1997</em></strong></p>
-<p><strong><em>Tembusai, Z. R., Mawengkang, H., &amp; Zarlis, M. (2021). K-Nearest Neighbor with K-Fold Cross Validation and Analytic Hierarchy Process on Data Classification. International Journal of Advances in Data and Information Systems, 2(1), 1–8. https://doi.org/10.25008/ijadis.v2i1.1204 </em></strong></p>
-<p><strong><em>Visually Explained. “K-Nearest Neighbors (KNN) in 3 Min.” YouTube, 17 Apr.&nbsp;2025, www.youtube.com/watch?v=gs9E7E0qOIc.</em></strong></p>
-<p><strong><em>W. Xing and Y. Bei, “Medical Health Big Data Classification Based on KNN Classification Algorithm,” in IEEE Access, vol.&nbsp;8, pp.&nbsp;28808-28819, 2020, doi: 10.1109/ACCESS.2019.2955754</em></strong></p>
-<p><strong><em>Willems JP, Saunders JT, DE Hunt, JB Schorling: Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. Southern Medical Journal 90:814-820; 1997</em></strong></p>
 <!-- -->
 
 
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-An2021" class="csl-entry" role="listitem">
+An, J. 2021. <span>“Diagram Illustrating Hamming Distance Between Binary Representations of Integers] [Digital Image].”</span>
+</div>
 <div id="ref-Tembusai2021" class="csl-entry" role="listitem">
 <span>“K-Nearest Neighbor with k-Fold Cross Validation and Analytic Hierarchy Process on Data Classification.”</span> 2021. <em>International Journal of Advances in Data and Information Systems</em> 2 (1): 1–8.
 </div>
@@ -1455,250 +1444,237 @@ Zhang, S. 2022. <span>“Challenges in KNN Classification.”</span> <em>IEEE Tr
 <span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Calculating Distance: When a new, unlabeled data point is introduced, the algorithm calculates its distance to every other point in the training dataset. The distance metric measures the distance between the query point(s) and other data points. It can be calculated using a variety of formulas. For example, either Euclidean distance, Manhattan distance, Minkowski, or Hamming distance, and we can visualize this using Voronezh diagrams like above. <span class="co">[</span><span class="ot">@VisuallyExplained2025</span><span class="co">]</span></span>
 <span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Euclidean Distance: Most commonly used. Measures the "straight-line" path between points; best for continuous data.</span>
-<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a>_Euclidean distance_:</span>
-<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a>D_{euclidean}(x_1, x_2) = \sqrt{\sum_{i = 1}^{n}{((x_1)_i - (x_2)_i)^2}}</span>
-<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Manhattan Distance: Calculates the sum of absolute differences, similar to navigating a grid (taxicab geometry).</span>
-<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>_Manhattan distance_:</span>
-<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>_Euclidean Distance_: Most commonly used. Measures the "straight-line" path between points; best for continuous data.</span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>D_{euclidean}(x_1, x_2) = \sqrt{\sum_{i = 1}^{n}{((x_1)_i - (x_2)_i)^2}}</span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a>_Manhattan Distance_: Calculates the sum of absolute differences, similar to navigating a grid (taxicab geometry).</span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>D_{manhattan}(x_1, x_2) = \sum_{i = 1}^{n}|((x_1)_i - (x_2)_i)|</span>
 <span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a>D_{manhattan}(x_1, x_2) = \sum_{i = 1}^{n}|((x_1)_i - (x_2)_i)|</span>
+<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a>_Minkowski Distance_: A generalized formula that can represent both Euclidean (p=1) and Manhattan (p=2) distances.</span>
 <span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Minkowski Distance: A generalized formula that can represent both Euclidean (p=1) and Manhattan (p=2) distances.</span>
+<span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a>D_{Minkowski}(X,Y) = \sum_{i = 1}^{n}|x_i - y_i|^p</span>
 <span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a>D_{Minkowski}(X,Y) = \sum_{i = 1}^{n}|x_i - y_i|^p</span>
-<span id="cb21-71"><a href="#cb21-71" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb21-72"><a href="#cb21-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hamming Distance: Used for categorical or string variables to identify where vectors do not match.</span>
-<span id="cb21-73"><a href="#cb21-73" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">center</span><span class="dt">&gt;</span></span>
-<span id="cb21-74"><a href="#cb21-74" aria-hidden="true" tabindex="-1"></a>!<span class="co">[</span><span class="ot">Hamming Distance XOR (Image Source: ©Anand. Inspired from [@yul2020astudy])</span><span class="co">](Hamming Distance.png)</span>{#fig-2}</span>
-<span id="cb21-75"><a href="#cb21-75" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">center</span><span class="dt">&gt;</span></span>
+<span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a>_Hamming Distance_: Used for categorical or string variables to identify where vectors do not match.</span>
+<span id="cb21-71"><a href="#cb21-71" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">center</span><span class="dt">&gt;</span></span>
+<span id="cb21-72"><a href="#cb21-72" aria-hidden="true" tabindex="-1"></a>!<span class="co">[</span><span class="ot">Hamming Distance XOR (Image Source: ©An2021. Inspired from [@An2021])</span><span class="co">](Hamming Distance.png)</span>{#fig-2}</span>
+<span id="cb21-73"><a href="#cb21-73" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">center</span><span class="dt">&gt;</span></span>
+<span id="cb21-74"><a href="#cb21-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-75"><a href="#cb21-75" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Identify Neighbors: Combining steps 1 and 2. We defined k, we determined distance based on our metric distance formula. Now we sort and select the points with the smallest distance values to the new query point. </span>
 <span id="cb21-76"><a href="#cb21-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-77"><a href="#cb21-77" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Identify Neighbors: Combining steps 1 and 2. We defined k, we determined distance based on our metric distance formula. Now we sort and select the points with the smallest distance values to the new query point. </span>
+<span id="cb21-77"><a href="#cb21-77" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Aggregate results based on the goal. </span>
 <span id="cb21-78"><a href="#cb21-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-79"><a href="#cb21-79" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Aggregate results based on the goal. </span>
-<span id="cb21-80"><a href="#cb21-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-81"><a href="#cb21-81" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Classification: The new point is assigned the class that appears most frequently among its k </span>
-<span id="cb21-82"><a href="#cb21-82" aria-hidden="true" tabindex="-1"></a> neighbors (majority or plurality voting). Like the example above, we had mostly blue squares within the vicinity to the query point aka the green dot so it is most likely also a blue square. </span>
-<span id="cb21-83"><a href="#cb21-83" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb21-84"><a href="#cb21-84" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Regression: The algorithm predicts a continuous value by taking the average (mean) or median of the k</span>
-<span id="cb21-85"><a href="#cb21-85" aria-hidden="true" tabindex="-1"></a> neighbors' target values. </span>
+<span id="cb21-79"><a href="#cb21-79" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Classification: The new point is assigned the class that appears most frequently among its k </span>
+<span id="cb21-80"><a href="#cb21-80" aria-hidden="true" tabindex="-1"></a> neighbors (majority or plurality voting). Like the example above, we had mostly blue squares within the vicinity to the query point aka the green dot so it is most likely also a blue square. </span>
+<span id="cb21-81"><a href="#cb21-81" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb21-82"><a href="#cb21-82" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Regression: The algorithm predicts a continuous value by taking the average (mean) or median of the k</span>
+<span id="cb21-83"><a href="#cb21-83" aria-hidden="true" tabindex="-1"></a> neighbors' target values. </span>
+<span id="cb21-84"><a href="#cb21-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-85"><a href="#cb21-85" aria-hidden="true" tabindex="-1"></a><span class="fu">## Key Characteristics of KNN</span></span>
 <span id="cb21-86"><a href="#cb21-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-87"><a href="#cb21-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## Key Characteristics of KNN</span></span>
+<span id="cb21-87"><a href="#cb21-87" aria-hidden="true" tabindex="-1"></a>Lazy Learner: KNN is considered a "lazy learner" because it does not have a distinct training phase. It simply stores the training data and defers all computation until a prediction is requested.</span>
 <span id="cb21-88"><a href="#cb21-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-89"><a href="#cb21-89" aria-hidden="true" tabindex="-1"></a>Lazy Learner: KNN is considered a "lazy learner" because it does not have a distinct training phase. It simply stores the training data and defers all computation until a prediction is requested.</span>
+<span id="cb21-89"><a href="#cb21-89" aria-hidden="true" tabindex="-1"></a>Non-Parametric: It makes no prior assumptions about the underlying distribution of the data, making it flexible for complex datasets.</span>
 <span id="cb21-90"><a href="#cb21-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-91"><a href="#cb21-91" aria-hidden="true" tabindex="-1"></a>Non-Parametric: It makes no prior assumptions about the underlying distribution of the data, making it flexible for complex datasets.</span>
+<span id="cb21-91"><a href="#cb21-91" aria-hidden="true" tabindex="-1"></a>Sensitivity to Scale: Because it relies on distance, features with larger magnitudes can disproportionately influence results. Therefore, feature scaling (standardization or normalization) is a critical preprocessing step.<span class="co">[</span><span class="ot">@xing2020</span><span class="co">]</span> </span>
 <span id="cb21-92"><a href="#cb21-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-93"><a href="#cb21-93" aria-hidden="true" tabindex="-1"></a>Sensitivity to Scale: Because it relies on distance, features with larger magnitudes can disproportionately influence results. Therefore, feature scaling (standardization or normalization) is a critical preprocessing step.<span class="co">[</span><span class="ot">@xing2020</span><span class="co">]</span> </span>
-<span id="cb21-94"><a href="#cb21-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-95"><a href="#cb21-95" aria-hidden="true" tabindex="-1"></a>Finding the Optimal 'K': The value of k is often determined using the Elbow Method or Cross-Validation, where multiple k values are tested to find the one that minimizes the error rate without overfitting or underfitting. Analysts typically choose an odd number for k to prevent ties in classification (like if we had equal red triangles and blue squares what then?). In our example, we will be using cross-validation to determine the value of 'k'. In cross validation, the dataset is divided by kfolds. Where at each iteration each fold is used once as test data and the remaining fold is used as training data, the process is repeated until all data is evaluated.</span>
-<span id="cb21-96"><a href="#cb21-96" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">@Tembusai2021</span><span class="co">]</span></span>
+<span id="cb21-93"><a href="#cb21-93" aria-hidden="true" tabindex="-1"></a>Finding the Optimal 'K': The value of k is often determined using the Elbow Method or Cross-Validation, where multiple k values are tested to find the one that minimizes the error rate without overfitting or underfitting. Analysts typically choose an odd number for k to prevent ties in classification (like if we had equal red triangles and blue squares what then?). In our example, we will be using cross-validation to determine the value of 'k'. In cross validation, the dataset is divided by kfolds. Where at each iteration each fold is used once as test data and the remaining fold is used as training data, the process is repeated until all data is evaluated.</span>
+<span id="cb21-94"><a href="#cb21-94" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">@Tembusai2021</span><span class="co">]</span></span>
+<span id="cb21-95"><a href="#cb21-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-96"><a href="#cb21-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## Strengths of KNN </span></span>
 <span id="cb21-97"><a href="#cb21-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-98"><a href="#cb21-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## Strengths of KNN </span></span>
+<span id="cb21-98"><a href="#cb21-98" aria-hidden="true" tabindex="-1"></a>1.Easy to implement/learn. There are also few hyper parameters - just the distance and k value. </span>
 <span id="cb21-99"><a href="#cb21-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-100"><a href="#cb21-100" aria-hidden="true" tabindex="-1"></a>1.Easy to implement/learn. There are also few hyper parameters - just the distance and k value. </span>
+<span id="cb21-100"><a href="#cb21-100" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>It's also adaptable. It adjusts easily to new training data since all training data is stored into memory. But similarly, because of that, it doesn't scale well. As the data set grows, the algorithm becomes less efficient due to increasing computational complexity, which compromises overall model performance.</span>
 <span id="cb21-101"><a href="#cb21-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-102"><a href="#cb21-102" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>It's also adaptable. It adjusts easily to new training data since all training data is stored into memory. But similarly, because of that, it doesn't scale well. As the data set grows, the algorithm becomes less efficient due to increasing computational complexity, which compromises overall model performance.</span>
+<span id="cb21-102"><a href="#cb21-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## Weaknesses of KNN </span></span>
 <span id="cb21-103"><a href="#cb21-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-104"><a href="#cb21-104" aria-hidden="true" tabindex="-1"></a><span class="fu">## Weaknesses of KNN </span></span>
+<span id="cb21-104"><a href="#cb21-104" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>As mentioned, it can be considered a "lazy algorithm" meaning it stores all training data and defers the computation to the time of classification, increasing memory usage and leads to slower processing compared to other methods of classifying. In other words, it does not build the model beforehand. It instead stores the data and makes predictions on demand. </span>
 <span id="cb21-105"><a href="#cb21-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-106"><a href="#cb21-106" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>As mentioned, it can be considered a "lazy algorithm" meaning it stores all training data and defers the computation to the time of classification, increasing memory usage and leads to slower processing compared to other methods of classifying. In other words, it does not build the model beforehand. It instead stores the data and makes predictions on demand. </span>
+<span id="cb21-106"><a href="#cb21-106" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>KNN also has what's called the "Curse of Dimensionality." It does not perform well with high dimensional data inputs. On a 2D xy graph it works fine but if we wanted to classify according to color, size, weight, etc. then the data points become sparse in higher dimensions and the distance between points become too similar for KNN to find meaningful neighbors. This leads to what's called the "peaking phenomenon." The peaking phenomenon occurs after reaching the optimal number of features - any more just increases noise and increases classification errors especially when the sample size is small. Feature selection and dimensionality reduction techniques can help minimize "curse of dimensionality" but we need to be careful. </span>
 <span id="cb21-107"><a href="#cb21-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-108"><a href="#cb21-108" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>KNN also has what's called the "Curse of Dimensionality." It does not perform well with high dimensional data inputs. On a 2D xy graph it works fine but if we wanted to classify according to color, size, weight, etc. then the data points become sparse in higher dimensions and the distance between points become too similar for KNN to find meaningful neighbors. This leads to what's called the "peaking phenomenon." The peaking phenomenon occurs after reaching the optimal number of features - any more just increases noise and increases classification errors especially when the sample size is small. Feature selection and dimensionality reduction techniques can help minimize "curse of dimensionality" but we need to be careful. </span>
+<span id="cb21-108"><a href="#cb21-108" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Another weakness is overfitting. Low k values can overfit  the data. High values tend to smooth out prediction values since average values over a greater are or neighborhood. <span class="co">[</span><span class="ot">@zhang2022</span><span class="co">]</span></span>
 <span id="cb21-109"><a href="#cb21-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-110"><a href="#cb21-110" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Another weakness is overfitting. Low k values can overfit  the data. High values tend to smooth out prediction values since average values over a greater are or neighborhood. <span class="co">[</span><span class="ot">@zhang2022</span><span class="co">]</span></span>
+<span id="cb21-110"><a href="#cb21-110" aria-hidden="true" tabindex="-1"></a><span class="fu">## Uses of the KNN Algorithm</span></span>
 <span id="cb21-111"><a href="#cb21-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-112"><a href="#cb21-112" aria-hidden="true" tabindex="-1"></a><span class="fu">## Uses of the KNN Algorithm</span></span>
+<span id="cb21-112"><a href="#cb21-112" aria-hidden="true" tabindex="-1"></a>When it comes to uses, we can use the KNN algorithm for simple recommendation systems. Data free processing is most commonly used because it's helpful for data sets with missing values because it estimates values using process called missing data imputation. KNN is actually most often used in finance like stock market forecasting, currency exchange rate, money laundering analysis. But it is also used in health care. For example, risk of heart attacks and prostate cancer by calculating most likely gene expression. In this paper we will apply the KNN algorithm to a data set of potential diabetic patients.<span class="co">[</span><span class="ot">@Nain2023</span><span class="co">]</span> </span>
 <span id="cb21-113"><a href="#cb21-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-114"><a href="#cb21-114" aria-hidden="true" tabindex="-1"></a>When it comes to uses, we can use the KNN algorithm for simple recommendation systems. Data free processing is most commonly used because it's helpful for data sets with missing values because it estimates values using process called missing data imputation. KNN is actually most often used in finance like stock market forecasting, currency exchange rate, money laundering analysis. But it is also used in health care. For example, risk of heart attacks and prostate cancer by calculating most likely gene expression. In this paper we will apply the KNN algorithm to a data set of potential diabetic patients.<span class="co">[</span><span class="ot">@Nain2023</span><span class="co">]</span> </span>
-<span id="cb21-115"><a href="#cb21-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-116"><a href="#cb21-116" aria-hidden="true" tabindex="-1"></a><span class="fu"># Analysis and Results</span></span>
-<span id="cb21-117"><a href="#cb21-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Description</span></span>
-<span id="cb21-118"><a href="#cb21-118" aria-hidden="true" tabindex="-1"></a>These data sets are courtesy of Dr John Schorling, Department of Medicine, University of Virginia School of Medicine.<span class="co">[</span><span class="ot">@Schorling1997</span><span class="co">]</span></span>
-<span id="cb21-119"><a href="#cb21-119" aria-hidden="true" tabindex="-1"></a>The data consist of 19 variables on 403 subjects from 1046 subjects who were interviewed in a study to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors in central Virginia for African Americans. According to Dr John Hong, Diabetes Mellitus Type II (adult onset diabetes) is associated most strongly with obesity. The waist/hip ratio may be a predictor in diabetes and heart disease. DM II is also associated with hypertension - they may both be part of "Syndrome X". The 403 subjects were the ones who were actually screened for diabetes. Glycosolated hemoglobin &gt; 7.0 is usually taken as a positive diagnosis of diabetes. <span class="co">[</span><span class="ot">@Willems1997</span><span class="co">]</span> </span>
-<span id="cb21-120"><a href="#cb21-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-121"><a href="#cb21-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
-<span id="cb21-122"><a href="#cb21-122" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mt)</span>
-<span id="cb21-123"><a href="#cb21-123" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb21-124"><a href="#cb21-124" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
-<span id="cb21-125"><a href="#cb21-125" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb21-126"><a href="#cb21-126" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb21-127"><a href="#cb21-127" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb21-128"><a href="#cb21-128" aria-hidden="true" tabindex="-1"></a><span class="fu">GET</span>(<span class="st">"https://query.data.world/s/qmc5py3qjodoyglqcny7ihdowxwepf?dws=00000"</span>, <span class="fu">write_disk</span>(tf <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">".xlsx"</span>)))</span>
-<span id="cb21-129"><a href="#cb21-129" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">read_excel</span>(tf))</span>
-<span id="cb21-130"><a href="#cb21-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-131"><a href="#cb21-131" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb21-132"><a href="#cb21-132" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(df))</span>
-<span id="cb21-133"><a href="#cb21-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-134"><a href="#cb21-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-135"><a href="#cb21-135" aria-hidden="true" tabindex="-1"></a>As shown, we have variables we do not need/want including empty columns. We'll select the non-demographic columns to begin and create a reduced data set. The new table below shows the first 6 rows of our reduced data set. </span>
-<span id="cb21-136"><a href="#cb21-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb21-137"><a href="#cb21-137" aria-hidden="true" tabindex="-1"></a>df_reduced <span class="ot">&lt;-</span> df[<span class="fu">c</span>(<span class="st">"Diabetes"</span>, <span class="st">"Cholesterol"</span>, <span class="st">"Glucose"</span>, <span class="st">"BMI"</span>, <span class="st">"Waist.hip.ratio"</span>, <span class="st">"HDL.Chol"</span>, <span class="st">"Chol.HDL.ratio"</span>, <span class="st">"Systolic.BP"</span>, <span class="st">"Diastolic.BP"</span>, <span class="st">"Weight"</span>)]</span>
-<span id="cb21-138"><a href="#cb21-138" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(df_reduced))</span>
-<span id="cb21-139"><a href="#cb21-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-140"><a href="#cb21-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-141"><a href="#cb21-141" aria-hidden="true" tabindex="-1"></a>The table below now shows a description of each of our variables to be used. </span>
-<span id="cb21-142"><a href="#cb21-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
-<span id="cb21-143"><a href="#cb21-143" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb21-144"><a href="#cb21-144" aria-hidden="true" tabindex="-1"></a>  <span class="at">Variables =</span> <span class="fu">c</span>(<span class="st">"Diabetes"</span>, <span class="st">"Cholesterol"</span>, <span class="st">"Glucose"</span>, <span class="st">"BMI"</span>, <span class="st">"Waist.hip.ratio"</span>, <span class="st">"HDL.Chol"</span>, <span class="st">"Chol.HDL.ratio"</span>, <span class="st">"Systolic.BP"</span>, <span class="st">"Diastolic.BP"</span>, <span class="st">"Weight"</span>),</span>
-<span id="cb21-145"><a href="#cb21-145" aria-hidden="true" tabindex="-1"></a>  <span class="at">Description =</span> <span class="fu">c</span>(<span class="st">"Yes/No"</span>, <span class="st">"Numeric"</span>, <span class="st">"Numeric"</span>, <span class="st">"Numeric"</span>, <span class="st">"Waist to Hip Ratio"</span>,<span class="st">"Numeric"</span>,<span class="st">"Cholesterol to HDL ratio"</span>,<span class="st">"Systolic Blood Pressure"</span>,<span class="st">"Diastolic Blood Pressure"</span>,<span class="st">"Numeric"</span>)</span>
-<span id="cb21-146"><a href="#cb21-146" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-147"><a href="#cb21-147" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-148"><a href="#cb21-148" aria-hidden="true" tabindex="-1"></a><span class="co">#vars &lt;- bind_rows(vars, df_reduced)</span></span>
+<span id="cb21-114"><a href="#cb21-114" aria-hidden="true" tabindex="-1"></a><span class="fu"># Analysis and Results</span></span>
+<span id="cb21-115"><a href="#cb21-115" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Description</span></span>
+<span id="cb21-116"><a href="#cb21-116" aria-hidden="true" tabindex="-1"></a>These data sets are courtesy of Dr John Schorling, Department of Medicine, University of Virginia School of Medicine.<span class="co">[</span><span class="ot">@Schorling1997</span><span class="co">]</span></span>
+<span id="cb21-117"><a href="#cb21-117" aria-hidden="true" tabindex="-1"></a>The data consist of 19 variables on 403 subjects from 1046 subjects who were interviewed in a study to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors in central Virginia for African Americans. According to Dr John Hong, Diabetes Mellitus Type II (adult onset diabetes) is associated most strongly with obesity. The waist/hip ratio may be a predictor in diabetes and heart disease. DM II is also associated with hypertension - they may both be part of "Syndrome X". The 403 subjects were the ones who were actually screened for diabetes. Glycosolated hemoglobin &gt; 7.0 is usually taken as a positive diagnosis of diabetes. <span class="co">[</span><span class="ot">@Willems1997</span><span class="co">]</span> </span>
+<span id="cb21-118"><a href="#cb21-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-119"><a href="#cb21-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
+<span id="cb21-120"><a href="#cb21-120" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mt)</span>
+<span id="cb21-121"><a href="#cb21-121" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb21-122"><a href="#cb21-122" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb21-123"><a href="#cb21-123" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb21-124"><a href="#cb21-124" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb21-125"><a href="#cb21-125" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb21-126"><a href="#cb21-126" aria-hidden="true" tabindex="-1"></a><span class="fu">GET</span>(<span class="st">"https://query.data.world/s/qmc5py3qjodoyglqcny7ihdowxwepf?dws=00000"</span>, <span class="fu">write_disk</span>(tf <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">".xlsx"</span>)))</span>
+<span id="cb21-127"><a href="#cb21-127" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">read_excel</span>(tf))</span>
+<span id="cb21-128"><a href="#cb21-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-129"><a href="#cb21-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb21-130"><a href="#cb21-130" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(df))</span>
+<span id="cb21-131"><a href="#cb21-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-132"><a href="#cb21-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-133"><a href="#cb21-133" aria-hidden="true" tabindex="-1"></a>As shown, we have variables we do not need/want including empty columns. We'll select the non-demographic columns to begin and create a reduced data set. The new table below shows the first 6 rows of our reduced data set. </span>
+<span id="cb21-134"><a href="#cb21-134" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb21-135"><a href="#cb21-135" aria-hidden="true" tabindex="-1"></a>df_reduced <span class="ot">&lt;-</span> df[<span class="fu">c</span>(<span class="st">"Diabetes"</span>, <span class="st">"Cholesterol"</span>, <span class="st">"Glucose"</span>, <span class="st">"BMI"</span>, <span class="st">"Waist.hip.ratio"</span>, <span class="st">"HDL.Chol"</span>, <span class="st">"Chol.HDL.ratio"</span>, <span class="st">"Systolic.BP"</span>, <span class="st">"Diastolic.BP"</span>, <span class="st">"Weight"</span>)]</span>
+<span id="cb21-136"><a href="#cb21-136" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(df_reduced))</span>
+<span id="cb21-137"><a href="#cb21-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-138"><a href="#cb21-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-139"><a href="#cb21-139" aria-hidden="true" tabindex="-1"></a>The table below now shows a description of each of our variables to be used. </span>
+<span id="cb21-140"><a href="#cb21-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
+<span id="cb21-141"><a href="#cb21-141" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb21-142"><a href="#cb21-142" aria-hidden="true" tabindex="-1"></a>  <span class="at">Variables =</span> <span class="fu">c</span>(<span class="st">"Diabetes"</span>, <span class="st">"Cholesterol"</span>, <span class="st">"Glucose"</span>, <span class="st">"BMI"</span>, <span class="st">"Waist.hip.ratio"</span>, <span class="st">"HDL.Chol"</span>, <span class="st">"Chol.HDL.ratio"</span>, <span class="st">"Systolic.BP"</span>, <span class="st">"Diastolic.BP"</span>, <span class="st">"Weight"</span>),</span>
+<span id="cb21-143"><a href="#cb21-143" aria-hidden="true" tabindex="-1"></a>  <span class="at">Description =</span> <span class="fu">c</span>(<span class="st">"Yes/No"</span>, <span class="st">"Numeric"</span>, <span class="st">"Numeric"</span>, <span class="st">"Numeric"</span>, <span class="st">"Waist to Hip Ratio"</span>,<span class="st">"Numeric"</span>,<span class="st">"Cholesterol to HDL ratio"</span>,<span class="st">"Systolic Blood Pressure"</span>,<span class="st">"Diastolic Blood Pressure"</span>,<span class="st">"Numeric"</span>)</span>
+<span id="cb21-144"><a href="#cb21-144" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-145"><a href="#cb21-145" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-146"><a href="#cb21-146" aria-hidden="true" tabindex="-1"></a><span class="co">#vars &lt;- bind_rows(vars, df_reduced)</span></span>
+<span id="cb21-147"><a href="#cb21-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-148"><a href="#cb21-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-149"><a href="#cb21-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-150"><a href="#cb21-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-151"><a href="#cb21-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-152"><a href="#cb21-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb21-153"><a href="#cb21-153" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(vars)</span>
-<span id="cb21-154"><a href="#cb21-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-155"><a href="#cb21-155" aria-hidden="true" tabindex="-1"></a><span class="fu">## Preparing the Data</span></span>
-<span id="cb21-156"><a href="#cb21-156" aria-hidden="true" tabindex="-1"></a>Like mentioned, kNN is sensitive to scaling (of the variables). So it is helpful to first standardize the variables. We do this using the preProcess function of the caret package:</span>
-<span id="cb21-157"><a href="#cb21-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-158"><a href="#cb21-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb21-159"><a href="#cb21-159" aria-hidden="true" tabindex="-1"></a>preproc_reduced <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(df_reduced[,<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"scale"</span>, <span class="st">"center"</span>))</span>
-<span id="cb21-160"><a href="#cb21-160" aria-hidden="true" tabindex="-1"></a>df_standardized <span class="ot">&lt;-</span> <span class="fu">predict</span>(preproc_reduced, df_reduced[, <span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>])</span>
-<span id="cb21-161"><a href="#cb21-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-162"><a href="#cb21-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-163"><a href="#cb21-163" aria-hidden="true" tabindex="-1"></a>Now we have scaled and centered values for our data.frame. </span>
-<span id="cb21-164"><a href="#cb21-164" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb21-165"><a href="#cb21-165" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_standardized)</span>
-<span id="cb21-166"><a href="#cb21-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-167"><a href="#cb21-167" aria-hidden="true" tabindex="-1"></a>Apply those scaled and centered values to our data using the bind_cols method from dpylr to normalize all of our data.</span>
-<span id="cb21-168"><a href="#cb21-168" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb21-169"><a href="#cb21-169" aria-hidden="true" tabindex="-1"></a>df_stdize <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">Diabetes =</span> df_reduced<span class="sc">$</span>Diabetes, df_standardized)</span>
-<span id="cb21-170"><a href="#cb21-170" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-171"><a href="#cb21-171" aria-hidden="true" tabindex="-1"></a>Now we have a data set which will work well for KNN! </span>
-<span id="cb21-172"><a href="#cb21-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-173"><a href="#cb21-173" aria-hidden="true" tabindex="-1"></a><span class="fu">## Using the KNN Model </span></span>
-<span id="cb21-174"><a href="#cb21-174" aria-hidden="true" tabindex="-1"></a>First, we create a test/train split so that we can train a KNN model. </span>
-<span id="cb21-175"><a href="#cb21-175" aria-hidden="true" tabindex="-1"></a>We will use the createDataPartition from caret to randomly select 80% of the data to use for the training set and 20% of the data to use for the test set. Then, create two different data frames using partition point returned by createDataPartition.</span>
-<span id="cb21-176"><a href="#cb21-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-177"><a href="#cb21-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb21-178"><a href="#cb21-178" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb21-179"><a href="#cb21-179" aria-hidden="true" tabindex="-1"></a><span class="co"># "p" indicates how much of the data should go into the first created partition</span></span>
-<span id="cb21-180"><a href="#cb21-180" aria-hidden="true" tabindex="-1"></a>param_split<span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(df_stdize<span class="sc">$</span>Diabetes, <span class="at">times =</span> <span class="dv">1</span>, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb21-181"><a href="#cb21-181" aria-hidden="true" tabindex="-1"></a>train_df <span class="ot">&lt;-</span> df_stdize[param_split, ]</span>
-<span id="cb21-182"><a href="#cb21-182" aria-hidden="true" tabindex="-1"></a>test_df <span class="ot">&lt;-</span> df_stdize[<span class="sc">-</span>param_split, ]</span>
-<span id="cb21-183"><a href="#cb21-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-184"><a href="#cb21-184" aria-hidden="true" tabindex="-1"></a>Now we "train" the KNN. </span>
+<span id="cb21-150"><a href="#cb21-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb21-151"><a href="#cb21-151" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(vars)</span>
+<span id="cb21-152"><a href="#cb21-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-153"><a href="#cb21-153" aria-hidden="true" tabindex="-1"></a><span class="fu">## Preparing the Data</span></span>
+<span id="cb21-154"><a href="#cb21-154" aria-hidden="true" tabindex="-1"></a>Like mentioned, kNN is sensitive to scaling (of the variables). So it is helpful to first standardize the variables. We do this using the preProcess function of the caret package:</span>
+<span id="cb21-155"><a href="#cb21-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-156"><a href="#cb21-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb21-157"><a href="#cb21-157" aria-hidden="true" tabindex="-1"></a>preproc_reduced <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(df_reduced[,<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"scale"</span>, <span class="st">"center"</span>))</span>
+<span id="cb21-158"><a href="#cb21-158" aria-hidden="true" tabindex="-1"></a>df_standardized <span class="ot">&lt;-</span> <span class="fu">predict</span>(preproc_reduced, df_reduced[, <span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>])</span>
+<span id="cb21-159"><a href="#cb21-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-160"><a href="#cb21-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-161"><a href="#cb21-161" aria-hidden="true" tabindex="-1"></a>Now we have scaled and centered values for our data.frame. </span>
+<span id="cb21-162"><a href="#cb21-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb21-163"><a href="#cb21-163" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_standardized)</span>
+<span id="cb21-164"><a href="#cb21-164" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-165"><a href="#cb21-165" aria-hidden="true" tabindex="-1"></a>Apply those scaled and centered values to our data using the bind_cols method from dpylr to normalize all of our data.</span>
+<span id="cb21-166"><a href="#cb21-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb21-167"><a href="#cb21-167" aria-hidden="true" tabindex="-1"></a>df_stdize <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">Diabetes =</span> df_reduced<span class="sc">$</span>Diabetes, df_standardized)</span>
+<span id="cb21-168"><a href="#cb21-168" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-169"><a href="#cb21-169" aria-hidden="true" tabindex="-1"></a>Now we have a data set which will work well for KNN! </span>
+<span id="cb21-170"><a href="#cb21-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-171"><a href="#cb21-171" aria-hidden="true" tabindex="-1"></a><span class="fu">## Using the KNN Model </span></span>
+<span id="cb21-172"><a href="#cb21-172" aria-hidden="true" tabindex="-1"></a>First, we create a test/train split so that we can train a KNN model. </span>
+<span id="cb21-173"><a href="#cb21-173" aria-hidden="true" tabindex="-1"></a>We will use the createDataPartition from caret to randomly select 80% of the data to use for the training set and 20% of the data to use for the test set. Then, create two different data frames using partition point returned by createDataPartition.</span>
+<span id="cb21-174"><a href="#cb21-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-175"><a href="#cb21-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb21-176"><a href="#cb21-176" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb21-177"><a href="#cb21-177" aria-hidden="true" tabindex="-1"></a><span class="co"># "p" indicates how much of the data should go into the first created partition</span></span>
+<span id="cb21-178"><a href="#cb21-178" aria-hidden="true" tabindex="-1"></a>param_split<span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(df_stdize<span class="sc">$</span>Diabetes, <span class="at">times =</span> <span class="dv">1</span>, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb21-179"><a href="#cb21-179" aria-hidden="true" tabindex="-1"></a>train_df <span class="ot">&lt;-</span> df_stdize[param_split, ]</span>
+<span id="cb21-180"><a href="#cb21-180" aria-hidden="true" tabindex="-1"></a>test_df <span class="ot">&lt;-</span> df_stdize[<span class="sc">-</span>param_split, ]</span>
+<span id="cb21-181"><a href="#cb21-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-182"><a href="#cb21-182" aria-hidden="true" tabindex="-1"></a>Now we "train" the KNN. </span>
+<span id="cb21-183"><a href="#cb21-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-184"><a href="#cb21-184" aria-hidden="true" tabindex="-1"></a>The trainControl method is a helper function for all the nuances of the KNN train method. It allows you to easily set up the KNN training parameters.</span>
 <span id="cb21-185"><a href="#cb21-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-186"><a href="#cb21-186" aria-hidden="true" tabindex="-1"></a>The trainControl method is a helper function for all the nuances of the KNN train method. It allows you to easily set up the KNN training parameters.</span>
-<span id="cb21-187"><a href="#cb21-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-188"><a href="#cb21-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,echo=TRUE}</span></span>
-<span id="cb21-189"><a href="#cb21-189" aria-hidden="true" tabindex="-1"></a>trnctrl_df <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
-<span id="cb21-190"><a href="#cb21-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-191"><a href="#cb21-191" aria-hidden="true" tabindex="-1"></a>method: This is the resampling method used. Using "cv" or cross validation. </span>
-<span id="cb21-192"><a href="#cb21-192" aria-hidden="true" tabindex="-1"></a>number: The number of folds because we're using cv. </span>
+<span id="cb21-186"><a href="#cb21-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,echo=TRUE}</span></span>
+<span id="cb21-187"><a href="#cb21-187" aria-hidden="true" tabindex="-1"></a>trnctrl_df <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb21-188"><a href="#cb21-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-189"><a href="#cb21-189" aria-hidden="true" tabindex="-1"></a>method: This is the resampling method used. Using "cv" or cross validation. </span>
+<span id="cb21-190"><a href="#cb21-190" aria-hidden="true" tabindex="-1"></a>number: The number of folds because we're using cv. </span>
+<span id="cb21-191"><a href="#cb21-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-192"><a href="#cb21-192" aria-hidden="true" tabindex="-1"></a>Now we will use all our variables to predict Diabetes. Then specify the training data, that we're training a KNN, and pass the training hyperparameters that we built with trainControl.</span>
 <span id="cb21-193"><a href="#cb21-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-194"><a href="#cb21-194" aria-hidden="true" tabindex="-1"></a>Now we will use all our variables to predict Diabetes. Then specify the training data, that we're training a KNN, and pass the training hyperparameters that we built with trainControl.</span>
-<span id="cb21-195"><a href="#cb21-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-196"><a href="#cb21-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb21-197"><a href="#cb21-197" aria-hidden="true" tabindex="-1"></a>model_knn_df <span class="ot">&lt;-</span> <span class="fu">train</span>(Diabetes <span class="sc">~</span> ., <span class="at">data =</span> train_df, <span class="at">method =</span> <span class="st">"knn"</span>, </span>
-<span id="cb21-198"><a href="#cb21-198" aria-hidden="true" tabindex="-1"></a>                      <span class="at">trControl =</span> trnctrl_df, </span>
-<span id="cb21-199"><a href="#cb21-199" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
-<span id="cb21-200"><a href="#cb21-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-201"><a href="#cb21-201" aria-hidden="true" tabindex="-1"></a>model_knn_df</span>
-<span id="cb21-202"><a href="#cb21-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-203"><a href="#cb21-203" aria-hidden="true" tabindex="-1"></a>This returns a series of KNN models and their associated metrics and tells us that the optimal number of nearest neighbors to be considered is 11 and the model accuracy for that K is 0.9198387. </span>
-<span id="cb21-204"><a href="#cb21-204" aria-hidden="true" tabindex="-1"></a>That's good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy.</span>
-<span id="cb21-205"><a href="#cb21-205" aria-hidden="true" tabindex="-1"></a>Because our data is imbalanced (which is common in the real-world) one class is much more frequent than the others.In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class.</span>
-<span id="cb21-206"><a href="#cb21-206" aria-hidden="true" tabindex="-1"></a>How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.<span class="co">[</span><span class="ot">@Cadili2025</span><span class="co">]</span></span>
+<span id="cb21-194"><a href="#cb21-194" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb21-195"><a href="#cb21-195" aria-hidden="true" tabindex="-1"></a>model_knn_df <span class="ot">&lt;-</span> <span class="fu">train</span>(Diabetes <span class="sc">~</span> ., <span class="at">data =</span> train_df, <span class="at">method =</span> <span class="st">"knn"</span>, </span>
+<span id="cb21-196"><a href="#cb21-196" aria-hidden="true" tabindex="-1"></a>                      <span class="at">trControl =</span> trnctrl_df, </span>
+<span id="cb21-197"><a href="#cb21-197" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb21-198"><a href="#cb21-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-199"><a href="#cb21-199" aria-hidden="true" tabindex="-1"></a>model_knn_df</span>
+<span id="cb21-200"><a href="#cb21-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-201"><a href="#cb21-201" aria-hidden="true" tabindex="-1"></a>This returns a series of KNN models and their associated metrics and tells us that the optimal number of nearest neighbors to be considered is 11 and the model accuracy for that K is 0.9198387. </span>
+<span id="cb21-202"><a href="#cb21-202" aria-hidden="true" tabindex="-1"></a>That's good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy.</span>
+<span id="cb21-203"><a href="#cb21-203" aria-hidden="true" tabindex="-1"></a>Because our data is imbalanced (which is common in the real-world) one class is much more frequent than the others. Variables (like cholesterol) drown out other (like BMI). In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class.</span>
+<span id="cb21-204"><a href="#cb21-204" aria-hidden="true" tabindex="-1"></a>How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.<span class="co">[</span><span class="ot">@Cadili2025</span><span class="co">]</span></span>
+<span id="cb21-205"><a href="#cb21-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-206"><a href="#cb21-206" aria-hidden="true" tabindex="-1"></a>Remember that most of the records in our data set are not patients with diabetes. Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.</span>
 <span id="cb21-207"><a href="#cb21-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-208"><a href="#cb21-208" aria-hidden="true" tabindex="-1"></a>Remember that most of the records in our data set are not patients with diabetes. Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.</span>
-<span id="cb21-209"><a href="#cb21-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-208"><a href="#cb21-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-209"><a href="#cb21-209" aria-hidden="true" tabindex="-1"></a><span class="fu">## Second KNN Model  </span></span>
 <span id="cb21-210"><a href="#cb21-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-211"><a href="#cb21-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## Second KNN Model  </span></span>
-<span id="cb21-212"><a href="#cb21-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-213"><a href="#cb21-213" aria-hidden="true" tabindex="-1"></a>We can find that simpler models have better accuracy. To see which variables are having the most impact on our outcome variable, we can use fs.anova to check the analysis of variance for each variable and use that in a second KNN.</span>
-<span id="cb21-214"><a href="#cb21-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,echo=TRUE}</span></span>
-<span id="cb21-215"><a href="#cb21-215" aria-hidden="true" tabindex="-1"></a>df_stdize<span class="sc">$</span>Diabetes <span class="ot">=</span> <span class="fu">ifelse</span>(df_stdize<span class="sc">$</span>Diabetes <span class="sc">==</span> <span class="st">"Diabetes"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb21-216"><a href="#cb21-216" aria-hidden="true" tabindex="-1"></a>fs <span class="ot">&lt;-</span> <span class="fu">fs.anova</span>(df_stdize, df_stdize<span class="sc">$</span>Diabetes)</span>
-<span id="cb21-217"><a href="#cb21-217" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fs<span class="sc">$</span>fs.order)</span>
-<span id="cb21-218"><a href="#cb21-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-219"><a href="#cb21-219" aria-hidden="true" tabindex="-1"></a>We can see that "Glucose" is the most important feature in our data set for predicting diabetes.</span>
-<span id="cb21-220"><a href="#cb21-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-221"><a href="#cb21-221" aria-hidden="true" tabindex="-1"></a>We can now do two things here to improve our performance. First, we'll balance our data set so that we have equal numbers of records with and without diabetes: </span>
-<span id="cb21-222"><a href="#cb21-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb21-223"><a href="#cb21-223" aria-hidden="true" tabindex="-1"></a>positive_cases <span class="ot">&lt;-</span> <span class="fu">nrow</span>(train_df[train_df<span class="sc">$</span>Diabetes <span class="sc">==</span> <span class="st">'Diabetes'</span>,])</span>
-<span id="cb21-224"><a href="#cb21-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-225"><a href="#cb21-225" aria-hidden="true" tabindex="-1"></a>balanced <span class="ot">=</span> <span class="fu">rbind</span>(train_df[<span class="fu">sample</span>(<span class="fu">which</span>(train_df<span class="sc">$</span>Diabetes <span class="sc">==</span> <span class="st">'No diabetes'</span>), positive_cases),], train_df[train_df<span class="sc">$</span>Diabetes <span class="sc">==</span> <span class="st">'Diabetes'</span>,])</span>
-<span id="cb21-226"><a href="#cb21-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-227"><a href="#cb21-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-228"><a href="#cb21-228" aria-hidden="true" tabindex="-1"></a>Second, we'll use just the Glucose readings to calculate the distance to our 'neighbors' in KNN: </span>
-<span id="cb21-229"><a href="#cb21-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb21-230"><a href="#cb21-230" aria-hidden="true" tabindex="-1"></a>trnctrl_df <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
-<span id="cb21-231"><a href="#cb21-231" aria-hidden="true" tabindex="-1"></a>model_knn_df_simple <span class="ot">&lt;-</span> <span class="fu">train</span>(Diabetes <span class="sc">~</span> Glucose, <span class="at">data =</span> balanced, <span class="at">method =</span> <span class="st">"knn"</span>, </span>
-<span id="cb21-232"><a href="#cb21-232" aria-hidden="true" tabindex="-1"></a>                             <span class="at">trControl =</span> trnctrl_df, </span>
-<span id="cb21-233"><a href="#cb21-233" aria-hidden="true" tabindex="-1"></a>                             <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
-<span id="cb21-234"><a href="#cb21-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-235"><a href="#cb21-235" aria-hidden="true" tabindex="-1"></a>model_knn_df_simple</span>
-<span id="cb21-236"><a href="#cb21-236" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-237"><a href="#cb21-237" aria-hidden="true" tabindex="-1"></a>The simpler model seems to have better performance. With a K value of 15, we see an accuracy of 0.93 and a Kappa of 0.86. </span>
-<span id="cb21-238"><a href="#cb21-238" aria-hidden="true" tabindex="-1"></a>Both of these scores are higher than we had seen with the larger model and the Kappa of 0.86 indicates that we are predicting both classes better although still not perfectly.</span>
+<span id="cb21-211"><a href="#cb21-211" aria-hidden="true" tabindex="-1"></a>We can find that simpler models have better accuracy. To see which variables are having the most impact on our outcome variable, we can use fs.anova to check the analysis of variance for each variable and use that in a second KNN.</span>
+<span id="cb21-212"><a href="#cb21-212" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,echo=TRUE}</span></span>
+<span id="cb21-213"><a href="#cb21-213" aria-hidden="true" tabindex="-1"></a>df_stdize<span class="sc">$</span>Diabetes <span class="ot">=</span> <span class="fu">ifelse</span>(df_stdize<span class="sc">$</span>Diabetes <span class="sc">==</span> <span class="st">"Diabetes"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb21-214"><a href="#cb21-214" aria-hidden="true" tabindex="-1"></a>fs <span class="ot">&lt;-</span> <span class="fu">fs.anova</span>(df_stdize, df_stdize<span class="sc">$</span>Diabetes)</span>
+<span id="cb21-215"><a href="#cb21-215" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fs<span class="sc">$</span>fs.order)</span>
+<span id="cb21-216"><a href="#cb21-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-217"><a href="#cb21-217" aria-hidden="true" tabindex="-1"></a>We can see that "Glucose" is the most important feature in our data set for predicting diabetes.</span>
+<span id="cb21-218"><a href="#cb21-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-219"><a href="#cb21-219" aria-hidden="true" tabindex="-1"></a>We can now do two things here to improve our performance. First, we'll balance our data set so that we have equal numbers of records with and without diabetes: </span>
+<span id="cb21-220"><a href="#cb21-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb21-221"><a href="#cb21-221" aria-hidden="true" tabindex="-1"></a>positive_cases <span class="ot">&lt;-</span> <span class="fu">nrow</span>(train_df[train_df<span class="sc">$</span>Diabetes <span class="sc">==</span> <span class="st">'Diabetes'</span>,])</span>
+<span id="cb21-222"><a href="#cb21-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-223"><a href="#cb21-223" aria-hidden="true" tabindex="-1"></a>balanced <span class="ot">=</span> <span class="fu">rbind</span>(train_df[<span class="fu">sample</span>(<span class="fu">which</span>(train_df<span class="sc">$</span>Diabetes <span class="sc">==</span> <span class="st">'No diabetes'</span>), positive_cases),], train_df[train_df<span class="sc">$</span>Diabetes <span class="sc">==</span> <span class="st">'Diabetes'</span>,])</span>
+<span id="cb21-224"><a href="#cb21-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-225"><a href="#cb21-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-226"><a href="#cb21-226" aria-hidden="true" tabindex="-1"></a>Second, we'll use just the Glucose readings to calculate the distance to our 'neighbors' in KNN: </span>
+<span id="cb21-227"><a href="#cb21-227" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb21-228"><a href="#cb21-228" aria-hidden="true" tabindex="-1"></a>trnctrl_df <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb21-229"><a href="#cb21-229" aria-hidden="true" tabindex="-1"></a>model_knn_df_simple <span class="ot">&lt;-</span> <span class="fu">train</span>(Diabetes <span class="sc">~</span> Glucose, <span class="at">data =</span> balanced, <span class="at">method =</span> <span class="st">"knn"</span>, </span>
+<span id="cb21-230"><a href="#cb21-230" aria-hidden="true" tabindex="-1"></a>                             <span class="at">trControl =</span> trnctrl_df, </span>
+<span id="cb21-231"><a href="#cb21-231" aria-hidden="true" tabindex="-1"></a>                             <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb21-232"><a href="#cb21-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-233"><a href="#cb21-233" aria-hidden="true" tabindex="-1"></a>model_knn_df_simple</span>
+<span id="cb21-234"><a href="#cb21-234" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-235"><a href="#cb21-235" aria-hidden="true" tabindex="-1"></a>The simpler model seems to have better performance. With a K value of 15, we see an accuracy of 0.93 and a Kappa of 0.86. </span>
+<span id="cb21-236"><a href="#cb21-236" aria-hidden="true" tabindex="-1"></a>Both of these scores are higher than we had seen with the larger model and the Kappa of 0.86 indicates that we are predicting both classes better although still not perfectly.</span>
+<span id="cb21-237"><a href="#cb21-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-238"><a href="#cb21-238" aria-hidden="true" tabindex="-1"></a><span class="fu">## Evaluating both KNN Models</span></span>
 <span id="cb21-239"><a href="#cb21-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-240"><a href="#cb21-240" aria-hidden="true" tabindex="-1"></a><span class="fu">## Evaluating both KNN Models</span></span>
-<span id="cb21-241"><a href="#cb21-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-242"><a href="#cb21-242" aria-hidden="true" tabindex="-1"></a>Since we held out a testing set of 20% of our training data, we have an easy way to evaluate both of our models. We will pass the model to predict and check the results against the actual test labels. Use a confusion matrix to assess how well our model predicts the test data. To recap, a confusion matrix looks like this: </span>
-<span id="cb21-243"><a href="#cb21-243" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">center</span><span class="dt">&gt;</span></span>
-<span id="cb21-244"><a href="#cb21-244" aria-hidden="true" tabindex="-1"></a><span class="al">![Confusion Matrix (Image Source: ©Draelos2019)](confusion-matrix.png)</span>{#fig-3}</span>
-<span id="cb21-245"><a href="#cb21-245" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">center</span><span class="dt">&gt;</span></span>
+<span id="cb21-240"><a href="#cb21-240" aria-hidden="true" tabindex="-1"></a>Since we held out a testing set of 20% of our training data, we have an easy way to evaluate both of our models. We will pass the model to predict and check the results against the actual test labels. Use a confusion matrix to assess how well our model predicts the test data. To recap, a confusion matrix looks like this: </span>
+<span id="cb21-241"><a href="#cb21-241" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">center</span><span class="dt">&gt;</span></span>
+<span id="cb21-242"><a href="#cb21-242" aria-hidden="true" tabindex="-1"></a><span class="al">![Confusion Matrix (Image Source: ©Draelos2019)](confusion-matrix.png)</span>{#fig-3}</span>
+<span id="cb21-243"><a href="#cb21-243" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">center</span><span class="dt">&gt;</span></span>
+<span id="cb21-244"><a href="#cb21-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-245"><a href="#cb21-245" aria-hidden="true" tabindex="-1"></a><span class="fu">### Unbalanced Model Analysis and Results</span></span>
 <span id="cb21-246"><a href="#cb21-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-247"><a href="#cb21-247" aria-hidden="true" tabindex="-1"></a><span class="fu">### Unbalanced Model Analysis and Results</span></span>
-<span id="cb21-248"><a href="#cb21-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-249"><a href="#cb21-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,echo=TRUE}</span></span>
-<span id="cb21-250"><a href="#cb21-250" aria-hidden="true" tabindex="-1"></a>predict_knn <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_knn_df, test_df)</span>
-<span id="cb21-251"><a href="#cb21-251" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(predict_knn), <span class="fu">as.factor</span>(test_df<span class="sc">$</span>Diabetes), <span class="at">positive =</span> <span class="st">"Diabetes"</span>)</span>
-<span id="cb21-252"><a href="#cb21-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-253"><a href="#cb21-253" aria-hidden="true" tabindex="-1"></a>Sensitivity (0.25000): The model correctly identifies only 25% of the actual positive cases (high false-negative rate).</span>
-<span id="cb21-254"><a href="#cb21-254" aria-hidden="true" tabindex="-1"></a>Specificity (1.00000): The model correctly identifies 100% of the negative cases, meaning there are no false positives.</span>
-<span id="cb21-255"><a href="#cb21-255" aria-hidden="true" tabindex="-1"></a>Positive Predictive Value (1.00000): When the model predicts a positive case, it is 100% correct.</span>
-<span id="cb21-256"><a href="#cb21-256" aria-hidden="true" tabindex="-1"></a>Negative Predictive Value (0.88000): When the model predicts a negative case, it is correct 88% of the time.</span>
-<span id="cb21-257"><a href="#cb21-257" aria-hidden="true" tabindex="-1"></a>Balanced Accuracy (0.62500): The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in.</span>
-<span id="cb21-258"><a href="#cb21-258" aria-hidden="true" tabindex="-1"></a>Prevalence (0.15385): The actual positive cases represent about 15.4% of the total dataset. </span>
+<span id="cb21-247"><a href="#cb21-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,echo=TRUE}</span></span>
+<span id="cb21-248"><a href="#cb21-248" aria-hidden="true" tabindex="-1"></a>predict_knn <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_knn_df, test_df)</span>
+<span id="cb21-249"><a href="#cb21-249" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(predict_knn), <span class="fu">as.factor</span>(test_df<span class="sc">$</span>Diabetes), <span class="at">positive =</span> <span class="st">"Diabetes"</span>)</span>
+<span id="cb21-250"><a href="#cb21-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-251"><a href="#cb21-251" aria-hidden="true" tabindex="-1"></a>Our confusion matrix shows 3 true positives, 66 true negatives, 9 false negatives, and 0 false positives. </span>
+<span id="cb21-252"><a href="#cb21-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-253"><a href="#cb21-253" aria-hidden="true" tabindex="-1"></a>***Sensitivity (0.25000)***: The model correctly identifies only 25% of the actual positive cases (high false-negative rate). It only caught 3 out of 12 people who have diabetes and missed 75% of the sick patients. </span>
+<span id="cb21-254"><a href="#cb21-254" aria-hidden="true" tabindex="-1"></a>***Specificity (1.00000)***: The model correctly identifies 100% of the negative cases, meaning there are no false positives.</span>
+<span id="cb21-255"><a href="#cb21-255" aria-hidden="true" tabindex="-1"></a>***Positive Predictive Value (1.00000)***: When the model predicts a positive case, it is 100% correct.</span>
+<span id="cb21-256"><a href="#cb21-256" aria-hidden="true" tabindex="-1"></a>***Negative Predictive Value (0.88000)***: When the model predicts a negative case, it is correct 88% of the time.</span>
+<span id="cb21-257"><a href="#cb21-257" aria-hidden="true" tabindex="-1"></a>***Balanced Accuracy (0.62500)***: The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in.</span>
+<span id="cb21-258"><a href="#cb21-258" aria-hidden="true" tabindex="-1"></a>***Prevalence (0.15385)***: The actual positive cases represent about 15.4% of the total dataset. </span>
 <span id="cb21-259"><a href="#cb21-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-260"><a href="#cb21-260" aria-hidden="true" tabindex="-1"></a>In summary, our unbalanced model (first model) does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled 'Diabetes'.</span>
+<span id="cb21-260"><a href="#cb21-260" aria-hidden="true" tabindex="-1"></a>At first glance, having a 88.46% accuracy looks great! If you guessed "no diabetes" for each patient, you'd be right 84.62% of the time because the dataset is unbalanced. Our p value is 0.22 which is greater than 0.05, which means our model isn't statistically better than just guessing "no diabetes" for everyone.Our kappa of 0.36 which isn't great. It means most of the accuracy is coming from the lopsided nature of the data rather than the model's predictive power. </span>
 <span id="cb21-261"><a href="#cb21-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-262"><a href="#cb21-262" aria-hidden="true" tabindex="-1"></a>Now we will look at the confusion matrix for our balanced model (second model). </span>
+<span id="cb21-262"><a href="#cb21-262" aria-hidden="true" tabindex="-1"></a>In summary, our unbalanced model (first model) does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled 'Diabetes' so it's missing the vast majority of actual diabetes cases. </span>
 <span id="cb21-263"><a href="#cb21-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-264"><a href="#cb21-264" aria-hidden="true" tabindex="-1"></a><span class="fu">### Balanced Model Analysis and Results </span></span>
+<span id="cb21-264"><a href="#cb21-264" aria-hidden="true" tabindex="-1"></a>Now we will look at the confusion matrix for our balanced model (second model). </span>
 <span id="cb21-265"><a href="#cb21-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-266"><a href="#cb21-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb21-267"><a href="#cb21-267" aria-hidden="true" tabindex="-1"></a>predict_knn_simple <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_knn_df_simple, test_df)</span>
-<span id="cb21-268"><a href="#cb21-268" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(predict_knn_simple), <span class="fu">as.factor</span>(test_df<span class="sc">$</span>Diabetes), <span class="at">positive =</span> <span class="st">"Diabetes"</span>)</span>
-<span id="cb21-269"><a href="#cb21-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-270"><a href="#cb21-270" aria-hidden="true" tabindex="-1"></a>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true 'diabetes' records. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them 'diabetes' when they aren't.</span>
-<span id="cb21-271"><a href="#cb21-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-272"><a href="#cb21-272" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
+<span id="cb21-266"><a href="#cb21-266" aria-hidden="true" tabindex="-1"></a><span class="fu">### Balanced Model Analysis and Results </span></span>
+<span id="cb21-267"><a href="#cb21-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-268"><a href="#cb21-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb21-269"><a href="#cb21-269" aria-hidden="true" tabindex="-1"></a>predict_knn_simple <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_knn_df_simple, test_df)</span>
+<span id="cb21-270"><a href="#cb21-270" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(predict_knn_simple), <span class="fu">as.factor</span>(test_df<span class="sc">$</span>Diabetes), <span class="at">positive =</span> <span class="st">"Diabetes"</span>)</span>
+<span id="cb21-271"><a href="#cb21-271" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-272"><a href="#cb21-272" aria-hidden="true" tabindex="-1"></a>Our confusion matrix shows 10 true positives, 56 true negatives, 2 false negatives, and 10 false positives. </span>
 <span id="cb21-273"><a href="#cb21-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-274"><a href="#cb21-274" aria-hidden="true" tabindex="-1"></a>KNN is a powerful tool to predict the classification or numerical value of new data. It's simple, intuitive, and easy to learn which makes it easy to implement. In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.</span>
-<span id="cb21-275"><a href="#cb21-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-276"><a href="#cb21-276" aria-hidden="true" tabindex="-1"></a><span class="fu"># References</span></span>
-<span id="cb21-277"><a href="#cb21-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-278"><a href="#cb21-278" aria-hidden="true" tabindex="-1"></a>***Cadili, R. (2025, December 16). What is Cohen’s Kappa? How and when to use it. KNIME. https://www.knime.com/blog/cohens-kappa-an-overview***</span>
-<span id="cb21-279"><a href="#cb21-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-280"><a href="#cb21-280" aria-hidden="true" tabindex="-1"></a>***Draelos, R. (2019, February 17). [The Confusion Matrix] [Image]. Glass Box Medicine.***</span>
-<span id="cb21-281"><a href="#cb21-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-282"><a href="#cb21-282" aria-hidden="true" tabindex="-1"></a>***IBM Technology. (2024, September 2). What is the K-Nearest Neighbor (KNN) Algorithm? YouTube. https://www.youtube.com/watch?v=b6uHw7QW_n4***</span>
-<span id="cb21-283"><a href="#cb21-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-284"><a href="#cb21-284" aria-hidden="true" tabindex="-1"></a>***Nain, S., &amp; Tomar, S. (2023). Medical image prediction for diagnosis of breast cancer using machine learning. AIP Conference Proceedings, 2853(1), Article 020140. doi.org***</span>
-<span id="cb21-285"><a href="#cb21-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-286"><a href="#cb21-286" aria-hidden="true" tabindex="-1"></a>***S. Zhang, "Challenges in KNN Classification," in IEEE Transactions on Knowledge and Data Engineering, vol. 34, no. 10, pp. 4663-4675, 1 Oct. 2022, doi: 10.1109/TKDE.2021.3049250***</span>
-<span id="cb21-287"><a href="#cb21-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-288"><a href="#cb21-288" aria-hidden="true" tabindex="-1"></a>***S. Zhang, X. Li, M. Zong, X. Zhu and R. Wang, "Efficient kNN Classification With Different Numbers of Nearest Neighbors," in IEEE Transactions on Neural Networks and Learning Systems, vol. 29, no. 5, pp. 1774-1785, May 2018, doi: 10.1109/TNNLS.2017.2673241***</span>
-<span id="cb21-289"><a href="#cb21-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-290"><a href="#cb21-290" aria-hidden="true" tabindex="-1"></a>***Schorling JB, Roach J, Siegel M, Baturka N, Hunt DE, Guterbock TM, Stewart HL: A trial of church-based smoking cessation interventions for rural African Americans. Preventive Medicine 26:92-101; 1997***</span>
-<span id="cb21-291"><a href="#cb21-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-292"><a href="#cb21-292" aria-hidden="true" tabindex="-1"></a>***Tembusai, Z. R., Mawengkang, H., &amp; Zarlis, M. (2021). K-Nearest Neighbor with K-Fold Cross Validation and Analytic Hierarchy Process on Data Classification. International Journal of Advances in Data and Information Systems, 2(1), 1–8. https://doi.org/10.25008/ijadis.v2i1.1204 ***</span>
-<span id="cb21-293"><a href="#cb21-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-294"><a href="#cb21-294" aria-hidden="true" tabindex="-1"></a>***Visually Explained. “K-Nearest Neighbors (KNN) in 3 Min.” YouTube, 17 Apr. 2025, www.youtube.com/watch?v=gs9E7E0qOIc.***</span>
-<span id="cb21-295"><a href="#cb21-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-296"><a href="#cb21-296" aria-hidden="true" tabindex="-1"></a>***W. Xing and Y. Bei, "Medical Health Big Data Classification Based on KNN Classification Algorithm," in IEEE Access, vol. 8, pp. 28808-28819, 2020, doi: 10.1109/ACCESS.2019.2955754***</span>
-<span id="cb21-297"><a href="#cb21-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-298"><a href="#cb21-298" aria-hidden="true" tabindex="-1"></a>***Willems JP, Saunders JT, DE Hunt, JB Schorling: Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. Southern Medical Journal 90:814-820; 1997***</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb21-274"><a href="#cb21-274" aria-hidden="true" tabindex="-1"></a>***Sensitivity (83.3%)***: Out of 12 people who actually have diabetes, the model caught 10 of them. It only missed 2.</span>
+<span id="cb21-275"><a href="#cb21-275" aria-hidden="true" tabindex="-1"></a>***Specificity (84.8%)***: Out of 66 healthy people, the model correctly identified 56 as healthy.</span>
+<span id="cb21-276"><a href="#cb21-276" aria-hidden="true" tabindex="-1"></a>***Pos Pred Value***: Is 50% — when the model says "Diabetes," it’s a coin flip whether the person actually has it.</span>
+<span id="cb21-277"><a href="#cb21-277" aria-hidden="true" tabindex="-1"></a>***Balanced Accuracy (84.1%)***: Since it’s high, it shows the model is actually learning to tell the difference between the two classes.</span>
+<span id="cb21-278"><a href="#cb21-278" aria-hidden="true" tabindex="-1"></a>***Negative Predictive Value (96.5%)***: This is excellent for a medical screen. If the model tells a patient they don't have diabetes, it is almost certainly correct.</span>
+<span id="cb21-279"><a href="#cb21-279" aria-hidden="true" tabindex="-1"></a>***Kappa (0.5357)***: This is much better. It proves the model is doing much better than just randomly guessing based on the majority group.</span>
+<span id="cb21-280"><a href="#cb21-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-281"><a href="#cb21-281" aria-hidden="true" tabindex="-1"></a>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better.This model correctly predicts 10 of the 12 true 'diabetes' records. Simple guessing would have missed all 12 sick people, the model found 10 of them. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them 'diabetes' when they aren't.</span>
+<span id="cb21-282"><a href="#cb21-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-283"><a href="#cb21-283" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
+<span id="cb21-284"><a href="#cb21-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-285"><a href="#cb21-285" aria-hidden="true" tabindex="-1"></a>KNN is a powerful tool to predict the classification or numerical value of new data. It's simple, intuitive, and easy to learn which makes it easy to implement. In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

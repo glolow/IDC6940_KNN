@@ -52,26 +52,24 @@ But KNN is a bit more complex than this.
 
 2. Calculating Distance: When a new, unlabeled data point is introduced, the algorithm calculates its distance to every other point in the training dataset. The distance metric measures the distance between the query point(s) and other data points. It can be calculated using a variety of formulas. For example, either Euclidean distance, Manhattan distance, Minkowski, or Hamming distance, and we can visualize this using Voronezh diagrams like above. [@VisuallyExplained2025]
 
-- Euclidean Distance: Most commonly used. Measures the "straight-line" path between points; best for continuous data.
-_Euclidean distance_:
+_Euclidean Distance_: Most commonly used. Measures the "straight-line" path between points; best for continuous data.
  
 $$
 D_{euclidean}(x_1, x_2) = \sqrt{\sum_{i = 1}^{n}{((x_1)_i - (x_2)_i)^2}}
 $$
 
-- Manhattan Distance: Calculates the sum of absolute differences, similar to navigating a grid (taxicab geometry).
-_Manhattan distance_:
+_Manhattan Distance_: Calculates the sum of absolute differences, similar to navigating a grid (taxicab geometry).
 
 $$
 D_{manhattan}(x_1, x_2) = \sum_{i = 1}^{n}|((x_1)_i - (x_2)_i)|
 $$
-- Minkowski Distance: A generalized formula that can represent both Euclidean (p=1) and Manhattan (p=2) distances.
+_Minkowski Distance_: A generalized formula that can represent both Euclidean (p=1) and Manhattan (p=2) distances.
 $$
 D_{Minkowski}(X,Y) = \sum_{i = 1}^{n}|x_i - y_i|^p
 $$
-- Hamming Distance: Used for categorical or string variables to identify where vectors do not match.
+_Hamming Distance_: Used for categorical or string variables to identify where vectors do not match.
 <center>
-![Hamming Distance XOR (Image Source: ©Anand. Inspired from [@yul2020astudy])](Hamming Distance.png){#fig-2}
+![Hamming Distance XOR (Image Source: ©An2021. Inspired from [@An2021])](Hamming Distance.png){#fig-2}
 </center>
 
 3. Identify Neighbors: Combining steps 1 and 2. We defined k, we determined distance based on our metric distance formula. Now we sort and select the points with the smallest distance values to the new query point. 
@@ -276,36 +274,12 @@ Our confusion matrix shows 10 true positives, 56 true negatives, 2 false negativ
 ***Sensitivity (83.3%)***: Out of 12 people who actually have diabetes, the model caught 10 of them. It only missed 2.
 ***Specificity (84.8%)***: Out of 66 healthy people, the model correctly identified 56 as healthy.
 ***Pos Pred Value***: Is 50% — when the model says "Diabetes," it’s a coin flip whether the person actually has it.
-***Balanced Accuracy (84.1%)**: Since it’s high, it shows the model is actually learning to tell the difference between the two classes.
+***Balanced Accuracy (84.1%)***: Since it’s high, it shows the model is actually learning to tell the difference between the two classes.
 ***Negative Predictive Value (96.5%)***: This is excellent for a medical screen. If the model tells a patient they don't have diabetes, it is almost certainly correct.
 ***Kappa (0.5357)***: This is much better. It proves the model is doing much better than just randomly guessing based on the majority group.
 
-As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true 'diabetes' records. Simple guessing would have missed all 12 sick people, the model found 10 of them. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them 'diabetes' when they aren't.
+As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better.This model correctly predicts 10 of the 12 true 'diabetes' records. Simple guessing would have missed all 12 sick people, the model found 10 of them. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them 'diabetes' when they aren't.
 
 # Conclusion
 
 KNN is a powerful tool to predict the classification or numerical value of new data. It's simple, intuitive, and easy to learn which makes it easy to implement. In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.
-
-# References
-
-***Cadili, R. (2025, December 16). What is Cohen’s Kappa? How and when to use it. KNIME. https://www.knime.com/blog/cohens-kappa-an-overview***
-
-***Draelos, R. (2019, February 17). [The Confusion Matrix] [Image]. Glass Box Medicine.***
-
-***IBM Technology. (2024, September 2). What is the K-Nearest Neighbor (KNN) Algorithm? YouTube. https://www.youtube.com/watch?v=b6uHw7QW_n4***
-
-***Nain, S., & Tomar, S. (2023). Medical image prediction for diagnosis of breast cancer using machine learning. AIP Conference Proceedings, 2853(1), Article 020140. doi.org***
-
-***S. Zhang, "Challenges in KNN Classification," in IEEE Transactions on Knowledge and Data Engineering, vol. 34, no. 10, pp. 4663-4675, 1 Oct. 2022, doi: 10.1109/TKDE.2021.3049250***
-
-***S. Zhang, X. Li, M. Zong, X. Zhu and R. Wang, "Efficient kNN Classification With Different Numbers of Nearest Neighbors," in IEEE Transactions on Neural Networks and Learning Systems, vol. 29, no. 5, pp. 1774-1785, May 2018, doi: 10.1109/TNNLS.2017.2673241***
-
-***Schorling JB, Roach J, Siegel M, Baturka N, Hunt DE, Guterbock TM, Stewart HL: A trial of church-based smoking cessation interventions for rural African Americans. Preventive Medicine 26:92-101; 1997***
-
-***Tembusai, Z. R., Mawengkang, H., & Zarlis, M. (2021). K-Nearest Neighbor with K-Fold Cross Validation and Analytic Hierarchy Process on Data Classification. International Journal of Advances in Data and Information Systems, 2(1), 1–8. https://doi.org/10.25008/ijadis.v2i1.1204 ***
-
-***Visually Explained. “K-Nearest Neighbors (KNN) in 3 Min.” YouTube, 17 Apr. 2025, www.youtube.com/watch?v=gs9E7E0qOIc.***
-
-***W. Xing and Y. Bei, "Medical Health Big Data Classification Based on KNN Classification Algorithm," in IEEE Access, vol. 8, pp. 28808-28819, 2020, doi: 10.1109/ACCESS.2019.2955754***
-
-***Willems JP, Saunders JT, DE Hunt, JB Schorling: Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. Southern Medical Journal 90:814-820; 1997***
