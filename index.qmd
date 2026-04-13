@@ -202,11 +202,11 @@ model_knn_df
 ```
 This returns a series of KNN models and their associated metrics and tells us that the optimal number of nearest neighbors to be considered is 11 and the model accuracy for that K is 0.9198387. 
 That's good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy.
-Because our data is imbalanced (which is common in the real-world) one class is much more frequent than the others.In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class.
-How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.
+Because our data is imbalanced (which is common in the real-world) one class is much more frequent than the others. Variables (like cholesterol) drown out other (like BMI). In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class.
+How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.[@Cadili2025]
 
 Remember that most of the records in our data set are not patients with diabetes. Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.
-[@Cadili2025]
+
 
 ## Second KNN Model  
 
@@ -250,14 +250,18 @@ Since we held out a testing set of 20% of our training data, we have an easy way
 predict_knn <- predict(model_knn_df, test_df)
 confusionMatrix(as.factor(predict_knn), as.factor(test_df$Diabetes), positive = "Diabetes")
 ```
-Sensitivity (0.25000): The model correctly identifies only 25% of the actual positive cases (high false-negative rate).
-Specificity (1.00000): The model correctly identifies 100% of the negative cases, meaning there are no false positives.
-Positive Predictive Value (1.00000): When the model predicts a positive case, it is 100% correct.
-Negative Predictive Value (0.88000): When the model predicts a negative case, it is correct 88% of the time.
-Balanced Accuracy (0.62500): The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in.
-Prevalence (0.15385): The actual positive cases represent about 15.4% of the total dataset. 
+Our confusion matrix whos 3 true positives, 66 true negatives, 9 false negatives, and 0 false positives. 
 
-In summary, our unbalanced model (first model) does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled 'Diabetes'.
+***Sensitivity (0.25000)***: The model correctly identifies only 25% of the actual positive cases (high false-negative rate). It only caught 3 out of 12 people who have diabetes and missed 75% of the sick patients. 
+***Specificity (1.00000)***: The model correctly identifies 100% of the negative cases, meaning there are no false positives.
+***Positive Predictive Value (1.00000)***: When the model predicts a positive case, it is 100% correct.
+***Negative Predictive Value (0.88000)***: When the model predicts a negative case, it is correct 88% of the time.
+***Balanced Accuracy (0.62500)***: The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in.
+***Prevalence (0.15385)***: The actual positive cases represent about 15.4% of the total dataset. 
+
+At first glance, having a 88.46% accuracy looks great! If you guessed "no diabetes" for each patient, you'd be right 84.62% of the time because the dataset is unbalanced. Our p value is 0.22 which is greater than 0.05, which means our model isn't statistically better than just guessing "no diabetes" for everyone.Our kappa of 0.36 which isn't great. It means most of the accuracy is coming from the lopsided nature of the data rather than the model's predictive power. 
+
+In summary, our unbalanced model (first model) does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled 'Diabetes' so it's missing the vast majority of actual diabetes cases. 
 
 Now we will look at the confusion matrix for our balanced model (second model). 
 
@@ -267,11 +271,11 @@ Now we will look at the confusion matrix for our balanced model (second model).
 predict_knn_simple <- predict(model_knn_df_simple, test_df)
 confusionMatrix(as.factor(predict_knn_simple), as.factor(test_df$Diabetes), positive = "Diabetes")
 ```
-As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true 'diabetes' records. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set,our model is a little too over-eager to label them 'diabetes' when they aren't.
+As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true 'diabetes' records. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them 'diabetes' when they aren't.
 
 # Conclusion
 
-# References
+KNN is a powerful tool to predict the classification or numerical value of new data. It's simple, intuitive, and easy to learn which makes it easy to implement. In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.
 
 # References
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Gloria Lowery">
-<meta name="dcterms.date" content="2026-04-09">
+<meta name="dcterms.date" content="2026-04-12">
 <meta name="description" content="A non-parametric supervised learning algorithm ">
 
 <title>Using the Machine Learning Algorithm K-Nearest Neighbors to Detect Patients with Diabetes</title>
@@ -157,7 +157,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 9, 2026</p>
+      <p class="date">April 12, 2026</p>
     </div>
   </div>
   
@@ -724,8 +724,8 @@ Accuracy was used to select the optimal model using the largest value.
 The final value used for the model was k = 9.</code></pre>
 </div>
 </div>
-<p>This returns a series of KNN models and their associated metrics and tells us that the optimal number of nearest neighbors to be considered is 11 and the model accuracy for that K is 0.9198387. That’s good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy. Because our data is imbalanced (which is common in the real-world) one class is much more frequent than the others.In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class. How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.</p>
-<p>Remember that most of the records in our data set are not patients with diabetes. Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way. <span class="citation" data-cites="Cadili2025">(<a href="#ref-Cadili2025" role="doc-biblioref"><span>“What Is Cohen’s Kappa? How and When to Use It”</span> 2025</a>)</span></p>
+<p>This returns a series of KNN models and their associated metrics and tells us that the optimal number of nearest neighbors to be considered is 11 and the model accuracy for that K is 0.9198387. That’s good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy. Because our data is imbalanced (which is common in the real-world) one class is much more frequent than the others.In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class. How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.<span class="citation" data-cites="Cadili2025">(<a href="#ref-Cadili2025" role="doc-biblioref"><span>“What Is Cohen’s Kappa? How and When to Use It”</span> 2025</a>)</span></p>
+<p>Remember that most of the records in our data set are not patients with diabetes. Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.</p>
 </section>
 <section id="second-knn-model" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="second-knn-model"><span class="header-section-number">3.4</span> Second KNN Model</h2>
@@ -889,21 +889,33 @@ Prediction    Diabetes No diabetes
                                           </code></pre>
 </div>
 </div>
-<p>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true ‘diabetes’ records. On the negative side though, the model mis-classifies 9 of the 66 ‘no diabetes’ records as ‘diabetes’. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set,our model is a little too over-eager to label them ‘diabetes’ when they aren’t.</p>
+<p>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true ‘diabetes’ records. On the negative side though, the model mis-classifies 9 of the 66 ‘no diabetes’ records as ‘diabetes’. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them ‘diabetes’ when they aren’t.</p>
 </section>
 </section>
 </section>
 <section id="conclusion" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Conclusion</h1>
+<p>KNN is a powerful tool to predict the classification or numerical value of new data. It’s simple, intuitive, and easy to learn which makes it easy to implement. In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.</p>
 </section>
 <section id="references" class="level1" data-number="5">
-
+<h1 data-number="5"><span class="header-section-number">5</span> References</h1>
+<p><strong><em>Cadili, R. (2025, December 16). What is Cohen’s Kappa? How and when to use it. KNIME. https://www.knime.com/blog/cohens-kappa-an-overview</em></strong></p>
+<p><strong><em>Draelos, R. (2019, February 17). [The Confusion Matrix] [Image]. Glass Box Medicine.</em></strong></p>
+<p><strong><em>IBM Technology. (2024, September 2). What is the K-Nearest Neighbor (KNN) Algorithm? YouTube. https://www.youtube.com/watch?v=b6uHw7QW_n4</em></strong></p>
+<p><strong><em>Nain, S., &amp; Tomar, S. (2023). Medical image prediction for diagnosis of breast cancer using machine learning. AIP Conference Proceedings, 2853(1), Article 020140. doi.org</em></strong></p>
+<p><strong><em>S. Zhang, “Challenges in KNN Classification,” in IEEE Transactions on Knowledge and Data Engineering, vol.&nbsp;34, no. 10, pp.&nbsp;4663-4675, 1 Oct.&nbsp;2022, doi: 10.1109/TKDE.2021.3049250</em></strong></p>
+<p><strong><em>S. Zhang, X. Li, M. Zong, X. Zhu and R. Wang, “Efficient kNN Classification With Different Numbers of Nearest Neighbors,” in IEEE Transactions on Neural Networks and Learning Systems, vol.&nbsp;29, no. 5, pp.&nbsp;1774-1785, May 2018, doi: 10.1109/TNNLS.2017.2673241</em></strong></p>
+<p><strong><em>Schorling JB, Roach J, Siegel M, Baturka N, Hunt DE, Guterbock TM, Stewart HL: A trial of church-based smoking cessation interventions for rural African Americans. Preventive Medicine 26:92-101; 1997</em></strong></p>
+<p><strong><em>Tembusai, Z. R., Mawengkang, H., &amp; Zarlis, M. (2021). K-Nearest Neighbor with K-Fold Cross Validation and Analytic Hierarchy Process on Data Classification. International Journal of Advances in Data and Information Systems, 2(1), 1–8. https://doi.org/10.25008/ijadis.v2i1.1204 </em></strong></p>
+<p><strong><em>Visually Explained. “K-Nearest Neighbors (KNN) in 3 Min.” YouTube, 17 Apr.&nbsp;2025, www.youtube.com/watch?v=gs9E7E0qOIc.</em></strong></p>
+<p><strong><em>W. Xing and Y. Bei, “Medical Health Big Data Classification Based on KNN Classification Algorithm,” in IEEE Access, vol.&nbsp;8, pp.&nbsp;28808-28819, 2020, doi: 10.1109/ACCESS.2019.2955754</em></strong></p>
+<p><strong><em>Willems JP, Saunders JT, DE Hunt, JB Schorling: Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. Southern Medical Journal 90:814-820; 1997</em></strong></p>
 <!-- -->
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">5 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Tembusai2021" class="csl-entry" role="listitem">
 <span>“K-Nearest Neighbor with k-Fold Cross Validation and Analytic Hierarchy Process on Data Classification.”</span> 2021. <em>International Journal of Advances in Data and Information Systems</em> 2 (1): 1–8.
 </div>
@@ -1594,10 +1606,10 @@ Zhang, S. 2022. <span>“Challenges in KNN Classification.”</span> <em>IEEE Tr
 <span id="cb21-203"><a href="#cb21-203" aria-hidden="true" tabindex="-1"></a>This returns a series of KNN models and their associated metrics and tells us that the optimal number of nearest neighbors to be considered is 11 and the model accuracy for that K is 0.9198387. </span>
 <span id="cb21-204"><a href="#cb21-204" aria-hidden="true" tabindex="-1"></a>That's good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy.</span>
 <span id="cb21-205"><a href="#cb21-205" aria-hidden="true" tabindex="-1"></a>Because our data is imbalanced (which is common in the real-world) one class is much more frequent than the others.In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class.</span>
-<span id="cb21-206"><a href="#cb21-206" aria-hidden="true" tabindex="-1"></a>How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.</span>
+<span id="cb21-206"><a href="#cb21-206" aria-hidden="true" tabindex="-1"></a>How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.<span class="co">[</span><span class="ot">@Cadili2025</span><span class="co">]</span></span>
 <span id="cb21-207"><a href="#cb21-207" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-208"><a href="#cb21-208" aria-hidden="true" tabindex="-1"></a>Remember that most of the records in our data set are not patients with diabetes. Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.</span>
-<span id="cb21-209"><a href="#cb21-209" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">@Cadili2025</span><span class="co">]</span></span>
+<span id="cb21-209"><a href="#cb21-209" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-210"><a href="#cb21-210" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-211"><a href="#cb21-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## Second KNN Model  </span></span>
 <span id="cb21-212"><a href="#cb21-212" aria-hidden="true" tabindex="-1"></a></span>
@@ -1658,11 +1670,35 @@ Zhang, S. 2022. <span>“Challenges in KNN Classification.”</span> <em>IEEE Tr
 <span id="cb21-267"><a href="#cb21-267" aria-hidden="true" tabindex="-1"></a>predict_knn_simple <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_knn_df_simple, test_df)</span>
 <span id="cb21-268"><a href="#cb21-268" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(predict_knn_simple), <span class="fu">as.factor</span>(test_df<span class="sc">$</span>Diabetes), <span class="at">positive =</span> <span class="st">"Diabetes"</span>)</span>
 <span id="cb21-269"><a href="#cb21-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-270"><a href="#cb21-270" aria-hidden="true" tabindex="-1"></a>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true 'diabetes' records. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set,our model is a little too over-eager to label them 'diabetes' when they aren't.</span>
+<span id="cb21-270"><a href="#cb21-270" aria-hidden="true" tabindex="-1"></a>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true 'diabetes' records. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them 'diabetes' when they aren't.</span>
 <span id="cb21-271"><a href="#cb21-271" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-272"><a href="#cb21-272" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
 <span id="cb21-273"><a href="#cb21-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-274"><a href="#cb21-274" aria-hidden="true" tabindex="-1"></a><span class="fu"># References</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb21-274"><a href="#cb21-274" aria-hidden="true" tabindex="-1"></a>KNN is a powerful tool to predict the classification or numerical value of new data. It's simple, intuitive, and easy to learn which makes it easy to implement. In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.</span>
+<span id="cb21-275"><a href="#cb21-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-276"><a href="#cb21-276" aria-hidden="true" tabindex="-1"></a><span class="fu"># References</span></span>
+<span id="cb21-277"><a href="#cb21-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-278"><a href="#cb21-278" aria-hidden="true" tabindex="-1"></a>***Cadili, R. (2025, December 16). What is Cohen’s Kappa? How and when to use it. KNIME. https://www.knime.com/blog/cohens-kappa-an-overview***</span>
+<span id="cb21-279"><a href="#cb21-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-280"><a href="#cb21-280" aria-hidden="true" tabindex="-1"></a>***Draelos, R. (2019, February 17). [The Confusion Matrix] [Image]. Glass Box Medicine.***</span>
+<span id="cb21-281"><a href="#cb21-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-282"><a href="#cb21-282" aria-hidden="true" tabindex="-1"></a>***IBM Technology. (2024, September 2). What is the K-Nearest Neighbor (KNN) Algorithm? YouTube. https://www.youtube.com/watch?v=b6uHw7QW_n4***</span>
+<span id="cb21-283"><a href="#cb21-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-284"><a href="#cb21-284" aria-hidden="true" tabindex="-1"></a>***Nain, S., &amp; Tomar, S. (2023). Medical image prediction for diagnosis of breast cancer using machine learning. AIP Conference Proceedings, 2853(1), Article 020140. doi.org***</span>
+<span id="cb21-285"><a href="#cb21-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-286"><a href="#cb21-286" aria-hidden="true" tabindex="-1"></a>***S. Zhang, "Challenges in KNN Classification," in IEEE Transactions on Knowledge and Data Engineering, vol. 34, no. 10, pp. 4663-4675, 1 Oct. 2022, doi: 10.1109/TKDE.2021.3049250***</span>
+<span id="cb21-287"><a href="#cb21-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-288"><a href="#cb21-288" aria-hidden="true" tabindex="-1"></a>***S. Zhang, X. Li, M. Zong, X. Zhu and R. Wang, "Efficient kNN Classification With Different Numbers of Nearest Neighbors," in IEEE Transactions on Neural Networks and Learning Systems, vol. 29, no. 5, pp. 1774-1785, May 2018, doi: 10.1109/TNNLS.2017.2673241***</span>
+<span id="cb21-289"><a href="#cb21-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-290"><a href="#cb21-290" aria-hidden="true" tabindex="-1"></a>***Schorling JB, Roach J, Siegel M, Baturka N, Hunt DE, Guterbock TM, Stewart HL: A trial of church-based smoking cessation interventions for rural African Americans. Preventive Medicine 26:92-101; 1997***</span>
+<span id="cb21-291"><a href="#cb21-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-292"><a href="#cb21-292" aria-hidden="true" tabindex="-1"></a>***Tembusai, Z. R., Mawengkang, H., &amp; Zarlis, M. (2021). K-Nearest Neighbor with K-Fold Cross Validation and Analytic Hierarchy Process on Data Classification. International Journal of Advances in Data and Information Systems, 2(1), 1–8. https://doi.org/10.25008/ijadis.v2i1.1204 ***</span>
+<span id="cb21-293"><a href="#cb21-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-294"><a href="#cb21-294" aria-hidden="true" tabindex="-1"></a>***Visually Explained. “K-Nearest Neighbors (KNN) in 3 Min.” YouTube, 17 Apr. 2025, www.youtube.com/watch?v=gs9E7E0qOIc.***</span>
+<span id="cb21-295"><a href="#cb21-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-296"><a href="#cb21-296" aria-hidden="true" tabindex="-1"></a>***W. Xing and Y. Bei, "Medical Health Big Data Classification Based on KNN Classification Algorithm," in IEEE Access, vol. 8, pp. 28808-28819, 2020, doi: 10.1109/ACCESS.2019.2955754***</span>
+<span id="cb21-297"><a href="#cb21-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-298"><a href="#cb21-298" aria-hidden="true" tabindex="-1"></a>***Willems JP, Saunders JT, DE Hunt, JB Schorling: Prevalence of coronary heart disease risk factors among rural blacks: A community-based study. Southern Medical Journal 90:814-820; 1997***</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
