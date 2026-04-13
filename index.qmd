@@ -250,7 +250,7 @@ Since we held out a testing set of 20% of our training data, we have an easy way
 predict_knn <- predict(model_knn_df, test_df)
 confusionMatrix(as.factor(predict_knn), as.factor(test_df$Diabetes), positive = "Diabetes")
 ```
-Our confusion matrix whos 3 true positives, 66 true negatives, 9 false negatives, and 0 false positives. 
+Our confusion matrix shows 3 true positives, 66 true negatives, 9 false negatives, and 0 false positives. 
 
 ***Sensitivity (0.25000)***: The model correctly identifies only 25% of the actual positive cases (high false-negative rate). It only caught 3 out of 12 people who have diabetes and missed 75% of the sick patients. 
 ***Specificity (1.00000)***: The model correctly identifies 100% of the negative cases, meaning there are no false positives.
@@ -271,7 +271,16 @@ Now we will look at the confusion matrix for our balanced model (second model).
 predict_knn_simple <- predict(model_knn_df_simple, test_df)
 confusionMatrix(as.factor(predict_knn_simple), as.factor(test_df$Diabetes), positive = "Diabetes")
 ```
-As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true 'diabetes' records. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them 'diabetes' when they aren't.
+Our confusion matrix shows 10 true positives, 56 true negatives, 2 false negatives, and 10 false positives. 
+
+***Sensitivity (83.3%)***: Out of 12 people who actually have diabetes, the model caught 10 of them. It only missed 2.
+***Specificity (84.8%)***: Out of 66 healthy people, the model correctly identified 56 as healthy.
+***Pos Pred Value***: Is 50% — when the model says "Diabetes," it’s a coin flip whether the person actually has it.
+***Balanced Accuracy (84.1%)**: Since it’s high, it shows the model is actually learning to tell the difference between the two classes.
+***Negative Predictive Value (96.5%)***: This is excellent for a medical screen. If the model tells a patient they don't have diabetes, it is almost certainly correct.
+***Kappa (0.5357)***: This is much better. It proves the model is doing much better than just randomly guessing based on the majority group.
+
+As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. This model correctly predicts 10 of the 12 true 'diabetes' records. Simple guessing would have missed all 12 sick people, the model found 10 of them. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them 'diabetes' when they aren't.
 
 # Conclusion
 
