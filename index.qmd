@@ -20,7 +20,7 @@ indent: true
 ---
 ------
 
-[Presentation](link){.external target="_blank"}
+[Presentation](slidesfromindex.html){.external target="_blank"}
  
 # Introduction
 

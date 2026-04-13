@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="slidesfromindex_files/libs/clipboard/clipboard.min.js"></script>
+<script src="slidesfromindex_files/libs/quarto-html/tabby.min.js"></script>
+<script src="slidesfromindex_files/libs/quarto-html/popper.min.js"></script>
+<script src="slidesfromindex_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="slidesfromindex_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="slidesfromindex_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="slidesfromindex_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
+
+  <meta name="author" content="Gloria Lowery">
+  <meta name="dcterms.date" content="2026-04-13">
+  <title>Using the Machine Learning Algorithm K-Nearest Neighbors to Detect Patients with Diabetes</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="slidesfromindex_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="slidesfromindex_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="slidesfromindex_files/libs/revealjs/dist/theme/quarto-95fe7e08a68a96be4b5aaef80a24ef45.css">
+  <link href="slidesfromindex_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="slidesfromindex_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="slidesfromindex_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="slidesfromindex_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title"><span style="color: #0366D6;">Using the Machine Learning Algorithm K-Nearest Neighbors to Detect Patients with Diabetes</span></h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Gloria Lowery 
+</div>
+</div>
+</div>
+
+  <p class="date">2026-04-13</p>
+</section>
+<section class="slide level2">
+
+</section>
+<section id="introduction" class="title-slide slide level1 center" data-number="1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+<p>When give data we typically want to make sense of what the data is telling us. Machine learning algorithms enable us to do just that. They are mathematical and statistical instructions that computers learn to make sense of a raw dataset.</p>
+<p>One such learning algorithm that we will look at is K-Nearest Neighbor. It is considered a “non-parametric supervised learning algorithm.” Non-parametric meaning it makes few or no assumptions about the underlying shape or distribution of data. Supervised, as in, it learns from labeled data (input that has a corresponding output) with a goal to predict outcomes for new, unseen data.</p>
+<p>The main goal of the K-Nearest Neighbors(KNN) algorithm is to predict the classification or numerical value of a new data point based on how similar it is to its closest neighbors. In this paper we will discuss the concept and underlying methodology of KNN, it’s strengths and limitations, as well as its real-world applications such as in business and medicine. Specifically, applying the KNN algorithm to identify diabetes within a group of subjects who were studied in order to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors.</p>
+<p>You can think of KNN as <strong><em>“birds of a feather flock together.”</em></strong></p>
+</section>
+
+<section>
+<section id="method" class="title-slide slide level1 center" data-number="2">
+<h1><span class="header-section-number">2</span> Method</h1>
+<p>The K-Nearest Neighbors (KNN) algorithm is one of the simplest and most intuitive supervised machine learning methods used for both classification (assigning a category) and regression (predicting a value). It is a non-parametric, supervised machine learning method used for both classification and regression. It requires two instances for it to achieve its goal 1) a distance metric and 2) defining K<span class="citation" data-cites="IBM2024">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“What Is the k-Nearest Neighbor (KNN) Algorithm?”</span> 2024</a>)</span>. Its methodology relies on the proximity principle, assuming that similar data points exist in close proximity within a feature space.</p>
+<p>Take a look at the following photo.</p>
+<center>
+<div id="fig-1" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="KnnClassification.svg.png">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: K-Nearest Neighbor Visual Representation (Image Source: ©Wikipedia2019)
+</figcaption>
+</figure>
+</div>
+</center>
+<p>When determining how to classify the green dot as either a blue square or red triangle, we will look at its neighbors - specifically the ones closest to it. Here, if we chose to look at three of its closest neighbors (k=3) we are looking at the area within the inner solid circle. We see that the majority of its neighbors are red triangles so we would classify the green dot as a red triangle. However, if we’re looking within the area of dashed circle, we see three blue squares vs two red triangles so the green dot would then be classified as a blue square.</p>
+<p>But KNN is a bit more complex than this.</p>
+</section>
+<section id="core-steps-of-the-knn-methodology" class="slide level2" data-number="2.1">
+<h2><span class="header-section-number">2.1</span> Core Steps of the KNN Methodology</h2>
+<ol type="1">
+<li><p>Defining the Parameter ‘K’: Like mentioned, when defining or selecting k, we are selecting the number of nearest neighbors to consider to determine the classification of a query point. For example, K=1, means it will be assigned to the same class as its single nearest neighbor. Choosing K depends on the input data. For example, data with more outliers performs much better with higher k values. We also want to choose an odd number for k to minimize the chances of ties in classification. <span class="citation" data-cites="zhang2018">(<a href="#/conclusion" role="doc-biblioref" onclick="">S. Zhang and Wang 2018</a>)</span></p></li>
+<li><p>Calculating Distance: When a new, unlabeled data point is introduced, the algorithm calculates its distance to every other point in the training dataset. The distance metric measures the distance between the query point(s) and other data points. It can be calculated using a variety of formulas. For example, either Euclidean distance, Manhattan distance, Minkowski, or Hamming distance, and we can visualize this using Voronezh diagrams like above. <span class="citation" data-cites="VisuallyExplained2025">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“K-Nearest Neighbors (KNN) in 3 Min”</span> 2025</a>)</span></p></li>
+</ol>
+<p><em>Euclidean Distance</em>: Most commonly used. Measures the “straight-line” path between points; best for continuous data.</p>
+<p><span class="math display">\[
+D_{euclidean}(x_1, x_2) = \sqrt{\sum_{i = 1}^{n}{((x_1)_i - (x_2)_i)^2}}
+\]</span></p>
+<p><em>Manhattan Distance</em>: Calculates the sum of absolute differences, similar to navigating a grid (taxicab geometry).</p>
+<p><span class="math display">\[
+D_{manhattan}(x_1, x_2) = \sum_{i = 1}^{n}|((x_1)_i - (x_2)_i)|
+\]</span> <em>Minkowski Distance</em>: A generalized formula that can represent both Euclidean (p=1) and Manhattan (p=2) distances. <span class="math display">\[
+D_{Minkowski}(X,Y) = \sum_{i = 1}^{n}|x_i - y_i|^p
+\]</span> <em>Hamming Distance</em>: Used for categorical or string variables to identify where vectors do not match.</p>
+<center>
+<div id="fig-2" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="Hamming%20Distance.png">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span class="citation" data-cites="An2021">(<a href="#/conclusion" role="doc-biblioref" onclick="">An 2021</a>)</span>)
+</figcaption>
+</figure>
+</div>
+</center>
+<ol start="3" type="1">
+<li><p>Identify Neighbors: Combining steps 1 and 2. We defined k, we determined distance based on our metric distance formula. Now we sort and select the points with the smallest distance values to the new query point.</p></li>
+<li><p>Aggregate results based on the goal.</p></li>
+</ol>
+<ul>
+<li><p>Classification: The new point is assigned the class that appears most frequently among its k neighbors (majority or plurality voting). Like the example above, we had mostly blue squares within the vicinity to the query point aka the green dot so it is most likely also a blue square.</p></li>
+<li><p>Regression: The algorithm predicts a continuous value by taking the average (mean) or median of the k neighbors’ target values.</p></li>
+</ul>
+</section>
+<section id="key-characteristics-of-knn" class="slide level2" data-number="2.2">
+<h2><span class="header-section-number">2.2</span> Key Characteristics of KNN</h2>
+<p>Lazy Learner: KNN is considered a “lazy learner” because it does not have a distinct training phase. It simply stores the training data and defers all computation until a prediction is requested.</p>
+<p>Non-Parametric: It makes no prior assumptions about the underlying distribution of the data, making it flexible for complex datasets.</p>
+<p>Sensitivity to Scale: Because it relies on distance, features with larger magnitudes can disproportionately influence results. Therefore, feature scaling (standardization or normalization) is a critical preprocessing step.<span class="citation" data-cites="xing2020">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“Medical Health Big Data Classification Based on KNN Classification Algorithm”</span> 2020</a>)</span></p>
+<p>Finding the Optimal ‘K’: The value of k is often determined using the Elbow Method or Cross-Validation, where multiple k values are tested to find the one that minimizes the error rate without overfitting or underfitting. Analysts typically choose an odd number for k to prevent ties in classification (like if we had equal red triangles and blue squares what then?). In our example, we will be using cross-validation to determine the value of ‘k’. In cross validation, the dataset is divided by kfolds. Where at each iteration each fold is used once as test data and the remaining fold is used as training data, the process is repeated until all data is evaluated. <span class="citation" data-cites="Tembusai2021">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“K-Nearest Neighbor with k-Fold Cross Validation and Analytic Hierarchy Process on Data Classification”</span> 2021</a>)</span></p>
+</section>
+<section id="strengths-of-knn" class="slide level2" data-number="2.3">
+<h2><span class="header-section-number">2.3</span> Strengths of KNN</h2>
+<p>1.Easy to implement/learn. There are also few hyper parameters - just the distance and k value.</p>
+<ol start="2" type="1">
+<li>It’s also adaptable. It adjusts easily to new training data since all training data is stored into memory. But similarly, because of that, it doesn’t scale well. As the data set grows, the algorithm becomes less efficient due to increasing computational complexity, which compromises overall model performance.</li>
+</ol>
+</section>
+<section id="weaknesses-of-knn" class="slide level2" data-number="2.4">
+<h2><span class="header-section-number">2.4</span> Weaknesses of KNN</h2>
+<ol type="1">
+<li><p>As mentioned, it can be considered a “lazy algorithm” meaning it stores all training data and defers the computation to the time of classification, increasing memory usage and leads to slower processing compared to other methods of classifying. In other words, it does not build the model beforehand. It instead stores the data and makes predictions on demand.</p></li>
+<li><p>KNN also has what’s called the “Curse of Dimensionality.” It does not perform well with high dimensional data inputs. On a 2D xy graph it works fine but if we wanted to classify according to color, size, weight, etc. then the data points become sparse in higher dimensions and the distance between points become too similar for KNN to find meaningful neighbors. This leads to what’s called the “peaking phenomenon.” The peaking phenomenon occurs after reaching the optimal number of features - any more just increases noise and increases classification errors especially when the sample size is small. Feature selection and dimensionality reduction techniques can help minimize “curse of dimensionality” but we need to be careful.</p></li>
+<li><p>Another weakness is overfitting. Low k values can overfit the data. High values tend to smooth out prediction values since average values over a greater are or neighborhood. <span class="citation" data-cites="zhang2022">(<a href="#/conclusion" role="doc-biblioref" onclick="">Zhang 2022</a>)</span></p></li>
+</ol>
+</section>
+<section id="uses-of-the-knn-algorithm" class="slide level2" data-number="2.5">
+<h2><span class="header-section-number">2.5</span> Uses of the KNN Algorithm</h2>
+<p>When it comes to uses, we can use the KNN algorithm for simple recommendation systems. Data free processing is most commonly used because it’s helpful for data sets with missing values because it estimates values using process called missing data imputation. KNN is actually most often used in finance like stock market forecasting, currency exchange rate, money laundering analysis. But it is also used in health care. For example, risk of heart attacks and prostate cancer by calculating most likely gene expression. In this paper we will apply the KNN algorithm to a data set of potential diabetic patients.<span class="citation" data-cites="Nain2023">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“Medical Image Prediction for Diagnosis of Breast Cancer Using Machine Learning”</span> 2021</a>)</span></p>
+</section></section>
+<section>
+<section id="analysis-and-results" class="title-slide slide level1 center" data-number="3">
+<h1><span class="header-section-number">3</span> Analysis and Results</h1>
+
+</section>
+<section id="data-description" class="slide level2" data-number="3.1">
+<h2><span class="header-section-number">3.1</span> Data Description</h2>
+<p>These data sets are courtesy of Dr John Schorling, Department of Medicine, University of Virginia School of Medicine.<span class="citation" data-cites="Schorling1997">(<a href="#/conclusion" role="doc-biblioref" onclick="">Schorling JB 1997</a>)</span> The data consist of 19 variables on 403 subjects from 1046 subjects who were interviewed in a study to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors in central Virginia for African Americans. According to Dr John Hong, Diabetes Mellitus Type II (adult onset diabetes) is associated most strongly with obesity. The waist/hip ratio may be a predictor in diabetes and heart disease. DM II is also associated with hypertension - they may both be part of “Syndrome X”. The 403 subjects were the ones who were actually screened for diabetes. Glycosolated hemoglobin &gt; 7.0 is usually taken as a positive diagnosis of diabetes. <span class="citation" data-cites="Willems1997">(<a href="#/conclusion" role="doc-biblioref" onclick="">Willems JP 1997</a>)</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">kable</span>(<span class="fu">head</span>(df))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 9%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 3%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 3%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Patient.number</th>
+<th style="text-align: right;">Cholesterol</th>
+<th style="text-align: right;">Glucose</th>
+<th style="text-align: right;">HDL.Chol</th>
+<th style="text-align: right;">Chol.HDL.ratio</th>
+<th style="text-align: right;">Age</th>
+<th style="text-align: left;">Gender</th>
+<th style="text-align: right;">Height</th>
+<th style="text-align: right;">Weight</th>
+<th style="text-align: right;">BMI</th>
+<th style="text-align: right;">Systolic.BP</th>
+<th style="text-align: right;">Diastolic.BP</th>
+<th style="text-align: right;">waist</th>
+<th style="text-align: right;">hip</th>
+<th style="text-align: right;">Waist.hip.ratio</th>
+<th style="text-align: left;">Diabetes</th>
+<th style="text-align: right;">…17</th>
+<th style="text-align: right;">…18</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">193</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">3.9</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">119</td>
+<td style="text-align: right;">22.5</td>
+<td style="text-align: right;">118</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">0.84</td>
+<td style="text-align: left;">No diabetes</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">146</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">26.4</td>
+<td style="text-align: right;">108</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.83</td>
+<td style="text-align: left;">No diabetes</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">217</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">187</td>
+<td style="text-align: right;">29.3</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0.89</td>
+<td style="text-align: left;">No diabetes</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">226</td>
+<td style="text-align: right;">97</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">114</td>
+<td style="text-align: right;">19.6</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">0.79</td>
+<td style="text-align: left;">No diabetes</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">164</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">20.2</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: left;">No diabetes</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">27.6</td>
+<td style="text-align: right;">108</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.93</td>
+<td style="text-align: left;">No diabetes</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>As shown, we have variables we do not need/want including empty columns. We’ll select the non-demographic columns to begin and create a reduced data set. The new table below shows the first 6 rows of our reduced data set.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>df_reduced <span class="ot">&lt;-</span> df[<span class="fu">c</span>(<span class="st">"Diabetes"</span>, <span class="st">"Cholesterol"</span>, <span class="st">"Glucose"</span>, <span class="st">"BMI"</span>, <span class="st">"Waist.hip.ratio"</span>, <span class="st">"HDL.Chol"</span>, <span class="st">"Chol.HDL.ratio"</span>, <span class="st">"Systolic.BP"</span>, <span class="st">"Diastolic.BP"</span>, <span class="st">"Weight"</span>)]</span>
+<span id="cb2-2"><a href=""></a><span class="fu">kable</span>(<span class="fu">head</span>(df_reduced))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 14%">
+<col style="width: 8%">
+<col style="width: 13%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Diabetes</th>
+<th style="text-align: right;">Cholesterol</th>
+<th style="text-align: right;">Glucose</th>
+<th style="text-align: right;">BMI</th>
+<th style="text-align: right;">Waist.hip.ratio</th>
+<th style="text-align: right;">HDL.Chol</th>
+<th style="text-align: right;">Chol.HDL.ratio</th>
+<th style="text-align: right;">Systolic.BP</th>
+<th style="text-align: right;">Diastolic.BP</th>
+<th style="text-align: right;">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">No diabetes</td>
+<td style="text-align: right;">193</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">22.5</td>
+<td style="text-align: right;">0.84</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">3.9</td>
+<td style="text-align: right;">118</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">119</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">No diabetes</td>
+<td style="text-align: right;">146</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">26.4</td>
+<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">108</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">135</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">No diabetes</td>
+<td style="text-align: right;">217</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">29.3</td>
+<td style="text-align: right;">0.89</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">187</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">No diabetes</td>
+<td style="text-align: right;">226</td>
+<td style="text-align: right;">97</td>
+<td style="text-align: right;">19.6</td>
+<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">114</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">No diabetes</td>
+<td style="text-align: right;">164</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">20.2</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">141</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">No diabetes</td>
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">27.6</td>
+<td style="text-align: right;">0.93</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">108</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">161</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The table below now shows a description of each of our variables to be used.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">kable</span>(vars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variables</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Diabetes</td>
+<td style="text-align: left;">Yes/No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cholesterol</td>
+<td style="text-align: left;">Numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Glucose</td>
+<td style="text-align: left;">Numeric</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BMI</td>
+<td style="text-align: left;">Numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Waist.hip.ratio</td>
+<td style="text-align: left;">Waist to Hip Ratio</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HDL.Chol</td>
+<td style="text-align: left;">Numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chol.HDL.ratio</td>
+<td style="text-align: left;">Cholesterol to HDL ratio</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Systolic.BP</td>
+<td style="text-align: left;">Systolic Blood Pressure</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Diastolic.BP</td>
+<td style="text-align: left;">Diastolic Blood Pressure</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Weight</td>
+<td style="text-align: left;">Numeric</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="preparing-the-data" class="slide level2" data-number="3.2">
+<h2><span class="header-section-number">3.2</span> Preparing the Data</h2>
+<p>Like mentioned, kNN is sensitive to scaling (of the variables). So it is helpful to first standardize the variables. We do this using the preProcess function of the caret package:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>preproc_reduced <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(df_reduced[,<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"scale"</span>, <span class="st">"center"</span>))</span>
+<span id="cb4-2"><a href=""></a>df_standardized <span class="ot">&lt;-</span> <span class="fu">predict</span>(preproc_reduced, df_reduced[, <span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Now we have scaled and centered values for our data.frame.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">summary</span>(df_standardized)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Cholesterol          Glucose              BMI          Waist.hip.ratio   
+ Min.   :-2.89327   Min.   :-1.10298   Min.   :-2.0566   Min.   :-2.75070  
+ 1st Qu.:-0.63204   1st Qu.:-0.48958   1st Qu.:-0.7083   1st Qu.:-0.70186  
+ Median :-0.09472   Median :-0.32229   Median :-0.1478   Median :-0.01891  
+ Mean   : 0.00000   Mean   : 0.00000   Mean   : 0.0000   Mean   : 0.00000  
+ 3rd Qu.: 0.48738   3rd Qu.: 0.00765   3rd Qu.: 0.5301   3rd Qu.: 0.66403  
+ Max.   : 5.27849   Max.   : 5.16117   Max.   : 4.0940   Max.   : 3.53241  
+    HDL.Chol       Chol.HDL.ratio     Systolic.BP        Diastolic.BP     
+ Min.   :-2.2146   Min.   :-1.7417   Min.   :-2.06187   Min.   :-2.61441  
+ 1st Qu.:-0.7099   1st Qu.:-0.7627   1st Qu.:-0.66201   1st Qu.:-0.61414  
+ Median :-0.2469   Median :-0.1869   Median :-0.04958   Median :-0.09555  
+ Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.00000   Mean   : 0.00000  
+ 3rd Qu.: 0.5054   3rd Qu.: 0.5041   3rd Qu.: 0.47537   3rd Qu.: 0.49712  
+ Max.   : 4.0357   Max.   : 8.5081   Max.   : 4.93740   Max.   : 3.01598  
+     Weight       
+ Min.   :-1.9404  
+ 1st Qu.:-0.6721  
+ Median :-0.1091  
+ Mean   : 0.0000  
+ 3rd Qu.: 0.5591  
+ Max.   : 3.6526  </code></pre>
+</div>
+</div>
+<p>Apply those scaled and centered values to our data using the bind_cols method from dpylr to normalize all of our data.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>df_stdize <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="at">Diabetes =</span> df_reduced<span class="sc">$</span>Diabetes, df_standardized)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Now we have a data set which will work well for KNN!</p>
+</section>
+<section id="using-the-knn-model" class="slide level2" data-number="3.3">
+<h2><span class="header-section-number">3.3</span> Using the KNN Model</h2>
+<p>First, we create a test/train split so that we can train a KNN model. We will use the createDataPartition from caret to randomly select 80% of the data to use for the training set and 20% of the data to use for the test set. Then, create two different data frames using partition point returned by createDataPartition.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb8-2"><a href=""></a><span class="co"># "p" indicates how much of the data should go into the first created partition</span></span>
+<span id="cb8-3"><a href=""></a>param_split<span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(df_stdize<span class="sc">$</span>Diabetes, <span class="at">times =</span> <span class="dv">1</span>, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-4"><a href=""></a>train_df <span class="ot">&lt;-</span> df_stdize[param_split, ]</span>
+<span id="cb8-5"><a href=""></a>test_df <span class="ot">&lt;-</span> df_stdize[<span class="sc">-</span>param_split, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Now we “train” the KNN.</p>
+<p>The trainControl method is a helper function for all the nuances of the KNN train method. It allows you to easily set up the KNN training parameters.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>trnctrl_df <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>method: This is the resampling method used. Using “cv” or cross validation. number: The number of folds because we’re using cv.</p>
+<p>Now we will use all our variables to predict Diabetes. Then specify the training data, that we’re training a KNN, and pass the training hyperparameters that we built with trainControl.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>model_knn_df <span class="ot">&lt;-</span> <span class="fu">train</span>(Diabetes <span class="sc">~</span> ., <span class="at">data =</span> train_df, <span class="at">method =</span> <span class="st">"knn"</span>, </span>
+<span id="cb10-2"><a href=""></a>                      <span class="at">trControl =</span> trnctrl_df, </span>
+<span id="cb10-3"><a href=""></a>                      <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb10-4"><a href=""></a></span>
+<span id="cb10-5"><a href=""></a>model_knn_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>k-Nearest Neighbors 
+
+312 samples
+  9 predictor
+  2 classes: 'Diabetes', 'No diabetes' 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 281, 280, 281, 282, 281, 281, ... 
+Resampling results across tuning parameters:
+
+  k   Accuracy   Kappa    
+   5  0.9166129  0.5860773
+   7  0.9198387  0.6093237
+   9  0.9198387  0.6138024
+  11  0.9132863  0.5589329
+  13  0.9069355  0.5214249
+  15  0.9037097  0.4918794
+  17  0.9037097  0.4918794
+  19  0.8971505  0.4320133
+  21  0.8939247  0.4087668
+  23  0.8971505  0.4320133
+
+Accuracy was used to select the optimal model using the largest value.
+The final value used for the model was k = 9.</code></pre>
+</div>
+</div>
+<p>This returns a series of KNN models and their associated metrics and tells us that the optimal number of nearest neighbors to be considered is 11 and the model accuracy for that K is 0.9198387. That’s good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy. Because our data is imbalanced (which is common in the real-world) one class is much more frequent than the others. Variables (like cholesterol) drown out other (like BMI). In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class. How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.<span class="citation" data-cites="Cadili2025">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“What Is Cohen’s Kappa? How and When to Use It”</span> 2025</a>)</span></p>
+<p>Remember that most of the records in our data set are not patients with diabetes. Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.</p>
+</section>
+<section id="second-knn-model" class="slide level2" data-number="3.4">
+<h2><span class="header-section-number">3.4</span> Second KNN Model</h2>
+<p>We can find that simpler models have better accuracy. To see which variables are having the most impact on our outcome variable, we can use fs.anova to check the analysis of variance for each variable and use that in a second KNN.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>df_stdize<span class="sc">$</span>Diabetes <span class="ot">=</span> <span class="fu">ifelse</span>(df_stdize<span class="sc">$</span>Diabetes <span class="sc">==</span> <span class="st">"Diabetes"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb12-2"><a href=""></a>fs <span class="ot">&lt;-</span> <span class="fu">fs.anova</span>(df_stdize, df_stdize<span class="sc">$</span>Diabetes)</span>
+<span id="cb12-3"><a href=""></a><span class="fu">print</span>(fs<span class="sc">$</span>fs.order)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Diabetes"        "Glucose"         "Chol.HDL.ratio"  "Cholesterol"    
+ [5] "Systolic.BP"     "Waist.hip.ratio" "Weight"          "BMI"            
+ [9] "HDL.Chol"        "Diastolic.BP"   </code></pre>
+</div>
+</div>
+<p>We can see that “Glucose” is the most important feature in our data set for predicting diabetes.</p>
+<p>We can now do two things here to improve our performance. First, we’ll balance our data set so that we have equal numbers of records with and without diabetes:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>positive_cases <span class="ot">&lt;-</span> <span class="fu">nrow</span>(train_df[train_df<span class="sc">$</span>Diabetes <span class="sc">==</span> <span class="st">'Diabetes'</span>,])</span>
+<span id="cb14-2"><a href=""></a></span>
+<span id="cb14-3"><a href=""></a>balanced <span class="ot">=</span> <span class="fu">rbind</span>(train_df[<span class="fu">sample</span>(<span class="fu">which</span>(train_df<span class="sc">$</span>Diabetes <span class="sc">==</span> <span class="st">'No diabetes'</span>), positive_cases),], train_df[train_df<span class="sc">$</span>Diabetes <span class="sc">==</span> <span class="st">'Diabetes'</span>,])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Second, we’ll use just the Glucose readings to calculate the distance to our ‘neighbors’ in KNN:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>trnctrl_df <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb15-2"><a href=""></a>model_knn_df_simple <span class="ot">&lt;-</span> <span class="fu">train</span>(Diabetes <span class="sc">~</span> Glucose, <span class="at">data =</span> balanced, <span class="at">method =</span> <span class="st">"knn"</span>, </span>
+<span id="cb15-3"><a href=""></a>                             <span class="at">trControl =</span> trnctrl_df, </span>
+<span id="cb15-4"><a href=""></a>                             <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb15-5"><a href=""></a></span>
+<span id="cb15-6"><a href=""></a>model_knn_df_simple</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>k-Nearest Neighbors 
+
+96 samples
+ 1 predictor
+ 2 classes: 'Diabetes', 'No diabetes' 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 87, 86, 86, 86, 88, 86, ... 
+Resampling results across tuning parameters:
+
+  k   Accuracy   Kappa    
+   5  0.8477778  0.6960976
+   7  0.8266667  0.6551916
+   9  0.8177778  0.6360976
+  11  0.8677778  0.7360976
+  13  0.8577778  0.7160976
+  15  0.8677778  0.7360976
+  17  0.8277778  0.6560976
+  19  0.8455556  0.6921429
+  21  0.8355556  0.6721429
+  23  0.8455556  0.6921429
+
+Accuracy was used to select the optimal model using the largest value.
+The final value used for the model was k = 15.</code></pre>
+</div>
+</div>
+<p>The simpler model seems to have better performance. With a K value of 15, we see an accuracy of 0.93 and a Kappa of 0.86. Both of these scores are higher than we had seen with the larger model and the Kappa of 0.86 indicates that we are predicting both classes better although still not perfectly.</p>
+</section>
+<section id="evaluating-both-knn-models" class="slide level2" data-number="3.5">
+<h2><span class="header-section-number">3.5</span> Evaluating both KNN Models</h2>
+<p>Since we held out a testing set of 20% of our training data, we have an easy way to evaluate both of our models. We will pass the model to predict and check the results against the actual test labels. Use a confusion matrix to assess how well our model predicts the test data. To recap, a confusion matrix looks like this:</p>
+<center>
+<div id="fig-3" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="confusion-matrix.png">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Confusion Matrix (Image Source: ©Draelos2019)
+</figcaption>
+</figure>
+</div>
+</center>
+<h3 data-number="3.5.1" id="unbalanced-model-analysis-and-results"><span class="header-section-number">3.5.1</span> Unbalanced Model Analysis and Results</h3>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>predict_knn <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_knn_df, test_df)</span>
+<span id="cb17-2"><a href=""></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(predict_knn), <span class="fu">as.factor</span>(test_df<span class="sc">$</span>Diabetes), <span class="at">positive =</span> <span class="st">"Diabetes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+             Reference
+Prediction    Diabetes No diabetes
+  Diabetes           3           0
+  No diabetes        9          66
+                                          
+               Accuracy : 0.8846          
+                 95% CI : (0.7922, 0.9459)
+    No Information Rate : 0.8462          
+    P-Value [Acc &gt; NIR] : 0.220527        
+                                          
+                  Kappa : 0.3607          
+                                          
+ Mcnemar's Test P-Value : 0.007661        
+                                          
+            Sensitivity : 0.25000         
+            Specificity : 1.00000         
+         Pos Pred Value : 1.00000         
+         Neg Pred Value : 0.88000         
+             Prevalence : 0.15385         
+         Detection Rate : 0.03846         
+   Detection Prevalence : 0.03846         
+      Balanced Accuracy : 0.62500         
+                                          
+       'Positive' Class : Diabetes        
+                                          </code></pre>
+</div>
+</div>
+<p>Our confusion matrix shows 3 true positives, 66 true negatives, 9 false negatives, and 0 false positives.</p>
+<p><strong><em>Sensitivity (0.25000)</em></strong>: The model correctly identifies only 25% of the actual positive cases (high false-negative rate). It only caught 3 out of 12 people who have diabetes and missed 75% of the sick patients. <strong><em>Specificity (1.00000)</em></strong>: The model correctly identifies 100% of the negative cases, meaning there are no false positives. <strong><em>Positive Predictive Value (1.00000)</em></strong>: When the model predicts a positive case, it is 100% correct. <strong><em>Negative Predictive Value (0.88000)</em></strong>: When the model predicts a negative case, it is correct 88% of the time. <strong><em>Balanced Accuracy (0.62500)</em></strong>: The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in. <strong><em>Prevalence (0.15385)</em></strong>: The actual positive cases represent about 15.4% of the total dataset.</p>
+<p>At first glance, having a 88.46% accuracy looks great! If you guessed “no diabetes” for each patient, you’d be right 84.62% of the time because the dataset is unbalanced. Our p value is 0.22 which is greater than 0.05, which means our model isn’t statistically better than just guessing “no diabetes” for everyone.Our kappa of 0.36 which isn’t great. It means most of the accuracy is coming from the lopsided nature of the data rather than the model’s predictive power.</p>
+<p>In summary, our unbalanced model (first model) does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled ‘Diabetes’ so it’s missing the vast majority of actual diabetes cases.</p>
+<p>Now we will look at the confusion matrix for our balanced model (second model).</p>
+<h3 data-number="3.5.2" id="balanced-model-analysis-and-results"><span class="header-section-number">3.5.2</span> Balanced Model Analysis and Results</h3>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>predict_knn_simple <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_knn_df_simple, test_df)</span>
+<span id="cb19-2"><a href=""></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(predict_knn_simple), <span class="fu">as.factor</span>(test_df<span class="sc">$</span>Diabetes), <span class="at">positive =</span> <span class="st">"Diabetes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+             Reference
+Prediction    Diabetes No diabetes
+  Diabetes          10          10
+  No diabetes        2          56
+                                          
+               Accuracy : 0.8462          
+                 95% CI : (0.7467, 0.9179)
+    No Information Rate : 0.8462          
+    P-Value [Acc &gt; NIR] : 0.57623         
+                                          
+                  Kappa : 0.5357          
+                                          
+ Mcnemar's Test P-Value : 0.04331         
+                                          
+            Sensitivity : 0.8333          
+            Specificity : 0.8485          
+         Pos Pred Value : 0.5000          
+         Neg Pred Value : 0.9655          
+             Prevalence : 0.1538          
+         Detection Rate : 0.1282          
+   Detection Prevalence : 0.2564          
+      Balanced Accuracy : 0.8409          
+                                          
+       'Positive' Class : Diabetes        
+                                          </code></pre>
+</div>
+</div>
+<p>Our confusion matrix shows 10 true positives, 56 true negatives, 2 false negatives, and 10 false positives.</p>
+<p><strong><em>Sensitivity (83.3%)</em></strong>: Out of 12 people who actually have diabetes, the model caught 10 of them. It only missed 2. <strong><em>Specificity (84.8%)</em></strong>: Out of 66 healthy people, the model correctly identified 56 as healthy. <strong><em>Pos Pred Value</em></strong>: Is 50% — when the model says “Diabetes,” it’s a coin flip whether the person actually has it. <strong><em>Balanced Accuracy (84.1%)</em></strong>: Since it’s high, it shows the model is actually learning to tell the difference between the two classes. <strong><em>Negative Predictive Value (96.5%)</em></strong>: This is excellent for a medical screen. If the model tells a patient they don’t have diabetes, it is almost certainly correct. <strong><em>Kappa (0.5357)</em></strong>: This is much better. It proves the model is doing much better than just randomly guessing based on the majority group.</p>
+<p>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better.This model correctly predicts 10 of the 12 true ‘diabetes’ records. Simple guessing would have missed all 12 sick people, the model found 10 of them. On the negative side though, the model mis-classifies 9 of the 66 ‘no diabetes’ records as ‘diabetes’. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them ‘diabetes’ when they aren’t.</p>
+</section></section>
+<section id="conclusion" class="title-slide slide level1 smaller scrollable" data-number="4">
+<h1><span class="header-section-number">4</span> Conclusion</h1>
+<p>KNN is a powerful tool to predict the classification or numerical value of new data. It’s simple, intuitive, and easy to learn which makes it easy to implement. In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.</p>
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-An2021" class="csl-entry" role="listitem">
+An, J. 2021. <span>“Diagram Illustrating Hamming Distance Between Binary Representations of Integers] [Digital Image].”</span>
+</div>
+<div id="ref-Tembusai2021" class="csl-entry" role="listitem">
+<span>“K-Nearest Neighbor with k-Fold Cross Validation and Analytic Hierarchy Process on Data Classification.”</span> 2021. <em>International Journal of Advances in Data and Information Systems</em> 2 (1): 1–8.
+</div>
+<div id="ref-VisuallyExplained2025" class="csl-entry" role="listitem">
+<span>“K-Nearest Neighbors (KNN) in 3 Min.”</span> 2025.
+</div>
+<div id="ref-xing2020" class="csl-entry" role="listitem">
+<span>“Medical Health Big Data Classification Based on KNN Classification Algorithm.”</span> 2020. <em>IEEE Access</em> 8: 28808–19.
+</div>
+<div id="ref-Nain2023" class="csl-entry" role="listitem">
+<span>“Medical Image Prediction for Diagnosis of Breast Cancer Using Machine Learning.”</span> 2021. <em>AIP Conference Preceedings</em> 2853 (1).
+</div>
+<div id="ref-zhang2018" class="csl-entry" role="listitem">
+S. Zhang, M. Zong, X. Li, and R. Wang. 2018. <span>“Efficient kNN Classification with Different Numbers of Nearest Neighbors.”</span> <em>IEEE Transactions on Neural Networks and Learning Systems</em> 29 (5): 1774–85.
+</div>
+<div id="ref-Schorling1997" class="csl-entry" role="listitem">
+Schorling JB, Siegel M, Roach J. 1997. <span>“A Trial of Church-Based Smoking Cessation Interventions for Rural African Americans.”</span> <em>Preventive Medicine</em> 26: 92–101.
+</div>
+<div id="ref-Cadili2025" class="csl-entry" role="listitem">
+<span>“What Is Cohen’s Kappa? How and When to Use It.”</span> 2025.
+</div>
+<div id="ref-IBM2024" class="csl-entry" role="listitem">
+<span>“What Is the k-Nearest Neighbor (KNN) Algorithm?”</span> 2024.
+</div>
+<div id="ref-Willems1997" class="csl-entry" role="listitem">
+Willems JP, DE Hunt, Saunders JT. 1997. <span>“Prevalence of Coronary Heart Disease Risk Factors Among Rural Blacks: A Community-Based Study.”</span> <em>Southern Medical Journal</em> 90: 814–20.
+</div>
+<div id="ref-zhang2022" class="csl-entry" role="listitem">
+Zhang, S. 2022. <span>“Challenges in KNN Classification.”</span> <em>IEEE Transactions on Knowledge and Data Engineering</em> 34 (10): 4663–75.
+</div>
+</div>
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="slidesfromindex_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="slidesfromindex_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="slidesfromindex_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="slidesfromindex_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="slidesfromindex_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="slidesfromindex_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="slidesfromindex_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="slidesfromindex_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="slidesfromindex_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="slidesfromindex_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+                // default icon
+                link.classList.add("external");
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
