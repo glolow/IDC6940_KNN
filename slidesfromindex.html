@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Gloria Lowery">
-  <meta name="dcterms.date" content="2026-04-13">
+  <meta name="dcterms.date" content="2026-04-16">
   <title>Using the Machine Learning Algorithm K-Nearest Neighbors to Detect Patients with Diabetes</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -224,29 +224,39 @@ Gloria Lowery
 </div>
 </div>
 
-  <p class="date">2026-04-13</p>
+  <p class="date">2026-04-16</p>
 </section>
-<section class="slide level2">
-
+<section id="introduction" class="slide level2" data-number="0.1">
+<h2><span class="header-section-number">0.1</span> <strong>Introduction</strong></h2>
+<ul>
+<li><p>KNN is a “non-parametric supervised learning algorithm.”</p></li>
+<li><p>Main goal is to predict the classification or numerical value of a new data point based on how similar it is to its closest neighbors.</p></li>
+<li><p>Discuss the methodology of KNN, it’s strengths and limitations, as well as its real-world applications in medicine.</p>
+<ul>
+<li>Identifying diabetes within a group of subjects who were studied in order to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors.</li>
+</ul></li>
+<li><p>You can think of KNN as <strong><em>“birds of a feather flock together.”</em></strong></p></li>
+</ul>
 </section>
-<section id="introduction" class="title-slide slide level1 center" data-number="1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>When give data we typically want to make sense of what the data is telling us. Machine learning algorithms enable us to do just that. They are mathematical and statistical instructions that computers learn to make sense of a raw dataset.</p>
-<p>One such learning algorithm that we will look at is K-Nearest Neighbor. It is considered a “non-parametric supervised learning algorithm.” Non-parametric meaning it makes few or no assumptions about the underlying shape or distribution of data. Supervised, as in, it learns from labeled data (input that has a corresponding output) with a goal to predict outcomes for new, unseen data.</p>
-<p>The main goal of the K-Nearest Neighbors(KNN) algorithm is to predict the classification or numerical value of a new data point based on how similar it is to its closest neighbors. In this paper we will discuss the concept and underlying methodology of KNN, it’s strengths and limitations, as well as its real-world applications such as in business and medicine. Specifically, applying the KNN algorithm to identify diabetes within a group of subjects who were studied in order to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors.</p>
-<p>You can think of KNN as <strong><em>“birds of a feather flock together.”</em></strong></p>
+<section id="methodology" class="slide level2" data-number="0.2">
+<h2><span class="header-section-number">0.2</span> <strong>Methodology</strong></h2>
+<ul>
+<li><p>Used for both classification (assigning a category) and regression (predicting a value).</p></li>
+<li><p>It requires two instances for it to achieve its goal:</p></li>
+</ul>
+<ol type="1">
+<li><p>Distance metric</p></li>
+<li><p>Defining K<span class="citation" data-cites="IBM2024">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“What Is the k-Nearest Neighbor (KNN) Algorithm?”</span> 2024</a>)</span></p></li>
+</ol>
 </section>
-
-<section>
-<section id="method" class="title-slide slide level1 center" data-number="2">
-<h1><span class="header-section-number">2</span> Method</h1>
-<p>The K-Nearest Neighbors (KNN) algorithm is one of the simplest and most intuitive supervised machine learning methods used for both classification (assigning a category) and regression (predicting a value). It is a non-parametric, supervised machine learning method used for both classification and regression. It requires two instances for it to achieve its goal 1) a distance metric and 2) defining K<span class="citation" data-cites="IBM2024">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“What Is the k-Nearest Neighbor (KNN) Algorithm?”</span> 2024</a>)</span>. Its methodology relies on the proximity principle, assuming that similar data points exist in close proximity within a feature space.</p>
-<p>Take a look at the following photo.</p>
+<section id="knn-visualization" class="slide level2" data-number="0.3">
+<h2><span class="header-section-number">0.3</span> KNN Visualization</h2>
+<p>Relies on the proximity principle, assuming that similar data points exist in close proximity within a feature space.</p>
 <center>
 <div id="fig-1" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig">
 <div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img data-src="KnnClassification.svg.png">
+<img data-src="KnnClassification.svg.png" width="560">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: K-Nearest Neighbor Visual Representation (Image Source: ©Wikipedia2019)
@@ -254,11 +264,9 @@ Figure&nbsp;1: K-Nearest Neighbor Visual Representation (Image Source: ©Wikiped
 </figure>
 </div>
 </center>
-<p>When determining how to classify the green dot as either a blue square or red triangle, we will look at its neighbors - specifically the ones closest to it. Here, if we chose to look at three of its closest neighbors (k=3) we are looking at the area within the inner solid circle. We see that the majority of its neighbors are red triangles so we would classify the green dot as a red triangle. However, if we’re looking within the area of dashed circle, we see three blue squares vs two red triangles so the green dot would then be classified as a blue square.</p>
-<p>But KNN is a bit more complex than this.</p>
 </section>
-<section id="core-steps-of-the-knn-methodology" class="slide level2" data-number="2.1">
-<h2><span class="header-section-number">2.1</span> Core Steps of the KNN Methodology</h2>
+<section id="core-steps-of-the-knn-methodology" class="slide level2" data-number="0.4">
+<h2><span class="header-section-number">0.4</span> Core Steps of the KNN Methodology</h2>
 <ol type="1">
 <li><p>Defining the Parameter ‘K’: Like mentioned, when defining or selecting k, we are selecting the number of nearest neighbors to consider to determine the classification of a query point. For example, K=1, means it will be assigned to the same class as its single nearest neighbor. Choosing K depends on the input data. For example, data with more outliers performs much better with higher k values. We also want to choose an odd number for k to minimize the chances of ties in classification. <span class="citation" data-cites="zhang2018">(<a href="#/conclusion" role="doc-biblioref" onclick="">S. Zhang and Wang 2018</a>)</span></p></li>
 <li><p>Calculating Distance: When a new, unlabeled data point is introduced, the algorithm calculates its distance to every other point in the training dataset. The distance metric measures the distance between the query point(s) and other data points. It can be calculated using a variety of formulas. For example, either Euclidean distance, Manhattan distance, Minkowski, or Hamming distance, and we can visualize this using Voronezh diagrams like above. <span class="citation" data-cites="VisuallyExplained2025">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“K-Nearest Neighbors (KNN) in 3 Min”</span> 2025</a>)</span></p></li>
@@ -294,39 +302,39 @@ Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span
 <li><p>Regression: The algorithm predicts a continuous value by taking the average (mean) or median of the k neighbors’ target values.</p></li>
 </ul>
 </section>
-<section id="key-characteristics-of-knn" class="slide level2" data-number="2.2">
-<h2><span class="header-section-number">2.2</span> Key Characteristics of KNN</h2>
+<section id="key-characteristics-of-knn" class="slide level2" data-number="0.5">
+<h2><span class="header-section-number">0.5</span> Key Characteristics of KNN</h2>
 <p>Lazy Learner: KNN is considered a “lazy learner” because it does not have a distinct training phase. It simply stores the training data and defers all computation until a prediction is requested.</p>
 <p>Non-Parametric: It makes no prior assumptions about the underlying distribution of the data, making it flexible for complex datasets.</p>
 <p>Sensitivity to Scale: Because it relies on distance, features with larger magnitudes can disproportionately influence results. Therefore, feature scaling (standardization or normalization) is a critical preprocessing step.<span class="citation" data-cites="xing2020">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“Medical Health Big Data Classification Based on KNN Classification Algorithm”</span> 2020</a>)</span></p>
 <p>Finding the Optimal ‘K’: The value of k is often determined using the Elbow Method or Cross-Validation, where multiple k values are tested to find the one that minimizes the error rate without overfitting or underfitting. Analysts typically choose an odd number for k to prevent ties in classification (like if we had equal red triangles and blue squares what then?). In our example, we will be using cross-validation to determine the value of ‘k’. In cross validation, the dataset is divided by kfolds. Where at each iteration each fold is used once as test data and the remaining fold is used as training data, the process is repeated until all data is evaluated. <span class="citation" data-cites="Tembusai2021">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“K-Nearest Neighbor with k-Fold Cross Validation and Analytic Hierarchy Process on Data Classification”</span> 2021</a>)</span></p>
 </section>
-<section id="strengths-of-knn" class="slide level2" data-number="2.3">
-<h2><span class="header-section-number">2.3</span> Strengths of KNN</h2>
+<section id="strengths-of-knn" class="slide level2" data-number="0.6">
+<h2><span class="header-section-number">0.6</span> Strengths of KNN</h2>
 <p>1.Easy to implement/learn. There are also few hyper parameters - just the distance and k value.</p>
 <ol start="2" type="1">
 <li>It’s also adaptable. It adjusts easily to new training data since all training data is stored into memory. But similarly, because of that, it doesn’t scale well. As the data set grows, the algorithm becomes less efficient due to increasing computational complexity, which compromises overall model performance.</li>
 </ol>
 </section>
-<section id="weaknesses-of-knn" class="slide level2" data-number="2.4">
-<h2><span class="header-section-number">2.4</span> Weaknesses of KNN</h2>
+<section id="weaknesses-of-knn" class="slide level2" data-number="0.7">
+<h2><span class="header-section-number">0.7</span> Weaknesses of KNN</h2>
 <ol type="1">
 <li><p>As mentioned, it can be considered a “lazy algorithm” meaning it stores all training data and defers the computation to the time of classification, increasing memory usage and leads to slower processing compared to other methods of classifying. In other words, it does not build the model beforehand. It instead stores the data and makes predictions on demand.</p></li>
 <li><p>KNN also has what’s called the “Curse of Dimensionality.” It does not perform well with high dimensional data inputs. On a 2D xy graph it works fine but if we wanted to classify according to color, size, weight, etc. then the data points become sparse in higher dimensions and the distance between points become too similar for KNN to find meaningful neighbors. This leads to what’s called the “peaking phenomenon.” The peaking phenomenon occurs after reaching the optimal number of features - any more just increases noise and increases classification errors especially when the sample size is small. Feature selection and dimensionality reduction techniques can help minimize “curse of dimensionality” but we need to be careful.</p></li>
 <li><p>Another weakness is overfitting. Low k values can overfit the data. High values tend to smooth out prediction values since average values over a greater are or neighborhood. <span class="citation" data-cites="zhang2022">(<a href="#/conclusion" role="doc-biblioref" onclick="">Zhang 2022</a>)</span></p></li>
 </ol>
 </section>
-<section id="uses-of-the-knn-algorithm" class="slide level2" data-number="2.5">
-<h2><span class="header-section-number">2.5</span> Uses of the KNN Algorithm</h2>
+<section id="uses-of-the-knn-algorithm" class="slide level2" data-number="0.8">
+<h2><span class="header-section-number">0.8</span> Uses of the KNN Algorithm</h2>
 <p>When it comes to uses, we can use the KNN algorithm for simple recommendation systems. Data free processing is most commonly used because it’s helpful for data sets with missing values because it estimates values using process called missing data imputation. KNN is actually most often used in finance like stock market forecasting, currency exchange rate, money laundering analysis. But it is also used in health care. For example, risk of heart attacks and prostate cancer by calculating most likely gene expression. In this paper we will apply the KNN algorithm to a data set of potential diabetic patients.<span class="citation" data-cites="Nain2023">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“Medical Image Prediction for Diagnosis of Breast Cancer Using Machine Learning”</span> 2021</a>)</span></p>
-</section></section>
+</section>
 <section>
-<section id="analysis-and-results" class="title-slide slide level1 center" data-number="3">
-<h1><span class="header-section-number">3</span> Analysis and Results</h1>
+<section id="analysis-and-results" class="title-slide slide level1 center" data-number="1">
+<h1><span class="header-section-number">1</span> Analysis and Results</h1>
 
 </section>
-<section id="data-description" class="slide level2" data-number="3.1">
-<h2><span class="header-section-number">3.1</span> Data Description</h2>
+<section id="data-description" class="slide level2" data-number="1.1">
+<h2><span class="header-section-number">1.1</span> Data Description</h2>
 <p>These data sets are courtesy of Dr John Schorling, Department of Medicine, University of Virginia School of Medicine.<span class="citation" data-cites="Schorling1997">(<a href="#/conclusion" role="doc-biblioref" onclick="">Schorling JB 1997</a>)</span> The data consist of 19 variables on 403 subjects from 1046 subjects who were interviewed in a study to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors in central Virginia for African Americans. According to Dr John Hong, Diabetes Mellitus Type II (adult onset diabetes) is associated most strongly with obesity. The waist/hip ratio may be a predictor in diabetes and heart disease. DM II is also associated with hypertension - they may both be part of “Syndrome X”. The 403 subjects were the ones who were actually screened for diabetes. Glycosolated hemoglobin &gt; 7.0 is usually taken as a positive diagnosis of diabetes. <span class="citation" data-cites="Willems1997">(<a href="#/conclusion" role="doc-biblioref" onclick="">Willems JP 1997</a>)</span></p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -674,8 +682,8 @@ Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span
 </div>
 </div>
 </section>
-<section id="preparing-the-data" class="slide level2" data-number="3.2">
-<h2><span class="header-section-number">3.2</span> Preparing the Data</h2>
+<section id="preparing-the-data" class="slide level2" data-number="1.2">
+<h2><span class="header-section-number">1.2</span> Preparing the Data</h2>
 <p>Like mentioned, kNN is sensitive to scaling (of the variables). So it is helpful to first standardize the variables. We do this using the preProcess function of the caret package:</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -723,8 +731,8 @@ Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span
 </div>
 <p>Now we have a data set which will work well for KNN!</p>
 </section>
-<section id="using-the-knn-model" class="slide level2" data-number="3.3">
-<h2><span class="header-section-number">3.3</span> Using the KNN Model</h2>
+<section id="using-the-knn-model" class="slide level2" data-number="1.3">
+<h2><span class="header-section-number">1.3</span> Using the KNN Model</h2>
 <p>First, we create a test/train split so that we can train a KNN model. We will use the createDataPartition from caret to randomly select 80% of the data to use for the training set and 20% of the data to use for the test set. Then, create two different data frames using partition point returned by createDataPartition.</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -783,11 +791,12 @@ Accuracy was used to select the optimal model using the largest value.
 The final value used for the model was k = 9.</code></pre>
 </div>
 </div>
-<p>This returns a series of KNN models and their associated metrics and tells us that the optimal number of nearest neighbors to be considered is 11 and the model accuracy for that K is 0.9198387. That’s good but the Kappa score is 0.6138024, which can indicate that our model is not predicting the two classes with an even accuracy. Because our data is imbalanced (which is common in the real-world) one class is much more frequent than the others. Variables (like cholesterol) drown out other (like BMI). In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class. How Cohen’s kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.<span class="citation" data-cites="Cadili2025">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“What Is Cohen’s Kappa? How and When to Use It”</span> 2025</a>)</span></p>
+<p>Based on our results, the model performed best at k=9. Although k=7 and k=9 have the same accuracy (91.98%), we choose k=9 because it has the higher kappa score, indicating better reliability and better performance. As k increases, we see both accuracy and Kappa drop which suggests the model is not predicting the two classes with even accuracy. It’s losing the ability to distinguish between those with Diabetes and those without Diabetes (underfitting).</p>
+<p>This is happening because our data is imbalanced (which is pretty common in the real-world). One class is much more frequent than the others, in this case ‘No Diabetes’. In these cases, overall accuracy becomes misleading because a model can be highly accurate simply by predicting the majority class. How Cohen’s Kappa value helps is that it adjusts the agreement that could occur simply due to the majority class, providing a more realistic estimate of the model’s performance.<span class="citation" data-cites="Cadili2025">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“What Is Cohen’s Kappa? How and When to Use It”</span> 2025</a>)</span></p>
 <p>Remember that most of the records in our data set are not patients with diabetes. Our model might simply guess that no patients have diabetes and achieve fairly high accuracy that way.</p>
 </section>
-<section id="second-knn-model" class="slide level2" data-number="3.4">
-<h2><span class="header-section-number">3.4</span> Second KNN Model</h2>
+<section id="second-knn-model" class="slide level2" data-number="1.4">
+<h2><span class="header-section-number">1.4</span> Second KNN Model</h2>
 <p>We can find that simpler models have better accuracy. To see which variables are having the most impact on our outcome variable, we can use fs.anova to check the analysis of variance for each variable and use that in a second KNN.</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -851,10 +860,10 @@ Accuracy was used to select the optimal model using the largest value.
 The final value used for the model was k = 15.</code></pre>
 </div>
 </div>
-<p>The simpler model seems to have better performance. With a K value of 15, we see an accuracy of 0.93 and a Kappa of 0.86. Both of these scores are higher than we had seen with the larger model and the Kappa of 0.86 indicates that we are predicting both classes better although still not perfectly.</p>
+<p>The simpler model seems to have better performance. With a K value of 15, we see an accuracy of 0.86 and a much better Kappa value of 0.74. Both of these scores are higher than we had seen with the larger model and the Kappa of 0.74 indicates that we are predicting both classes better although still not perfectly. Another thing to note is notice how the accuracy “bounces” (drops at k=9, peaks at 11, then drops again at 17). Since we have a smaller sample size (96 versus 312), the model is much more sensitive to how the 10-fold cross-validation splits the data. Another model we could test is combining glucose with another strong predictor (like BMI or Age) to see if we could push that accuracy and Kappa score even higher.<span class="citation" data-cites="Google2026">(<a href="#/conclusion" role="doc-biblioref" onclick=""><span>“Gemini [Large Language Model]”</span> 2026</a>)</span></p>
 </section>
-<section id="evaluating-both-knn-models" class="slide level2" data-number="3.5">
-<h2><span class="header-section-number">3.5</span> Evaluating both KNN Models</h2>
+<section id="evaluating-both-knn-models" class="slide level2" data-number="1.5">
+<h2><span class="header-section-number">1.5</span> Evaluating both KNN Models</h2>
 <p>Since we held out a testing set of 20% of our training data, we have an easy way to evaluate both of our models. We will pass the model to predict and check the results against the actual test labels. Use a confusion matrix to assess how well our model predicts the test data. To recap, a confusion matrix looks like this:</p>
 <center>
 <div id="fig-3" class="quarto-float quarto-figure quarto-figure-center">
@@ -868,7 +877,7 @@ Figure&nbsp;3: Confusion Matrix (Image Source: ©Draelos2019)
 </figure>
 </div>
 </center>
-<h3 data-number="3.5.1" id="unbalanced-model-analysis-and-results"><span class="header-section-number">3.5.1</span> Unbalanced Model Analysis and Results</h3>
+<h3 data-number="1.5.1" id="unbalanced-model-analysis-and-results"><span class="header-section-number">1.5.1</span> Unbalanced Model Analysis and Results</h3>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -910,7 +919,7 @@ Prediction    Diabetes No diabetes
 <p>At first glance, having a 88.46% accuracy looks great! If you guessed “no diabetes” for each patient, you’d be right 84.62% of the time because the dataset is unbalanced. Our p value is 0.22 which is greater than 0.05, which means our model isn’t statistically better than just guessing “no diabetes” for everyone.Our kappa of 0.36 which isn’t great. It means most of the accuracy is coming from the lopsided nature of the data rather than the model’s predictive power.</p>
 <p>In summary, our unbalanced model (first model) does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled ‘Diabetes’ so it’s missing the vast majority of actual diabetes cases.</p>
 <p>Now we will look at the confusion matrix for our balanced model (second model).</p>
-<h3 data-number="3.5.2" id="balanced-model-analysis-and-results"><span class="header-section-number">3.5.2</span> Balanced Model Analysis and Results</h3>
+<h3 data-number="1.5.2" id="balanced-model-analysis-and-results"><span class="header-section-number">1.5.2</span> Balanced Model Analysis and Results</h3>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -951,13 +960,16 @@ Prediction    Diabetes No diabetes
 <p><strong><em>Sensitivity (83.3%)</em></strong>: Out of 12 people who actually have diabetes, the model caught 10 of them. It only missed 2. <strong><em>Specificity (84.8%)</em></strong>: Out of 66 healthy people, the model correctly identified 56 as healthy. <strong><em>Pos Pred Value</em></strong>: Is 50% — when the model says “Diabetes,” it’s a coin flip whether the person actually has it. <strong><em>Balanced Accuracy (84.1%)</em></strong>: Since it’s high, it shows the model is actually learning to tell the difference between the two classes. <strong><em>Negative Predictive Value (96.5%)</em></strong>: This is excellent for a medical screen. If the model tells a patient they don’t have diabetes, it is almost certainly correct. <strong><em>Kappa (0.5357)</em></strong>: This is much better. It proves the model is doing much better than just randomly guessing based on the majority group.</p>
 <p>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better.This model correctly predicts 10 of the 12 true ‘diabetes’ records. Simple guessing would have missed all 12 sick people, the model found 10 of them. On the negative side though, the model mis-classifies 9 of the 66 ‘no diabetes’ records as ‘diabetes’. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them ‘diabetes’ when they aren’t.</p>
 </section></section>
-<section id="conclusion" class="title-slide slide level1 smaller scrollable" data-number="4">
-<h1><span class="header-section-number">4</span> Conclusion</h1>
+<section id="conclusion" class="title-slide slide level1 smaller scrollable" data-number="2">
+<h1><span class="header-section-number">2</span> Conclusion</h1>
 <p>KNN is a powerful tool to predict the classification or numerical value of new data. It’s simple, intuitive, and easy to learn which makes it easy to implement. In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.</p>
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-An2021" class="csl-entry" role="listitem">
 An, J. 2021. <span>“Diagram Illustrating Hamming Distance Between Binary Representations of Integers] [Digital Image].”</span>
+</div>
+<div id="ref-Google2026" class="csl-entry" role="listitem">
+<span>“Gemini [Large Language Model].”</span> 2026.
 </div>
 <div id="ref-Tembusai2021" class="csl-entry" role="listitem">
 <span>“K-Nearest Neighbor with k-Fold Cross Validation and Analytic Hierarchy Process on Data Classification.”</span> 2021. <em>International Journal of Advances in Data and Information Systems</em> 2 (1): 1–8.
