@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Gloria Lowery">
-<meta name="dcterms.date" content="2026-04-16">
+<meta name="dcterms.date" content="2026-04-18">
 <meta name="description" content="A non-parametric supervised learning algorithm ">
 
 <title>Using the Machine Learning Algorithm K-Nearest Neighbors to Detect Patients with Diabetes</title>
@@ -157,7 +157,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 16, 2026</p>
+      <p class="date">April 18, 2026</p>
     </div>
   </div>
   
@@ -845,7 +845,12 @@ Prediction    Diabetes No diabetes
 </div>
 </div>
 <p>Our confusion matrix shows 3 true positives, 66 true negatives, 9 false negatives, and 0 false positives.</p>
-<p><strong><em>Sensitivity (0.25000)</em></strong>: The model correctly identifies only 25% of the actual positive cases (high false-negative rate). It only caught 3 out of 12 people who have diabetes and missed 75% of the sick patients. <strong><em>Specificity (1.00000)</em></strong>: The model correctly identifies 100% of the negative cases, meaning there are no false positives. <strong><em>Positive Predictive Value (1.00000)</em></strong>: When the model predicts a positive case, it is 100% correct. <strong><em>Negative Predictive Value (0.88000)</em></strong>: When the model predicts a negative case, it is correct 88% of the time. <strong><em>Balanced Accuracy (0.62500)</em></strong>: The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in. <strong><em>Prevalence (0.15385)</em></strong>: The actual positive cases represent about 15.4% of the total dataset.</p>
+<p><strong><em>Sensitivity (0.25000)</em></strong>: The model correctly identifies only 25% of the actual positive cases (high false-negative rate). It only caught 3 out of 12 people who have diabetes and missed 75% of the sick patients.</p>
+<p><strong><em>Specificity (1.00000)</em></strong>: The model correctly identifies 100% of the negative cases, meaning there are no false positives.</p>
+<p><strong><em>Positive Predictive Value (1.00000)</em></strong>: When the model predicts a positive case, it is 100% correct.</p>
+<p><strong><em>Negative Predictive Value (0.88000)</em></strong>: When the model predicts a negative case, it is correct 88% of the time.</p>
+<p><strong><em>Balanced Accuracy (0.62500)</em></strong>: The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in.</p>
+<p><strong><em>Prevalence (0.15385)</em></strong>: The actual positive cases represent about 15.4% of the total dataset.</p>
 <p>At first glance, having a 88.46% accuracy looks great! If you guessed “no diabetes” for each patient, you’d be right 84.62% of the time because the dataset is unbalanced. Our p value is 0.22 which is greater than 0.05, which means our model isn’t statistically better than just guessing “no diabetes” for everyone.Our kappa of 0.36 which isn’t great. It means most of the accuracy is coming from the lopsided nature of the data rather than the model’s predictive power.</p>
 <p>In summary, our unbalanced model (first model) does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled ‘Diabetes’ so it’s missing the vast majority of actual diabetes cases.</p>
 <p>Now we will look at the confusion matrix for our balanced model (second model).</p>
@@ -889,7 +894,12 @@ Prediction    Diabetes No diabetes
 </div>
 </div>
 <p>Our confusion matrix shows 10 true positives, 56 true negatives, 2 false negatives, and 10 false positives.</p>
-<p><strong><em>Sensitivity (83.3%)</em></strong>: Out of 12 people who actually have diabetes, the model caught 10 of them. It only missed 2. <strong><em>Specificity (84.8%)</em></strong>: Out of 66 healthy people, the model correctly identified 56 as healthy. <strong><em>Pos Pred Value</em></strong>: Is 50% — when the model says “Diabetes,” it’s a coin flip whether the person actually has it. <strong><em>Balanced Accuracy (84.1%)</em></strong>: Since it’s high, it shows the model is actually learning to tell the difference between the two classes. <strong><em>Negative Predictive Value (96.5%)</em></strong>: This is excellent for a medical screen. If the model tells a patient they don’t have diabetes, it is almost certainly correct. <strong><em>Kappa (0.5357)</em></strong>: This is much better. It proves the model is doing much better than just randomly guessing based on the majority group.</p>
+<p><strong><em>Sensitivity (83.3%)</em></strong>: Out of 12 people who actually have diabetes, the model caught 10 of them. It only missed 2.</p>
+<p><strong><em>Specificity (84.8%)</em></strong>: Out of 66 healthy people, the model correctly identified 56 as healthy.</p>
+<p><strong><em>Pos Pred Value</em></strong>: Is 50% — when the model says “Diabetes,” it’s a coin flip whether the person actually has it.</p>
+<p><strong><em>Balanced Accuracy (84.1%)</em></strong>: Since it’s high, it shows the model is actually learning to tell the difference between the two classes.</p>
+<p><strong><em>Negative Predictive Value (96.5%)</em></strong>: This is excellent for a medical screen. If the model tells a patient they don’t have diabetes, it is almost certainly correct.</p>
+<p><strong><em>Kappa (0.5357)</em></strong>: This is much better. It proves the model is doing much better than just randomly guessing based on the majority group.</p>
 <p>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better.This model correctly predicts 10 of the 12 true ‘diabetes’ records. Simple guessing would have missed all 12 sick people, the model found 10 of them. On the negative side though, the model mis-classifies 9 of the 66 ‘no diabetes’ records as ‘diabetes’. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them ‘diabetes’ when they aren’t.</p>
 </section>
 </section>
@@ -1646,39 +1656,68 @@ Zhang, S. 2022. <span>“Challenges in KNN Classification.”</span> <em>IEEE Tr
 <span id="cb21-250"><a href="#cb21-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-251"><a href="#cb21-251" aria-hidden="true" tabindex="-1"></a>Our confusion matrix shows 3 true positives, 66 true negatives, 9 false negatives, and 0 false positives. </span>
 <span id="cb21-252"><a href="#cb21-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-253"><a href="#cb21-253" aria-hidden="true" tabindex="-1"></a>***Sensitivity (0.25000)***: The model correctly identifies only 25% of the actual positive cases (high false-negative rate). It only caught 3 out of 12 people who have diabetes and missed 75% of the sick patients. </span>
-<span id="cb21-254"><a href="#cb21-254" aria-hidden="true" tabindex="-1"></a>***Specificity (1.00000)***: The model correctly identifies 100% of the negative cases, meaning there are no false positives.</span>
-<span id="cb21-255"><a href="#cb21-255" aria-hidden="true" tabindex="-1"></a>***Positive Predictive Value (1.00000)***: When the model predicts a positive case, it is 100% correct.</span>
-<span id="cb21-256"><a href="#cb21-256" aria-hidden="true" tabindex="-1"></a>***Negative Predictive Value (0.88000)***: When the model predicts a negative case, it is correct 88% of the time.</span>
-<span id="cb21-257"><a href="#cb21-257" aria-hidden="true" tabindex="-1"></a>***Balanced Accuracy (0.62500)***: The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in.</span>
-<span id="cb21-258"><a href="#cb21-258" aria-hidden="true" tabindex="-1"></a>***Prevalence (0.15385)***: The actual positive cases represent about 15.4% of the total dataset. </span>
-<span id="cb21-259"><a href="#cb21-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-260"><a href="#cb21-260" aria-hidden="true" tabindex="-1"></a>At first glance, having a 88.46% accuracy looks great! If you guessed "no diabetes" for each patient, you'd be right 84.62% of the time because the dataset is unbalanced. Our p value is 0.22 which is greater than 0.05, which means our model isn't statistically better than just guessing "no diabetes" for everyone.Our kappa of 0.36 which isn't great. It means most of the accuracy is coming from the lopsided nature of the data rather than the model's predictive power. </span>
-<span id="cb21-261"><a href="#cb21-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-262"><a href="#cb21-262" aria-hidden="true" tabindex="-1"></a>In summary, our unbalanced model (first model) does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled 'Diabetes' so it's missing the vast majority of actual diabetes cases. </span>
-<span id="cb21-263"><a href="#cb21-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-264"><a href="#cb21-264" aria-hidden="true" tabindex="-1"></a>Now we will look at the confusion matrix for our balanced model (second model). </span>
-<span id="cb21-265"><a href="#cb21-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-266"><a href="#cb21-266" aria-hidden="true" tabindex="-1"></a><span class="fu">### Balanced Model Analysis and Results </span></span>
-<span id="cb21-267"><a href="#cb21-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-268"><a href="#cb21-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb21-269"><a href="#cb21-269" aria-hidden="true" tabindex="-1"></a>predict_knn_simple <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_knn_df_simple, test_df)</span>
-<span id="cb21-270"><a href="#cb21-270" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(predict_knn_simple), <span class="fu">as.factor</span>(test_df<span class="sc">$</span>Diabetes), <span class="at">positive =</span> <span class="st">"Diabetes"</span>)</span>
-<span id="cb21-271"><a href="#cb21-271" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-272"><a href="#cb21-272" aria-hidden="true" tabindex="-1"></a>Our confusion matrix shows 10 true positives, 56 true negatives, 2 false negatives, and 10 false positives. </span>
-<span id="cb21-273"><a href="#cb21-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-274"><a href="#cb21-274" aria-hidden="true" tabindex="-1"></a>***Sensitivity (83.3%)***: Out of 12 people who actually have diabetes, the model caught 10 of them. It only missed 2.</span>
-<span id="cb21-275"><a href="#cb21-275" aria-hidden="true" tabindex="-1"></a>***Specificity (84.8%)***: Out of 66 healthy people, the model correctly identified 56 as healthy.</span>
-<span id="cb21-276"><a href="#cb21-276" aria-hidden="true" tabindex="-1"></a>***Pos Pred Value***: Is 50% — when the model says "Diabetes," it’s a coin flip whether the person actually has it.</span>
-<span id="cb21-277"><a href="#cb21-277" aria-hidden="true" tabindex="-1"></a>***Balanced Accuracy (84.1%)***: Since it’s high, it shows the model is actually learning to tell the difference between the two classes.</span>
-<span id="cb21-278"><a href="#cb21-278" aria-hidden="true" tabindex="-1"></a>***Negative Predictive Value (96.5%)***: This is excellent for a medical screen. If the model tells a patient they don't have diabetes, it is almost certainly correct.</span>
-<span id="cb21-279"><a href="#cb21-279" aria-hidden="true" tabindex="-1"></a>***Kappa (0.5357)***: This is much better. It proves the model is doing much better than just randomly guessing based on the majority group.</span>
+<span id="cb21-253"><a href="#cb21-253" aria-hidden="true" tabindex="-1"></a>***Sensitivity (0.25000)***: The model correctly identifies only 25% of the actual positive cases (high false-negative rate). It only caught 3 out of 12 people who have diabetes and missed 75% of the sick patients.</span>
+<span id="cb21-254"><a href="#cb21-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-255"><a href="#cb21-255" aria-hidden="true" tabindex="-1"></a>***Specificity (1.00000)***: The model correctly identifies 100% of the negative cases, meaning there are no false positives.</span>
+<span id="cb21-256"><a href="#cb21-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-257"><a href="#cb21-257" aria-hidden="true" tabindex="-1"></a>***Positive Predictive Value (1.00000)***: When the model predicts a positive case, it is 100% correct.</span>
+<span id="cb21-258"><a href="#cb21-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-259"><a href="#cb21-259" aria-hidden="true" tabindex="-1"></a>***Negative Predictive Value (0.88000)***: When the model predicts a negative case, it is correct 88% of the time.</span>
+<span id="cb21-260"><a href="#cb21-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-261"><a href="#cb21-261" aria-hidden="true" tabindex="-1"></a>***Balanced Accuracy (0.62500)***: The average of sensitivity and specificity, reflecting a mediocre overall performance skewed by the low sensitivity, detailed in.</span>
+<span id="cb21-262"><a href="#cb21-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-263"><a href="#cb21-263" aria-hidden="true" tabindex="-1"></a>***Prevalence (0.15385)***: The actual positive cases represent about 15.4% of the total dataset. </span>
+<span id="cb21-264"><a href="#cb21-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-265"><a href="#cb21-265" aria-hidden="true" tabindex="-1"></a>At first glance, having a 88.46% accuracy looks great! If you guessed "no diabetes" for each patient, you'd be right 84.62% of the time because the dataset is unbalanced. Our p value is 0.22 which is greater than 0.05, which means our model isn't statistically better than just guessing "no diabetes" for everyone.Our kappa of 0.36 which isn't great. It means most of the accuracy is coming from the lopsided nature of the data rather than the model's predictive power. </span>
+<span id="cb21-266"><a href="#cb21-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-267"><a href="#cb21-267" aria-hidden="true" tabindex="-1"></a>In summary, our unbalanced model (first model) does a good job of identifying patients without diabetes but a poor job of identifying patients with diabetes. The model only accurately identifies 25% of the records labeled 'Diabetes' so it's missing the vast majority of actual diabetes cases. </span>
+<span id="cb21-268"><a href="#cb21-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-269"><a href="#cb21-269" aria-hidden="true" tabindex="-1"></a>Now we will look at the confusion matrix for our balanced model (second model). </span>
+<span id="cb21-270"><a href="#cb21-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-271"><a href="#cb21-271" aria-hidden="true" tabindex="-1"></a><span class="fu">### Balanced Model Analysis and Results </span></span>
+<span id="cb21-272"><a href="#cb21-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-273"><a href="#cb21-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb21-274"><a href="#cb21-274" aria-hidden="true" tabindex="-1"></a>predict_knn_simple <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_knn_df_simple, test_df)</span>
+<span id="cb21-275"><a href="#cb21-275" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">as.factor</span>(predict_knn_simple), <span class="fu">as.factor</span>(test_df<span class="sc">$</span>Diabetes), <span class="at">positive =</span> <span class="st">"Diabetes"</span>)</span>
+<span id="cb21-276"><a href="#cb21-276" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-277"><a href="#cb21-277" aria-hidden="true" tabindex="-1"></a>Our confusion matrix shows 10 true positives, 56 true negatives, 2 false negatives, and 10 false positives. </span>
+<span id="cb21-278"><a href="#cb21-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-279"><a href="#cb21-279" aria-hidden="true" tabindex="-1"></a>***Sensitivity (83.3%)***: Out of 12 people who actually have diabetes, the model caught 10 of them. It only missed 2.</span>
 <span id="cb21-280"><a href="#cb21-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-281"><a href="#cb21-281" aria-hidden="true" tabindex="-1"></a>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better.This model correctly predicts 10 of the 12 true 'diabetes' records. Simple guessing would have missed all 12 sick people, the model found 10 of them. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them 'diabetes' when they aren't.</span>
+<span id="cb21-281"><a href="#cb21-281" aria-hidden="true" tabindex="-1"></a>***Specificity (84.8%)***: Out of 66 healthy people, the model correctly identified 56 as healthy.</span>
 <span id="cb21-282"><a href="#cb21-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-283"><a href="#cb21-283" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
+<span id="cb21-283"><a href="#cb21-283" aria-hidden="true" tabindex="-1"></a>***Pos Pred Value***: Is 50% — when the model says "Diabetes," it’s a coin flip whether the person actually has it.</span>
 <span id="cb21-284"><a href="#cb21-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-285"><a href="#cb21-285" aria-hidden="true" tabindex="-1"></a>KNN is a powerful tool to predict the classification or numerical value of new data. It's simple, intuitive, and easy to learn which makes it easy to implement. In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb21-285"><a href="#cb21-285" aria-hidden="true" tabindex="-1"></a>***Balanced Accuracy (84.1%)***: Since it’s high, it shows the model is actually learning to tell the difference between the two classes.</span>
+<span id="cb21-286"><a href="#cb21-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-287"><a href="#cb21-287" aria-hidden="true" tabindex="-1"></a>***Negative Predictive Value (96.5%)***: This is excellent for a medical screen. If the model tells a patient they don't have diabetes, it is almost certainly correct.</span>
+<span id="cb21-290"><a href="#cb21-290" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-291"><a href="#cb21-291" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-292"><a href="#cb21-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-293"><a href="#cb21-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-296"><a href="#cb21-296" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-297"><a href="#cb21-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-298"><a href="#cb21-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-299"><a href="#cb21-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-302"><a href="#cb21-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-303"><a href="#cb21-303" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-304"><a href="#cb21-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-305"><a href="#cb21-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-308"><a href="#cb21-308" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-309"><a href="#cb21-309" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-310"><a href="#cb21-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-311"><a href="#cb21-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-314"><a href="#cb21-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-315"><a href="#cb21-315" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-316"><a href="#cb21-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-317"><a href="#cb21-317" aria-hidden="true" tabindex="-1"></a>***Kappa (0.5357)***: This is much better. It proves the model is doing much better than just randomly guessing based on the majority group.</span>
+<span id="cb21-318"><a href="#cb21-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-319"><a href="#cb21-319" aria-hidden="true" tabindex="-1"></a>As we can see, our overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better.This model correctly predicts 10 of the 12 true 'diabetes' records. Simple guessing would have missed all 12 sick people, the model found 10 of them. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'. This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them 'diabetes' when they aren't.</span>
+<span id="cb21-320"><a href="#cb21-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-321"><a href="#cb21-321" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
+<span id="cb21-322"><a href="#cb21-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-323"><a href="#cb21-323" aria-hidden="true" tabindex="-1"></a>KNN is a powerful tool to predict the classification or numerical value of new data. It's simple, intuitive, and easy to learn which makes it easy to implement. In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
