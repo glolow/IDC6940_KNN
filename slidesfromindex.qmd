@@ -302,7 +302,7 @@ Since we held out a testing set of 20% of our training data, we have an easy way
 
 <center>
 
-![Confusion Matrix (Image Source: ©Draelos2019)](confusion-matrix.png){#fig-3}
+![Confusion Matrix (Image Source: ©Draelos2019)](confusion-matrix.png){#fig-3 width="492"}
 
 </center>
 
@@ -322,9 +322,13 @@ confusionMatrix(as.factor(predict_knn_simple), as.factor(test_df$Diabetes), posi
 
 # Results
 
--   Overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. Second model correctly predicts 10 of the 12 true 'diabetes' records. Simple guessing would have missed all 12 sick people, the model found 10 of them. On the negative side though, the model mis-classifies 9 of the 66 'no diabetes' records as 'diabetes'.
+-   Overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better.
 
--   This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them 'diabetes' when they aren't.
+    -   Second model correctly predicts 10 of the 12 true 'diabetes' records. Simple guessing would have missed all 12 sick people. The model found 10 of them.
+
+-   On the negative side though, the model misclassified 9 of the 66 'no diabetes' records as 'diabetes'.
+
+    -   This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them 'diabetes' when they aren't.
 
 # Conclusion
 

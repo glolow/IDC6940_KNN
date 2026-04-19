@@ -886,7 +886,7 @@ The final value used for the model was k = 15.</code></pre>
 <div id="fig-3" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig">
 <div aria-describedby="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img data-src="confusion-matrix.png">
+<img data-src="confusion-matrix.png" width="492">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3: Confusion Matrix (Image Source: ©Draelos2019)
@@ -979,8 +979,14 @@ Prediction    Diabetes No diabetes
 <section id="results" class="title-slide slide level1 center" data-number="25">
 <h1><span class="header-section-number">25</span> Results</h1>
 <ul>
-<li><p>Overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better. Second model correctly predicts 10 of the 12 true ‘diabetes’ records. Simple guessing would have missed all 12 sick people, the model found 10 of them. On the negative side though, the model mis-classifies 9 of the 66 ‘no diabetes’ records as ‘diabetes’.</p></li>
-<li><p>This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them ‘diabetes’ when they aren’t.</p></li>
+<li><p>Overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better.</p>
+<ul>
+<li>Second model correctly predicts 10 of the 12 true ‘diabetes’ records. Simple guessing would have missed all 12 sick people. The model found 10 of them.</li>
+</ul></li>
+<li><p>On the negative side though, the model misclassified 9 of the 66 ‘no diabetes’ records as ‘diabetes’.</p>
+<ul>
+<li>This is a downside of training our KNN on a balanced data set: when we introduce new data points from our test set, our model is a little too over-eager to label them ‘diabetes’ when they aren’t.</li>
+</ul></li>
 </ul>
 </section>
 
