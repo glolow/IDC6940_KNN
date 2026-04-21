@@ -265,7 +265,6 @@ Figure&nbsp;1: K-Nearest Neighbor Visual Representation (Image Source: ©Wikiped
 </center>
 </section>
 
-<section>
 <section id="core-steps-of-the-knn-methodology" class="title-slide slide level1 center" data-number="4">
 <h1><span class="header-section-number">4</span> Core Steps of the KNN Methodology</h1>
 <ol type="1">
@@ -276,35 +275,7 @@ Figure&nbsp;1: K-Nearest Neighbor Visual Representation (Image Source: ©Wikiped
 </ul></li>
 </ol>
 </section>
-<section id="distance-forumlas" class="slide level2" data-number="4.1">
-<h2><span class="header-section-number">4.1</span> Distance Forumlas</h2>
-<p><em>Euclidean Distance</em>: Most commonly used. Measures the “straight-line” path between points; best for continuous data.</p>
-<p><span class="math display">\[
-D_{euclidean}(x_1, x_2) = \sqrt{\sum_{i = 1}^{n}{((x_1)_i - (x_2)_i)^2}}
-\]</span></p>
-<p><em>Manhattan Distance</em>: Calculates the sum of absolute differences, similar to navigating a grid (taxicab geometry).</p>
-<p><span class="math display">\[
-D_{manhattan}(x_1, x_2) = \sum_{i = 1}^{n}|((x_1)_i - (x_2)_i)|
-\]</span></p>
-</section>
-<section class="slide level2">
 
-<p><em>Minkowski Distance</em>: A generalized formula that can represent both Euclidean (p=1) and Manhattan (p=2) distances. <span class="math display">\[
-D_{Minkowski}(X,Y) = \sum_{i = 1}^{n}|x_i - y_i|^p
-\]</span> <em>Hamming Distance</em>: Used for categorical or string variables to identify where vectors do not match.</p>
-<center>
-<div id="fig-2" class="quarto-float quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img data-src="Hamming%20Distance.png" width="284">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span class="citation" data-cites="An2021">(<a href="#/references" role="doc-biblioref" onclick="">An 2021</a>)</span>)
-</figcaption>
-</figure>
-</div>
-</center>
-</section></section>
 <section id="methodology-cont." class="title-slide slide level1 center" data-number="5">
 <h1><span class="header-section-number">5</span> Methodology (cont.)</h1>
 <ol start="3" type="1">
@@ -357,28 +328,20 @@ Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span
 </ol>
 </section>
 
-<section id="uses-of-the-knn-algorithm" class="title-slide slide level1 center" data-number="9">
-<h1><span class="header-section-number">9</span> Uses of the KNN Algorithm</h1>
-<ul>
-<li><p>Simple recommendation systems. Data free processing is most commonly used because it’s helpful for data sets with missing values because it estimates values using process called missing data imputation.</p></li>
-<li><p>Most often used in finance like stock market forecasting, currency exchange rate, and money laundering analysis, and health care<span class="citation" data-cites="Nain2023">(<a href="#/references" role="doc-biblioref" onclick=""><span>“Medical Image Prediction for Diagnosis of Breast Cancer Using Machine Learning”</span> 2021</a>)</span></p></li>
-</ul>
-</section>
-
 <section>
-<section id="analysis-and-results" class="title-slide slide level1 center" data-number="10">
-<h1><span class="header-section-number">10</span> Analysis and Results</h1>
+<section id="analysis-and-results" class="title-slide slide level1 center" data-number="9">
+<h1><span class="header-section-number">9</span> 5Analysis and Results</h1>
 
 </section>
-<section id="data-description" class="slide level2" data-number="10.1">
-<h2><span class="header-section-number">10.1</span> Data Description</h2>
+<section id="data-description" class="slide level2" data-number="9.1">
+<h2><span class="header-section-number">9.1</span> Data Description</h2>
 <ul>
 <li><p>These data sets are courtesy of Dr John Schorling, Department of Medicine, University of Virginia School of Medicine.<span class="citation" data-cites="Schorling1997">(<a href="#/references" role="doc-biblioref" onclick="">Schorling JB 1997</a>)</span></p></li>
 <li><p>The data consist of 19 variables on 403 subjects from 1046 subjects who were interviewed in a study to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors in central Virginia for African Americans. The 403 subjects were the ones who were actually screened for diabetes. Glycosolated hemoglobin &gt; 7.0 is usually taken as a positive diagnosis of diabetes. <span class="citation" data-cites="Willems1997">(<a href="#/references" role="doc-biblioref" onclick="">Willems JP 1997</a>)</span></p></li>
 </ul>
 </section></section>
-<section id="data-description-cont." class="title-slide slide level1 center" data-number="11">
-<h1><span class="header-section-number">11</span> Data Description (cont.)</h1>
+<section id="data-description-cont." class="title-slide slide level1 center" data-number="10">
+<h1><span class="header-section-number">10</span> Data Description (cont.)</h1>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -551,8 +514,8 @@ Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span
 </div>
 </section>
 
-<section id="data-description-cont.-1" class="title-slide slide level1 center" data-number="12">
-<h1><span class="header-section-number">12</span> Data Description (cont.)</h1>
+<section id="data-description-cont.-1" class="title-slide slide level1 center" data-number="11">
+<h1><span class="header-section-number">11</span> Data Description (cont.)</h1>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -661,8 +624,8 @@ Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span
 </div>
 </section>
 
-<section id="preparing-the-data" class="title-slide slide level1 center" data-number="13">
-<h1><span class="header-section-number">13</span> Preparing the Data</h1>
+<section id="preparing-the-data" class="title-slide slide level1 center" data-number="12">
+<h1><span class="header-section-number">12</span> Preparing the Data</h1>
 <p>Like mentioned, KNN is sensitive to scaling (of the variables), so it is helpful to first standardize the variables.</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -703,8 +666,8 @@ Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span
 </div>
 </section>
 
-<section id="preparing-the-data-cont." class="title-slide slide level1 center" data-number="14">
-<h1><span class="header-section-number">14</span> Preparing the Data (cont.)</h1>
+<section id="preparing-the-data-cont." class="title-slide slide level1 center" data-number="13">
+<h1><span class="header-section-number">13</span> Preparing the Data (cont.)</h1>
 <p>Apply those scaled and centered values to our data using the bind_cols method from dpylr to normalize all of our data.</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -715,8 +678,8 @@ Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span
 <p>Now we have a data set which will work well for KNN!</p>
 </section>
 
-<section id="using-the-knn-model" class="title-slide slide level1 center" data-number="15">
-<h1><span class="header-section-number">15</span> Using the KNN Model</h1>
+<section id="using-the-knn-model" class="title-slide slide level1 center" data-number="14">
+<h1><span class="header-section-number">14</span> Using the KNN Model</h1>
 <p>Create a test/train split</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -731,8 +694,8 @@ Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span
 <p>Now we “train” the KNN</p>
 </section>
 
-<section id="training-knn" class="title-slide slide level1 center" data-number="16">
-<h1><span class="header-section-number">16</span> Training KNN</h1>
+<section id="training-knn" class="title-slide slide level1 center" data-number="15">
+<h1><span class="header-section-number">15</span> Training KNN</h1>
 <p>The trainControl method allows you to easily set up the KNN training parameters.</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -744,8 +707,8 @@ Figure&nbsp;2: Hamming Distance XOR (Image Source: ©An2021. Inspired from <span
 <p>Using all our variables to predict Diabetes. Then specifying the training data, that we’re training a KNN, and pass the training hyperparameters that we built with trainControl.</p>
 </section>
 
-<section id="first-knn-model" class="title-slide slide level1 center" data-number="17">
-<h1><span class="header-section-number">17</span> First KNN Model</h1>
+<section id="first-knn-model" class="title-slide slide level1 center" data-number="16">
+<h1><span class="header-section-number">16</span> First KNN Model</h1>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -786,8 +749,8 @@ The final value used for the model was k = 9.</code></pre>
 <p>Based on our results, the model performed best at k=9.</p>
 </section>
 
-<section id="cohens-kappa-score" class="title-slide slide level1 center" data-number="18">
-<h1><span class="header-section-number">18</span> Cohen’s Kappa Score</h1>
+<section id="cohens-kappa-score" class="title-slide slide level1 center" data-number="17">
+<h1><span class="header-section-number">17</span> Cohen’s Kappa Score</h1>
 <ul>
 <li><p>Higher Kappa score. As k increases, we see both accuracy and Kappa drop which suggests the model is not predicting the two classes with even accuracy. It’s losing the ability to distinguish between those with Diabetes and those without Diabetes (underfitting).</p></li>
 <li><p>Our data is umbalanced. One class is much more frequent than the others, in this case ‘No Diabetes’.</p></li>
@@ -796,8 +759,8 @@ The final value used for the model was k = 9.</code></pre>
 </ul>
 </section>
 
-<section id="second-knn-model" class="title-slide slide level1 center" data-number="19">
-<h1><span class="header-section-number">19</span> Second KNN Model</h1>
+<section id="second-knn-model" class="title-slide slide level1 center" data-number="18">
+<h1><span class="header-section-number">18</span> Second KNN Model</h1>
 <p>To see which variables are having the most impact on our outcome variable, we can use fs.anova to check the analysis of variance for each variable and use that to create a second KNN.</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -815,8 +778,8 @@ The final value used for the model was k = 9.</code></pre>
 <p>We can see that “Glucose” is the most important feature in our data set for predicting diabetes.</p>
 </section>
 
-<section id="balance-the-data-set" class="title-slide slide level1 center" data-number="20">
-<h1><span class="header-section-number">20</span> Balance the Data Set</h1>
+<section id="balance-the-data-set" class="title-slide slide level1 center" data-number="19">
+<h1><span class="header-section-number">19</span> Balance the Data Set</h1>
 <p>We can now do two things here to improve our performance. First, we’ll balance our data set so that we have equal numbers of records with and without diabetes:</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -838,8 +801,8 @@ The final value used for the model was k = 9.</code></pre>
 </div>
 </section>
 
-<section id="second-knn-model-1" class="title-slide slide level1 center" data-number="21">
-<h1><span class="header-section-number">21</span> Second KNN Model</h1>
+<section id="second-knn-model-1" class="title-slide slide level1 center" data-number="20">
+<h1><span class="header-section-number">20</span> Second KNN Model</h1>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -876,8 +839,8 @@ The final value used for the model was k = 15.</code></pre>
 <p>The simpler model seems to have better performance. With a K value of 15, we see an accuracy of 0.86 and a much better Kappa value of 0.74. Both of these scores are higher than we had seen with the larger model and the Kappa of 0.74 indicates that we are predicting both classes better although still not perfectly.</p>
 </section>
 
-<section id="evaluating-both-knn-models" class="title-slide slide level1 center" data-number="22">
-<h1><span class="header-section-number">22</span> Evaluating both KNN Models</h1>
+<section id="evaluating-both-knn-models" class="title-slide slide level1 center" data-number="21">
+<h1><span class="header-section-number">21</span> Evaluating both KNN Models</h1>
 <p>Since we held out a testing set of 20% of our training data, we have an easy way to evaluate both of our models.</p>
 <center>
 <div id="fig-3" class="quarto-float quarto-figure quarto-figure-center">
@@ -886,15 +849,15 @@ The final value used for the model was k = 15.</code></pre>
 <img data-src="confusion-matrix.png" width="492">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Confusion Matrix (Image Source: ©Draelos2019)
+Figure&nbsp;2: Confusion Matrix (Image Source: ©Draelos2019)
 </figcaption>
 </figure>
 </div>
 </center>
 </section>
 
-<section id="unbalanced-model-analysis-and-results" class="title-slide slide level1 center" data-number="23">
-<h1><span class="header-section-number">23</span> Unbalanced Model Analysis and Results</h1>
+<section id="unbalanced-model-analysis-and-results" class="title-slide slide level1 center" data-number="22">
+<h1><span class="header-section-number">22</span> Unbalanced Model Analysis and Results</h1>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -933,8 +896,8 @@ Prediction    Diabetes No diabetes
 </div>
 </section>
 
-<section id="balanced-model-analysis-and-results" class="title-slide slide level1 center" data-number="24">
-<h1><span class="header-section-number">24</span> Balanced Model Analysis and Results</h1>
+<section id="balanced-model-analysis-and-results" class="title-slide slide level1 center" data-number="23">
+<h1><span class="header-section-number">23</span> Balanced Model Analysis and Results</h1>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -973,8 +936,8 @@ Prediction    Diabetes No diabetes
 </div>
 </section>
 
-<section id="results" class="title-slide slide level1 center" data-number="25">
-<h1><span class="header-section-number">25</span> Results</h1>
+<section id="results" class="title-slide slide level1 center" data-number="24">
+<h1><span class="header-section-number">24</span> Results</h1>
 <ul>
 <li><p>Overall accuracy rate has fallen slightly, but our ability to predict the diabetes label is much much better.</p>
 <ul>
@@ -987,26 +950,20 @@ Prediction    Diabetes No diabetes
 </ul>
 </section>
 
-<section id="conclusion" class="title-slide slide level1 center" data-number="26">
-<h1><span class="header-section-number">26</span> Conclusion</h1>
+<section id="conclusion" class="title-slide slide level1 center" data-number="25">
+<h1><span class="header-section-number">25</span> Conclusion</h1>
 <ul>
 <li><p>KNN is a powerful tool to predict the classification or numerical value of new data. It’s simple, intuitive, and easy to learn which makes it easy to implement.</p></li>
 <li><p>In our example, we applied the KNN algorithm to a set of patients to determine who has Diabetes and fine-tuned hyperparameters to improve performance. We also learned how you can prepare data for use with KNN by scaling and centering a data set and the different techniques you can use to tune the algorithms.</p></li>
 </ul>
 </section>
 
-<section id="references" class="title-slide slide level1 smaller scrollable" data-number="27">
-<h1><span class="header-section-number">27</span> References</h1>
+<section id="references" class="title-slide slide level1 smaller scrollable" data-number="26">
+<h1><span class="header-section-number">26</span> References</h1>
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-An2021" class="csl-entry" role="listitem">
-An, J. 2021. <span>“Diagram Illustrating Hamming Distance Between Binary Representations of Integers] [Digital Image].”</span>
-</div>
 <div id="ref-VisuallyExplained2025" class="csl-entry" role="listitem">
 <span>“K-Nearest Neighbors (KNN) in 3 Min.”</span> 2025.
-</div>
-<div id="ref-Nain2023" class="csl-entry" role="listitem">
-<span>“Medical Image Prediction for Diagnosis of Breast Cancer Using Machine Learning.”</span> 2021. <em>AIP Conference Preceedings</em> 2853 (1).
 </div>
 <div id="ref-Schorling1997" class="csl-entry" role="listitem">
 Schorling JB, Siegel M, Roach J. 1997. <span>“A Trial of Church-Based Smoking Cessation Interventions for Rural African Americans.”</span> <em>Preventive Medicine</em> 26: 92–101.

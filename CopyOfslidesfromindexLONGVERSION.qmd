@@ -57,6 +57,32 @@ Relies on the proximity principle, assuming that similar data points exist in cl
 
     -   Calculated using either Euclidean distance, Manhattan distance, Minkowski, or Hamming distance formulas [@VisuallyExplained2025].
 
+## Distance Forumlas
+
+*Euclidean Distance*: Most commonly used. Measures the "straight-line" path between points; best for continuous data.
+
+$$
+D_{euclidean}(x_1, x_2) = \sqrt{\sum_{i = 1}^{n}{((x_1)_i - (x_2)_i)^2}}
+$$
+
+*Manhattan Distance*: Calculates the sum of absolute differences, similar to navigating a grid (taxicab geometry).
+
+$$
+D_{manhattan}(x_1, x_2) = \sum_{i = 1}^{n}|((x_1)_i - (x_2)_i)|
+$$
+
+------------------------------------------------------------------------
+
+*Minkowski Distance*: A generalized formula that can represent both Euclidean (p=1) and Manhattan (p=2) distances. $$
+D_{Minkowski}(X,Y) = \sum_{i = 1}^{n}|x_i - y_i|^p
+$$ *Hamming Distance*: Used for categorical or string variables to identify where vectors do not match.
+
+<center>
+
+![Hamming Distance XOR (Image Source: ©An2021. Inspired from [@An2021])](Hamming%20Distance.png){#fig-2 width="284"}
+
+</center>
+
 # Methodology (cont.)
 
 3.  Identify Neighbors: Combine steps 1 (defined 'k') and 2 (distance based on our metric distance formula). Now we sort and select the points with the smallest distance values to the new query point.
@@ -100,7 +126,13 @@ Relies on the proximity principle, assuming that similar data points exist in cl
 
 3.  Overfitting
 
-# 5Analysis and Results
+# Uses of the KNN Algorithm
+
+-   Simple recommendation systems. Data free processing is most commonly used because it's helpful for data sets with missing values because it estimates values using process called missing data imputation.
+
+-   Most often used in finance like stock market forecasting, currency exchange rate, and money laundering analysis, and health care[@Nain2023]
+
+# Analysis and Results
 
 ## Data Description
 
