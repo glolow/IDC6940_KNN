@@ -25,9 +25,7 @@ indent: true
 
 -   Main goal is to predict the classification or numerical value of a new data point based on how similar it is to its closest neighbors.
 
--   Discuss the methodology of KNN, it's strengths and limitations, as well as its real-world applications in medicine.
-
-    -   Identifying diabetes within a group of subjects who were studied in order to understand the prevalence of obesity, diabetes, and other cardiovascular risk factors.
+-   Discuss the methodology of KNN, it's strengths and limitations, as well as its real-world applications such as in medicine.
 
 -   You can think of KNN as ***"birds of a feather flock together."***
 
